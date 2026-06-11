@@ -2,6 +2,8 @@
 (function () {
   'use strict';
 
+  document.documentElement.classList.add('js');
+
   /* ---------- Mobile nav ---------- */
   var menuBtn = document.querySelector('.menu-btn');
   var nav = document.querySelector('.nav');

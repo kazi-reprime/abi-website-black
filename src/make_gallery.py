@@ -17,9 +17,20 @@ NAMED = [
     'nysed-school-logo.png', 'abi-logo-white.png', 'testimonials-bg.jpg',
     'otherprograms-bg.jpg', 'homecontact-bg-1.jpg',
 ]
+# target-name -> archive variant (originals not archived under the exact name)
+SUBSTITUTES = {
+    '200-Hour-Barber-Fundamentals-Program-ban-1.jpg': 'abi-students-191.jpg',
+    '3-hours-program.jpg': '3-hour-program.jpg',
+    'abi-program-c.jpg': 'haircut5.jpg',
+    'abi-program-license.jpg': 'abi-students-218-unsmushed.jpg',
+    'requirement.jpg': 'testimonials-bg.jpg',
+    'IMG_9854.jpg': 'IMG_9854-unsmushed.jpg',
+}
 missing = []
 for n in NAMED:
     src = os.path.join(ARCH, n)
+    if not os.path.exists(src) and n in SUBSTITUTES:
+        src = os.path.join(ARCH, SUBSTITUTES[n])
     if os.path.exists(src):
         shutil.copy2(src, os.path.join(IMG, n))
     else:
