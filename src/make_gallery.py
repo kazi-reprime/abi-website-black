@@ -13,9 +13,7 @@ NAMED = [
     '50-hour-program.jpg', '3-hours-program.jpg', 'abi-program-c.jpg',
     'abi-program-license.jpg', 'about.jpg', 'School-Mission-Statement.jpg',
     'requirement.jpg', 'IMG_9854.jpg', 'haircut1.jpg', 'haircut3.jpg', 'haircut4.jpg',
-    'haircut5.jpg', 'haircut6.jpg', 'haircut7.jpg', 'free-haircut-coupon.jpg',
-    'nysed-school-logo.png', 'abi-logo-white.png', 'testimonials-bg.jpg',
-    'otherprograms-bg.jpg', 'homecontact-bg-1.jpg',
+    'haircut5.jpg', 'haircut6.jpg', 'haircut7.jpg',
 ]
 # target-name -> archive variant (originals not archived under the exact name)
 SUBSTITUTES = {

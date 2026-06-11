@@ -17,6 +17,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/effects.css">
+<script>try{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": ["TradeSchool", "LocalBusiness"], "name": "American Barber Institute", "alternateName": "ABI", "url": "https://www.abi.edu", "logo": "https://www.abi.edu/assets/img/favicon.svg", "foundingDate": "1996", "description": "New York's only dedicated barber school. NYS-licensed 500-hour Master Barber program in Midtown Manhattan with financial aid, veterans GI Bill and ACCESS-VR options, and job placement.", "telephone": "+1-212-290-2289", "email": "admission@abi.edu", "address": [{"@type": "PostalAddress", "streetAddress": "48 West 39th Street", "addressLocality": "New York", "addressRegion": "NY", "postalCode": "10018", "addressCountry": "US"}, {"@type": "PostalAddress", "streetAddress": "121 Westchester Square", "addressLocality": "Bronx", "addressRegion": "NY", "postalCode": "10461", "addressCountry": "US"}], "geo": {"@type": "GeoCoordinates", "latitude": 40.7522, "longitude": -73.9849}, "openingHours": "Mo-Fr 08:00-20:00", "sameAs": ["https://www.facebook.com/Abi.Education/", "https://www.instagram.com/americanbarberinstitute/", "https://twitter.com/amerbarberedu"]}</script>
 </head>
 <body>
@@ -25,7 +27,16 @@
 <div class="topbar">
   <div class="wrap">
     <div>Schedule your tour today! <a href="tel:+12122902289">(212) 290-2289</a> English · <a href="tel:+12122900278">(212) 290-0278</a> Español</div>
-    <div class="langs"><a href="index.html" aria-current="true">EN</a>&nbsp;|&nbsp;<a href="es/index.html" >ES</a></div>
+    <div style="display:flex;align-items:center;gap:22px">
+      <div class="theme-picker" role="group" aria-label="Color theme">
+        <span class="tp-label">Theme</span>
+        <button class="theme-dot t-midnight" data-theme="midnight" aria-pressed="true" aria-label="Midnight Gold theme" title="Midnight Gold"></button>
+        <button class="theme-dot t-classic" data-theme="classic" aria-pressed="false" aria-label="Classic Americana theme" title="Classic Americana"></button>
+        <button class="theme-dot t-emerald" data-theme="emerald" aria-pressed="false" aria-label="Emerald Lounge theme" title="Emerald Lounge"></button>
+        <button class="theme-dot t-noir" data-theme="noir" aria-pressed="false" aria-label="Crimson Noir theme" title="Crimson Noir"></button>
+      </div>
+      <div class="langs"><a href="index.html" aria-current="true">EN</a>&nbsp;|&nbsp;<a href="es/index.html" >ES</a></div>
+    </div>
   </div>
 </div>
 
@@ -93,6 +104,12 @@
 <!-- ============ HERO ============ -->
 <div class="hero">
   <div class="hero-bg" style="background-image:url('assets/img/home-bg.jpg')" role="img" aria-label="Students training at American Barber Institute in Manhattan"></div>
+  <svg class="float-deco d1" width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.5 7.5L20 19M8.5 16.5L20 5"/></svg>
+  <svg class="float-deco d2" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true"><rect x="7" y="2" width="10" height="9" rx="2"/><path d="M9 11v9a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-9M10 5h.01M14 5h.01M12 7h.01"/></svg>
+  <svg class="float-deco d3" width="74" height="74" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true"><path d="M4 21V8a2 2 0 0 1 2-2h2V3.5A1.5 1.5 0 0 1 9.5 2h5A1.5 1.5 0 0 1 16 3.5V6h2a2 2 0 0 1 2 2v13"/><path d="M4 21h16M8 10h8M8 14h8M8 18h8"/></svg>
+  <a class="scroll-cue" href="#programs" aria-label="Scroll to programs">
+    <svg width="26" height="40" viewBox="0 0 26 40" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="1" y="1" width="24" height="38" rx="12"/><path d="M13 10v8m0 0l-4-4m4 4l4-4"/></svg>
+  </a>
   <div class="wrap">
     <span class="hero-eyebrow">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
@@ -140,6 +157,14 @@
       <div><b data-s>0</b><span>Sec</span></div>
     </div>
     <a class="btn btn-dark" href="contact.html">Reserve Your Seat</a>
+  </div>
+</div>
+
+<!-- ============ SKILLS MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Classic Tapers <b>✂</b></span><span>Low Fades <b>✂</b></span><span>Mid Fades <b>✂</b></span><span>High Fades <b>✂</b></span><span>Razor Lineups <b>✂</b></span><span>Hot Towel Shaves <b>✂</b></span><span>Pompadours <b>✂</b></span><span>Beard Trims <b>✂</b></span><span>Shape Ups <b>✂</b></span><span>Caesars <b>✂</b></span><span>Flat Tops <b>✂</b></span><span>High-Top Fades <b>✂</b></span><span>Mohawks <b>✂</b></span><span>Blowouts <b>✂</b></span>
+    <span>Classic Tapers <b>✂</b></span><span>Low Fades <b>✂</b></span><span>Mid Fades <b>✂</b></span><span>High Fades <b>✂</b></span><span>Razor Lineups <b>✂</b></span><span>Hot Towel Shaves <b>✂</b></span><span>Pompadours <b>✂</b></span><span>Beard Trims <b>✂</b></span><span>Shape Ups <b>✂</b></span><span>Caesars <b>✂</b></span><span>Flat Tops <b>✂</b></span><span>High-Top Fades <b>✂</b></span><span>Mohawks <b>✂</b></span><span>Blowouts <b>✂</b></span>
   </div>
 </div>
 
@@ -391,6 +416,8 @@
   </div>
 </section>
 
+<div class="divider-pole" aria-hidden="true"></div>
+
 <!-- ============ TESTIMONIALS ============ -->
 <section>
   <div class="wrap">
@@ -591,5 +618,6 @@
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 <script src="assets/js/main.js" defer></script>
+<script src="assets/js/effects.js" defer></script>
 </body>
 </html>
