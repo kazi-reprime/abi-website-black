@@ -1,92 +1,82 @@
-# American Barber Institute — Website Rebuild
+# American Barber Institute — Website & Landing Page System
 
-A ground-up, modern rebuild of **[abi.edu](https://www.abi.edu)** — the American Barber Institute, New York City's only dedicated barber school (est. 1996) — preserving **all original content, pricing, programs, reviews, and photography**, repackaged as a fast, animated, multi-theme static site.
+Modern, bilingual, multi-theme rebuild of **[abi.edu](https://www.abi.edu)** — American Barber Institute, New York City's only dedicated barber school (est. 1996).
+
+**Live:** https://abi-website-black.vercel.app
 
 ---
 
-## What this is
+## What was built
 
-The original abi.edu is a WordPress site (custom theme, Contact Form 7, NextGEN Gallery). The live site sits behind a bot-protection checkpoint, so the entire site was recovered from the **Wayback Machine**: 78 unique pages (English + Spanish), every archived image (471 photos), all program data, tuition tables, schedules, FAQs, Google reviews, blog articles, and YouTube videos. That content was then rebuilt into this site with a premium barbershop aesthetic informed by research across the best US barber-school and barbershop websites (Tricoci, Premier Barber Institute, Fellow Barber, Blind Barber, Scissors & Scotch).
+| Area | Delivered |
+|---|---|
+| **Landing pages** | 28 conversion-focused pages from one generator: Manhattan + Bronx program pages, 2 homepage/splash A/B variants, and 9 location SEO pages (Queens, Brooklyn, Yonkers, Westchester, Long Island, Mount Vernon, Port Chester, Connecticut, Pennsylvania) — every one in **English and Spanish** |
+| **Hero** | Approved design on every landing page: *"500 Hours. Barber Program. Start Today."* + approved campus photo (`assets/img/lp-hero.jpg`) |
+| **Interior site** | ~30 pages (programs, financial aid, admissions, FAQ, gallery, blog, $3 haircuts…) restyled to the same brand with one unified header, logo and nav |
+| **Themes** | 5 visitor-selectable color themes (ABI Blue default, Midnight Gold, Classic Americana, Emerald, Crimson Noir) — picked from the top-bar dots, applied pre-paint (no flicker), persisted via `localStorage('abi-theme')` |
+| **Alive UI** | Glassmorphism (frosted header/form/cards), ken-burns hero, skills ticker marquee, count-up stats, glow + pulse accents — all honoring `prefers-reduced-motion` |
+| **Conversion** | Above-the-fold lead form, live countdown, next-6 start dates, sticky mobile Call/CTA bar, chat bubble → form, exit-intent popup, click-to-call everywhere |
+| **Content parity** | Full audit vs. abi.edu + americanbarberinstitute.com: FAQs, tuition plans A/B/C, $3 menu, YouTube videos, gallery, 5 Google reviews, socials, official map embed — nothing left behind |
+| **SEO / AI search** | TradeSchool + Course + FAQPage JSON-LD on every landing page, 59-URL sitemap, canonical + hreflang EN⇄ES, `llms.txt`, versioned assets, answer-first FAQ copy |
+| **Responsive** | Verified at 8 viewports (iPhone SE → desktop) × 3 page types — zero horizontal overflow, consistent brand on every device |
 
-## Highlights
-
-### 🎨 Four switchable themes
-Pick via the dots in the top bar — persisted in `localStorage`, no flash on reload:
-
-| Theme | Personality | Palette |
-|---|---|---|
-| **Midnight Gold** (default) | Premium NYC barbershop | Charcoal `#101316` · Gold `#c9a227` · Cream |
-| **Classic Americana** | Vintage barber pole | Navy `#1a2433` · Barber Red `#b3322e` · Cream |
-| **Emerald Lounge** | Gentleman's club | Deep Green `#0e1f19` · Brass `#ab883a` |
-| **Crimson Noir** | Modern monochrome | Black `#0b0b0c` · Crimson `#d6203c` |
-
-The entire design system flows through CSS custom properties, so every component re-skins instantly (`html[data-theme]` overrides + `color-mix()` for tinted surfaces).
-
-### ✨ Motion layer ("the site feels alive")
-- **Hero**: Ken Burns drift on the photography, drifting gold particle canvas, staggered entrance choreography, shimmer sweep on the headline, floating barber-tool illustrations, bobbing scroll cue
-- **Skills marquee** — infinite scrolling ticker of every cut taught (pauses on hover)
-- **3D tilt cards** with cursor-tracking glare (pointer devices only)
-- **Magnetic buttons** with click ripples and a looping sheen sweep on gold CTAs
-- **Parallax** on hero background and split-section imagery
-- **Scroll progress bar**, shrinking sticky header, animated barber-pole divider
-- **Live countdown** to the next class start (always computes the *true* first Monday of next month — never stale), with a pulse on every tick
-- Section headings mask-reveal, kicker lines draw in, staggered card reveals
-
-All motion is transform/opacity only (GPU-friendly), gated behind a `js` class (full content without JavaScript), and **fully disabled under `prefers-reduced-motion`**.
-
-### 📄 Complete content (31 pages)
-- **Home** — hero, countdown, 6 program cards, about, skills, requirements, financial aid, $3 menu, Google reviews, gallery, videos, contact form
-- **Programs** — hub + detail pages: 500-Hour Master Barber ($4,600–$5,600, 3 schedules with weekly payment plans), 200-Hour Fundamentals ($3,600), 50-Hour Refresher ($1,500), 50-Hour Scalp Micro-Pigmentation ($3,500 w/ tool kit), 3-Hour Contagious Diseases home-study ($100), License Transfer service
-- **Financial Aid** + dedicated **Veterans (GI Bill®)** and **ACCESS-VR** pages
-- **Admissions** — requirements, 4-step enrollment, schedules, holiday calendar
-- **$3 Haircuts** — public services menu + free-haircut coupon form
-- **Jobs** — placement office + barbershop owner registration form
-- **Gallery** — 229 archived photos with keyboard-navigable lightbox
-- **FAQ** (with `FAQPage` schema) · **Contact** (map, subway/bus directions) · **Resources** (state licensing boards) · **Privacy** · **Blog** (9 original articles) · **Spanish landing page** (`/es/`)
-
-### 🔍 SEO & accessibility
-`TradeSchool`/`LocalBusiness` + per-program `Course` + `FAQPage` JSON-LD · canonical/OG tags · sitemap.xml · robots.txt · semantic HTML, skip links, focus states, labeled forms, alt text everywhere · sticky mobile Call/Tour bar.
-
-## Stack — zero dependencies
-
-No framework, no npm, no build chain. Hand-written HTML/CSS/JS assembled by a ~200-line Python script. Deploys to any static host as-is.
+## Repository structure
 
 ```
-abi-website/
-├── build.py              # merges src/pages/* into the base template; emits sitemap + robots
-├── vercel.json           # clean URLs, immutable asset caching, security headers
-├── index.html …          # 31 generated pages (repo root = deploy root)
-├── programs/ blog/ es/   # generated sub-pages
+├── index.html, es/                  # Generated pages (landing system, EN + ES)
+├── 500-hours-…/, master-barber-…/   # Program landing pages
+├── barber-school-*/                 # 9 location landing pages (EN; ES under es/)
+├── splash-page-1/, splash-page-2/   # A/B homepage variants
+├── about.html, programs/, blog/, …  # Interior site pages (generated)
+├── classic-home.html                # Archived previous homepage
 ├── assets/
-│   ├── css/style.css     # design system + 4 themes (CSS custom properties)
-│   ├── css/effects.css   # motion & effects layer
-│   ├── js/main.js        # nav, themes, countdown, lightbox, reveals, forms
-│   ├── js/effects.js     # particles, tilt, parallax, ripples, progress bar
-│   └── img/              # 248 optimized originals from the archived site
-└── src/
-    ├── pages/            # per-page content partials (edit these, then rebuild)
-    ├── make_blog.py      # regenerates blog partials from the site archive
-    ├── make_gallery.py   # syncs curated images + regenerates the gallery page
-    └── blog_manifest.json
+│   ├── css/style.css                # Interior base styles
+│   ├── css/brand.css                # ABI Blue brand + theme palettes
+│   ├── css/landing.css              # Landing design system + header + themes + motion
+│   ├── js/landing.js                # Form, countdown, themes, ticker, stats, facades
+│   ├── js/main.js, effects.js       # Interior behavior
+│   └── img/                         # All photography (lp-hero.jpg = approved hero)
+├── src/
+│   ├── pages/*.html                 # Interior content partials
+│   └── deploy_vercel.py             # API-based production deploy (no CLI needed)
+├── build.py                         # Interior site generator (partials → pages + sitemap)
+├── build_landing_pages.py           # Landing page generator (data → 28 pages)
+├── vercel.json                      # cleanUrls, caching, headers
+├── llms.txt, robots.txt, sitemap.xml
+├── README-LANDING-PAGES.md          # Landing system details & launch checklist
+└── DEPLOY.md                        # Publishing steps
 ```
 
-## Develop
+## How it works
+
+Two small Python generators produce every page from data + partials — no framework, no build dependencies, instant static hosting:
 
 ```bash
-python3 build.py                # regenerate all pages after editing src/pages/*
-python3 -m http.server 8642     # preview at http://localhost:8642
+python3 build.py                  # interior pages + sitemap/robots
+python3 build_landing_pages.py    # all 28 landing pages
 ```
+
+Edit copy in `build_landing_pages.py` (FAQs, tuition, translations, locations) or `src/pages/*.html`, rerun, deploy.
 
 ## Deploy
 
-Static output at repo root. On **Vercel**: import the repo, no build command, output directory `.` — `vercel.json` handles clean URLs, caching, and security headers.
+```bash
+git push                          # version everything
+VERCEL_TOKEN=… TEAM_ID=… python3 src/deploy_vercel.py   # production deploy via API
+```
 
-## Content provenance
+See `DEPLOY.md`.
 
-All copy, prices, schedules, requirements, reviews, photos and video links were extracted from archived captures (2023–2025) of the original abi.edu. The raw archive (pages, text extracts, full image set, content inventory) lives outside this repo in `~/Websites/abi-archive/`.
+## Before launch (2 items)
 
-**Contact (ABI):** 48 West 39th Street, NYC 10018 · 121 Westchester Square, Bronx, NY 10461 · (212) 290-2289 EN · (212) 290-0278 ES · admission@abi.edu
+1. **Lead form endpoint** — set `FORM_ENDPOINT` in `assets/js/landing.js` (Formspree or LeadConnector webhook). Until then submits show a call-us fallback.
+2. **Analytics** — add GA4 / Meta Pixel snippets; lead events (`generate_lead`, `Lead`) already fire on form success.
 
----
+## How we got here
 
-*GI BILL® is a registered trademark of the U.S. Department of Veterans Affairs (VA).*
+1. Audited every page of the two legacy sites (content, prices, FAQs, videos, schedules) — including the Spanish pages.
+2. Recovered the full site source from the original Vercel deployment via API.
+3. Built the landing system to the approved mockup, then unified the whole site behind one header/logo/brand.
+4. Added themes, glassmorphism and motion; fixed theme-flip and stale-cache bugs (versioned assets).
+5. Enriched with videos, FAQs, reviews, start dates, schema and llms.txt for AI search.
+6. Hardened responsiveness across 8 device sizes; everything verified live in production after each push.
