@@ -28,104 +28,35 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{root}assets/css/style.css?v=6">
-<link rel="stylesheet" href="{root}assets/css/brand.css?v=6">
-<link rel="stylesheet" href="{root}assets/css/effects.css?v=6">
+<link rel="stylesheet" href="{root}assets/css/style.css?v=8">
+<link rel="stylesheet" href="{root}assets/css/brand.css?v=8">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=8">
+<script>(function(){{try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
+<link rel="stylesheet" href="{root}assets/css/effects.css?v=8">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 {schema}
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="topbar">
-  <div class="wrap">
-    <div>🔥 <b>Limited seats — start your barber journey for only $150/week*</b> · <a href="{lp}" style="text-decoration:underline;font-weight:700">Reserve Your Spot →</a> · <a href="tel:+12122902289">(212) 290-2289</a> · <a href="tel:+12122900278">(212) 290-0278</a> Español</div>
-    <div style="display:flex;align-items:center;gap:22px">
-      <div class="theme-picker" role="group" aria-label="Color theme">
-        <span class="tp-label">Theme</span>
-        <button class="theme-dot t-blue" data-theme="blue" aria-pressed="true" aria-label="ABI Blue theme" title="ABI Blue"></button><button class="theme-dot t-midnight" data-theme="midnight" aria-pressed="false" aria-label="Midnight Gold theme" title="Midnight Gold"></button>
-        <button class="theme-dot t-classic" data-theme="classic" aria-pressed="false" aria-label="Classic Americana theme" title="Classic Americana"></button>
-        <button class="theme-dot t-emerald" data-theme="emerald" aria-pressed="false" aria-label="Emerald Lounge theme" title="Emerald Lounge"></button>
-        <button class="theme-dot t-noir" data-theme="noir" aria-pressed="false" aria-label="Crimson Noir theme" title="Crimson Noir"></button>
-      </div>
-      <div class="langs"><a href="{root}index.html" {en_cur}>EN</a>&nbsp;|&nbsp;<a href="{root}es/index.html" {es_cur}>ES</a></div>
-    </div>
-  </div>
-</div>
-
-<header class="site-head">
-  <div class="wrap">
-    <a class="brand" href="{root}index.html" aria-label="American Barber Institute home">
-      <svg width="40" height="40" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <rect x="2" y="2" width="44" height="44" rx="8" fill="#1b2fd9"/>
-        <rect x="19" y="6" width="10" height="36" rx="5" fill="#101316"/>
-        <path d="M19 12 L29 18 M19 22 L29 28 M19 32 L29 38" stroke="#ffffff" stroke-width="3.4" stroke-linecap="round"/>
-        <circle cx="24" cy="6.5" r="3.2" fill="#101316"/>
-      </svg>
-      <span><b>American Barber<br>Institute</b><small>NYC · Est. 1996</small></span>
+<div class="topbar">Start your barber journey today for only $150 per week*<span class="theme-dots" role="group" aria-label="Color theme"><button class="tdot tdot-blue" data-set-theme="blue" aria-label="Blue theme" title="Blue"></button><button class="tdot tdot-midnight" data-set-theme="midnight" aria-label="Midnight theme" title="Midnight"></button><button class="tdot tdot-classic" data-set-theme="classic" aria-label="Classic theme" title="Classic"></button><button class="tdot tdot-emerald" data-set-theme="emerald" aria-label="Emerald theme" title="Emerald"></button><button class="tdot tdot-noir" data-set-theme="noir" aria-label="Noir theme" title="Noir"></button></span></div>
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="logo" href="{root}index.html" aria-label="American Barber Institute">
+      <span class="logo-abi">ABI</span>
+      <span class="logo-words">American<br>Barber Institute<sup>&reg;</sup></span>
     </a>
-    <nav class="nav" aria-label="Main">
-      <div class="has-sub">
-        <a href="{root}about.html">About</a>
-        <div class="sub">
-          <a href="{root}about.html">About ABI &amp; Mission</a>
-          <a href="{root}about.html#instructors">Our Instructors</a>
-          <a href="{root}about.html#skills">Skills &amp; Techniques</a>
-          <a href="{root}about.html#tour">Virtual Tour</a>
-        </div>
-      </div>
-      <div class="has-sub">
-        <a href="{root}programs/index.html">Programs</a>
-        <div class="sub">
-          <a href="{lp}" style="font-weight:700">⚡ Reserve Your Spot — Start Today</a>
-          <a href="{root}programs/500-hour-master-barber.html">500-Hour Master Barber (4 Months)</a>
-          <a href="{root}programs/200-hour-barber-fundamentals.html">200-Hour Barber Fundamentals</a>
-          <a href="{root}programs/50-hour-barber-refresher.html">50-Hour Barber Refresher</a>
-          <a href="{root}programs/scalp-micro-pigmentation.html">50-Hour Scalp Micro-Pigmentation</a>
-          <a href="{root}programs/contagious-diseases.html">3-Hour Contagious Diseases</a>
-          <a href="{root}programs/license-transfer.html">License Transfer</a>
-        </div>
-      </div>
-      <div class="has-sub">
-        <a href="{root}financial-aid.html">Financial Aid</a>
-        <div class="sub">
-          <a href="{root}financial-aid.html">Financial Aid Options</a>
-          <a href="{root}veterans.html">Veterans · GI Bill®</a>
-          <a href="{root}access-vr.html">ACCESS-VR Program</a>
-        </div>
-      </div>
-      <a href="{root}admissions.html">Admissions</a>
-      <a href="{root}haircuts.html">$3 Haircuts</a>
-      <div class="has-sub">
-        <a href="{root}jobs.html">Jobs</a>
-        <div class="sub">
-          <a href="{root}jobs.html">Job Placement</a>
-          <a href="{root}jobs.html#shops">Shop Registration</a>
-        </div>
-      </div>
-      <div class="has-sub">
-        <a href="{root}barber-school-queens-ny/">Locations</a>
-        <div class="sub">
-          <a href="{root}barber-school-queens-ny/">Queens</a>
-          <a href="{root}barber-school-brooklyn-new-york/">Brooklyn</a>
-          <a href="{root}barber-school-yonkers-new-york/">Yonkers</a>
-          <a href="{root}barber-school-westchester-ny/">Westchester</a>
-          <a href="{root}barber-school-long-island-ny/">Long Island</a>
-          <a href="{root}barber-school-mount-vernon-ny/">Mount Vernon</a>
-          <a href="{root}barber-school-port-chester-ny/">Port Chester</a>
-          <a href="{root}barber-school-connecticut/">Connecticut</a>
-          <a href="{root}barber-school-pennsylvania/">Pennsylvania</a>
-        </div>
-      </div>
-      <a href="{root}gallery.html">Gallery</a>
-      <a href="{root}faq.html">FAQs</a>
-      <a href="{root}contact.html">Contact</a>
-    </nav>
-    <a class="btn btn-gold head-cta" href="{root}contact.html">Book a Tour</a>
-    <button class="menu-btn" aria-label="Open menu" aria-expanded="false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
+    <div class="hdr-phones">
+      <a class="phone-pill" href="tel:+12122902289"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.22a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span><span class="lbl">English: </span>(212) 290-2289</span></a>
+      <a class="phone-pill" href="tel:+12122900278"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.22a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span><span class="lbl">Spanish: </span>(212) 290-0278</span></a>
+      <a class="btn btn-blue btn-call" href="tel:+12122902289"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.22a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>&nbsp;Call</a>
+    </div>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
+  <nav class="mainnav" aria-label="Main"><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}financial-aid.html">Financial Aid</a><a href="{root}admissions.html">Admissions</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}jobs.html">Jobs</a><div class="mn-sub"><a href="{root}barber-school-queens-ny/">Locations <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a><div class="mn-drop"><a href="{root}barber-school-queens-ny/">Queens</a><a href="{root}barber-school-brooklyn-new-york/">Brooklyn</a><a href="{root}barber-school-yonkers-new-york/">Yonkers</a><a href="{root}barber-school-westchester-ny/">Westchester</a><a href="{root}barber-school-long-island-ny/">Long Island</a><a href="{root}barber-school-mount-vernon-ny/">Mount Vernon</a><a href="{root}barber-school-port-chester-ny/">Port Chester</a><a href="{root}barber-school-connecticut/">Connecticut</a><a href="{root}barber-school-pennsylvania/">Pennsylvania</a></div></div><a href="{root}gallery.html">Gallery</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a>
+    <span class="mn-lang"><a href="{root}index.html" style="color:var(--blue)">EN</a> | <a href="{root}es/index.html">ES</a></span>
+  </nav>
+  <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}programs/index.html">Programs</a><a href="{root}financial-aid.html">Financial Aid</a><a href="{root}admissions.html">Admissions</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}jobs.html">Jobs</a><a href="{root}barber-school-queens-ny/">Locations <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a><a href="{root}barber-school-queens-ny/">Queens</a><a href="{root}barber-school-brooklyn-new-york/">Brooklyn</a><a href="{root}barber-school-yonkers-new-york/">Yonkers</a><a href="{root}barber-school-westchester-ny/">Westchester</a><a href="{root}barber-school-long-island-ny/">Long Island</a><a href="{root}barber-school-mount-vernon-ny/">Mount Vernon</a><a href="{root}barber-school-port-chester-ny/">Port Chester</a><a href="{root}barber-school-connecticut/">Connecticut</a><a href="{root}barber-school-pennsylvania/">Pennsylvania</a><a href="{root}gallery.html">Gallery</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
 </header>
 
 <main id="main">
@@ -220,8 +151,9 @@ TEMPLATE = """<!DOCTYPE html>
 </div>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script src="{root}assets/js/main.js?v=6" defer></script>
-<script src="{root}assets/js/effects.js?v=6" defer></script>
+<script src="{root}assets/js/main.js?v=8" defer></script>
+<script src="{root}assets/js/effects.js?v=8" defer></script>
+<script src="{root}assets/js/landing.js?v=8" defer></script>
 </body>
 </html>
 """

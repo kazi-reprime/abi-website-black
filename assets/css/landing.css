@@ -303,3 +303,7 @@ html[data-theme="noir"]{--blue:#c8102e;--blue-dark:#a00d25;--blue-light:#fdecef;
 .chip{background:rgba(255,255,255,.8);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .exit-card{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
 .bubble-tip{background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+
+/* keep theme dots clear of topbar text */
+.topbar{padding-left:8.5rem;padding-right:8.5rem}
+@media (max-width:840px){.topbar{padding-left:1rem;padding-right:1rem}}

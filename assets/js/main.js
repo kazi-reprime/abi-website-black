@@ -4,31 +4,12 @@
 
   document.documentElement.classList.add('js');
 
-  /* ---------- Theme switcher ---------- */
+  /* ---------- Theme init (clicks handled by landing.js .tdot) ---------- */
   var THEMES = ['midnight', 'classic', 'emerald', 'noir'];
-  function applyTheme(name, animate) {
-    if (THEMES.indexOf(name) === -1) name = 'midnight';
-    var root = document.documentElement;
-    if (animate) {
-      root.classList.add('theming');
-      setTimeout(function () { root.classList.remove('theming'); }, 600);
-    }
-    if (name === 'midnight') root.removeAttribute('data-theme');
-    else root.setAttribute('data-theme', name);
-    try { localStorage.setItem('abi-theme', name); } catch (e) {}
-    document.querySelectorAll('.theme-dot').forEach(function (d) {
-      d.setAttribute('aria-pressed', d.getAttribute('data-theme') === name ? 'true' : 'false');
-    });
-    var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content',
-      getComputedStyle(root).getPropertyValue('--ink').trim() || '#101316');
-  }
-  document.querySelectorAll('.theme-dot').forEach(function (d) {
-    d.addEventListener('click', function () { applyTheme(d.getAttribute('data-theme'), true); });
-  });
   var saved = null;
   try { saved = localStorage.getItem('abi-theme'); } catch (e) {}
-  applyTheme(saved || 'midnight', false);
+  if (saved && THEMES.indexOf(saved) > -1) document.documentElement.setAttribute('data-theme', saved);
+  else document.documentElement.removeAttribute('data-theme');
 
   /* ---------- Mobile nav ---------- */
   var menuBtn = document.querySelector('.menu-btn');

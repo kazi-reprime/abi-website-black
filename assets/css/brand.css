@@ -45,3 +45,12 @@
 
 /* Header must stay solid white at all scroll positions */
 .site-head, .site-head.scrolled, header.site-head { background: rgba(255,255,255,.82) !important; backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); }
+
+/* Midnight Gold as an explicit theme (original palette) */
+html[data-theme="midnight"] {
+  --gold: #c9a227; --gold-bright: #e3b94e; --gold-soft: #f0d896;
+  --blue: #c9a227; --blue-dark: #a98b1f; --blue-light: #faf3dd;
+  --red: #8e2b2b; --on-accent: #14110a;
+  --paper: #f6f1e7; --paper-2: #efe7d8;
+  --card-border: #e7dfd0; --tag-border: #e3d9c5; --input-border: #d8cfbc;
+}
