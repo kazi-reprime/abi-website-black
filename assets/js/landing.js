@@ -165,7 +165,7 @@
     d.addEventListener('click', function () {
       var t = d.getAttribute('data-set-theme');
       apply(t);
-      try { localStorage.setItem(KEY, t); } catch (e) {}
+      try { localStorage.setItem(KEY, t); localStorage.setItem('abi-theme-user', '1'); } catch (e) {}
     });
   });
 })();

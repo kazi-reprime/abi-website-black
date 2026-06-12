@@ -7,9 +7,9 @@
   /* ---------- Theme init (clicks handled by landing.js .tdot) ---------- */
   var THEMES = ['midnight', 'classic', 'emerald', 'noir'];
   var saved = null;
-  try { saved = localStorage.getItem('abi-theme'); } catch (e) {}
+  try { if (localStorage.getItem('abi-theme-user')) saved = localStorage.getItem('abi-theme'); } catch (e) {}
   if (saved && THEMES.indexOf(saved) > -1) document.documentElement.setAttribute('data-theme', saved);
-  else document.documentElement.removeAttribute('data-theme');
+  else if (saved !== null || true) { if (!saved) document.documentElement.removeAttribute('data-theme'); }
 
   /* ---------- Mobile nav ---------- */
   var menuBtn = document.querySelector('.menu-btn');

@@ -28,11 +28,11 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{root}assets/css/style.css?v=11">
-<link rel="stylesheet" href="{root}assets/css/brand.css?v=11">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=11">
-<script>(function(){{try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
-<link rel="stylesheet" href="{root}assets/css/effects.css?v=11">
+<link rel="stylesheet" href="{root}assets/css/style.css?v=12">
+<link rel="stylesheet" href="{root}assets/css/brand.css?v=12">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=12">
+<script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
+<link rel="stylesheet" href="{root}assets/css/effects.css?v=12">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 {schema}
 </head>
@@ -151,9 +151,9 @@ TEMPLATE = """<!DOCTYPE html>
 </div>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script src="{root}assets/js/main.js?v=11" defer></script>
-<script src="{root}assets/js/effects.js?v=11" defer></script>
-<script src="{root}assets/js/landing.js?v=11" defer></script>
+<script src="{root}assets/js/main.js?v=12" defer></script>
+<script src="{root}assets/js/effects.js?v=12" defer></script>
+<script src="{root}assets/js/landing.js?v=12" defer></script>
 </body>
 </html>
 """
