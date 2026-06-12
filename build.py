@@ -282,7 +282,7 @@ def course_schema(name, desc, hours, weeks, price):
 # ---------------------------------------------------------------- pages
 PAGES = [
     # (output, partial, title, description, lang, extra_schema)
-    ("index.html", "home.html",
+    ("classic-home.html", "home.html",
      "Barber School NYC | American Barber Institute — 500-Hour Master Barber Program",
      "NYC's only dedicated barber school, est. 1996. NYS-licensed 500-hour Master Barber program, financial aid, veterans GI Bill®, ACCESS-VR & job placement. New classes monthly.",
      "en", [ORG_SCHEMA]),
@@ -371,7 +371,7 @@ PAGES = [
      "Blog — Barbering Career Advice & News | American Barber Institute",
      "Advice from NYC's only dedicated barber school: licensing, careers, shop ownership, marketing your barbershop, and life after barber school.",
      "en", []),
-    ("es/index.html", "es-home.html",
+    ("es/classic-home.html", "es-home.html",
      "Escuela de Barbería en NYC | American Barber Institute",
      "La única escuela dedicada a la barbería en Nueva York, desde 1996. Programa de Master Barber de 500 horas con licencia del Estado de NY, ayuda financiera y colocación laboral. Llame al (212) 290-0278.",
      "es", [ORG_SCHEMA]),
@@ -431,7 +431,7 @@ def build():
         open(dest, 'w', encoding='utf-8').write(html)
         written.append(out)
     # sitemap
-    written += ['500-hours-master-barber-program-landing-page/index.html', 'es/500-hours-master-barber-program-landing-page/index.html', 'master-barber-program-bronx/index.html', 'es/master-barber-program-bronx/index.html', 'splash-page-1/index.html', 'splash-page-2/index.html', 'es/splash-page-1/index.html', 'es/splash-page-2/index.html', 'barber-school-queens-ny/index.html', 'barber-school-brooklyn-new-york/index.html', 'barber-school-yonkers-new-york/index.html', 'barber-school-westchester-ny/index.html', 'barber-school-long-island-ny/index.html', 'barber-school-mount-vernon-ny/index.html', 'barber-school-port-chester-ny/index.html', 'barber-school-connecticut/index.html', 'barber-school-pennsylvania/index.html']
+    written += ['index.html', 'es/index.html', '500-hours-master-barber-program-landing-page/index.html', 'es/500-hours-master-barber-program-landing-page/index.html', 'master-barber-program-bronx/index.html', 'es/master-barber-program-bronx/index.html', 'splash-page-1/index.html', 'splash-page-2/index.html', 'es/splash-page-1/index.html', 'es/splash-page-2/index.html', 'barber-school-queens-ny/index.html', 'barber-school-brooklyn-new-york/index.html', 'barber-school-yonkers-new-york/index.html', 'barber-school-westchester-ny/index.html', 'barber-school-long-island-ny/index.html', 'barber-school-mount-vernon-ny/index.html', 'barber-school-port-chester-ny/index.html', 'barber-school-connecticut/index.html', 'barber-school-pennsylvania/index.html']
     urls = '\n'.join(
         f'  <url><loc>{SITE_URL}/{o}</loc></url>'.replace('/index.html', '/')
         for o in written)

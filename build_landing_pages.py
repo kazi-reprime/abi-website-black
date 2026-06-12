@@ -331,6 +331,20 @@ for n, (h1a_en,h1b_en,h1a_es,h1b_es) in (
      "campus":MANHATTAN,"h1a":h1a_es,"h1b":h1b_es,"script":"Empieza Hoy.",
      "sub":"Conviértete en barbero licenciado en tan solo <b>17 semanas</b>. Entrenamiento práctico. Habilidades reales. Oportunidades reales.",
      "hero_img":"lp-hero.jpg","dur":"~4 Meses","tui":"$4,600","variant":n})
+PAGES.append({"type":"splash","lang":"en","path":"index.html",
+ "url":"/","alt":"/es",
+ "title":"Barber School NYC | American Barber Institute — Become a Licensed Barber in 4 Months",
+ "desc":"NYC's only dedicated barber school, est. 1996. NYS-licensed 500-hour Master Barber program, financial aid, veterans GI Bill, ACCESS-VR and job placement. New classes start the first Monday of every month.",
+ "campus":MANHATTAN,"h1a":"Your Future.","h1b":"Your Career.","script":"Start Today.",
+ "sub":"Become a licensed barber in as little as <b>17 weeks</b>. Hands-on training. Real skills. Real opportunities.",
+ "hero_img":"lp-hero.jpg","dur":"~4 Months","tui":"$4,600","variant":1})
+PAGES.append({"type":"splash","lang":"es","path":"es/index.html",
+ "url":"/es","alt":"/",
+ "title":"Escuela de Barberia en NYC | American Barber Institute — Conviertete en Barbero Licenciado",
+ "desc":"La unica escuela de barberia dedicada en Nueva York. Licenciada por el Departamento de Educacion del Estado de NY. Cambiando vidas por mas de 30 anos. Clases nuevas el primer lunes de cada mes.",
+ "campus":MANHATTAN,"h1a":"Tu Futuro.","h1b":"Tu Carrera.","script":"Empieza Hoy.",
+ "sub":"Conviertete en barbero licenciado en tan solo <b>17 semanas</b>. Entrenamiento practico. Habilidades reales. Oportunidades reales.",
+ "hero_img":"lp-hero.jpg","dur":"~4 Meses","tui":"$4,600","variant":1})
 # location pages (EN only, matching live site)
 for L in LOCATIONS:
     PAGES.append({"type":"location","lang":"en","path":L["slug"]+"/index.html",
