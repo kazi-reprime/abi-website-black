@@ -433,6 +433,23 @@ for L in LOCATIONS:
      "campus":L["campus"],"h1a":E["h1"],"h1b":"","script":"Empieza Hoy.",
      "sub":E["intro"][0],"loc":LE,"hero_img":"lp-hero.jpg","dur":"~4 Meses","tui":"$4,600"})
 
+# ── GLOBAL HERO OVERRIDE: exact mockup content on every landing page ──
+for _p in PAGES:
+    _es = _p["lang"] == "es"
+    _campus_en = "Manhattan" if _p["campus"] is MANHATTAN else "Bronx"
+    _p["h1a"] = "500 Horas." if _es else "500 Hours."
+    _p["h1b"] = "Programa de Barbero." if _es else "Barber Program."
+    _p["script"] = "Empieza Hoy." if _es else "Start Today."
+    if _es:
+        _campus = "sede de Manhattan" if _campus_en == "Manhattan" else "sede del Bronx"
+        _p["sub"] = ("Conviértete en Barbero licenciado en tan solo <b>4 meses</b>. "
+                     "Entrenamiento práctico integral y preparación completa para el examen "
+                     "del Estado de NY en nuestra %s." % _campus)
+    else:
+        _p["sub"] = ("Become a licensed Barber in as little as <b>4 months</b>. "
+                     "Comprehensive hands-on training and full NY State Board Exam prep "
+                     "at our %s campus." % _campus_en)
+
 # ───────────────────────── template parts ─────────────────────────
 def head(p, s, pre):
     alt = ""
