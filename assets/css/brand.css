@@ -44,3 +44,6 @@ html[data-theme="emerald"], html[data-theme="noir"] {
 .sub a:hover { background: #eef1ff; color: var(--blue); }
 .menu-btn { color: var(--text-dark); }
 .mobile-nav, .m-nav { background: #fff; }
+
+/* Header must stay solid white at all scroll positions */
+.site-head, .site-head.scrolled, header.site-head { background: #fff !important; }
