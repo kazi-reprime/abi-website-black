@@ -3,7 +3,7 @@
 """ABI landing page generator — one template, 17 pages (EN/ES, multi-location).
 Run: python3 build.py   → writes pages next to this script.
 """
-import os
+import os, json
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = "https://www.abi.edu"
@@ -447,7 +447,15 @@ def head(p, s, pre):
 "url":"%s%s","telephone":"%s","foundingDate":"1996",
 "address":{"@type":"PostalAddress","streetAddress":"%s"},
 "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.3","reviewCount":"100"}}
-</script>""" % (SITE, p["url"], p["campus"]["tel_disp"], p["campus"]["addr"])
+</script>
+<script type="application/ld+json">%s</script>
+<script type="application/ld+json">%s</script>""" % (SITE, p["url"], p["campus"]["tel_disp"], p["campus"]["addr"],
+        json.dumps({"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+            {"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in FAQS[p["lang"]]]}, ensure_ascii=False),
+        json.dumps({"@context":"https://schema.org","@type":"Course","name":"500-Hour Master Barber Program",
+            "description":p["desc"],"provider":{"@type":"TradeSchool","name":"American Barber Institute","sameAs":SITE},
+            "offers":{"@type":"Offer","price":"4600","priceCurrency":"USD","category":"Tuition"},
+            "hasCourseInstance":{"@type":"CourseInstance","courseMode":"Onsite","location":p["campus"]["addr"]}}, ensure_ascii=False))
     return """<!DOCTYPE html>
 <html lang="%s">
 <head>
@@ -465,7 +473,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=8">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=9">
 <script>(function(){try{var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
 </head>
@@ -670,7 +678,9 @@ def sec_testi(p, s):
 <section class="sec sec-alt"><div class="container">
   <div class="rv"><span class="eyebrow">%s</span><h2>%s</h2><p class="lead">%s</p></div>
   <div class="testi">%s</div>
-</div></section>""" % (s["testi_eb"], s["testi_h"], s["testi_sub"], cards)
+  <p><a class="greview" href="https://maps.google.com/?q=American+Barber+Institute+48+West+39th+Street+New+York" target="_blank" rel="noopener">★ %s</a></p>
+</div></section>""" % (s["testi_eb"], s["testi_h"], s["testi_sub"], cards,
+        "Ver todas las reseñas en Google →" if p["lang"]=="es" else "View all reviews on Google →")
 
 def sec_countdown(p, s):
     cells = "".join('<div class="count-cell"><b data-cd-%s>0</b><span>%s</span></div>'
@@ -751,6 +761,99 @@ def sec_location(p, s):
         h_near, c["name_" + p["lang"]], icon("pin",15), c["addr"], c["tel"], c["tel_disp"], c["addr"].replace(" ","+"),
         icon("train",18), h_get, L["getting"], whyhtml, disc)
 
+
+FAQS = {
+ "en": [
+  ("How much does barber school cost in New York?",
+   "At ABI, the 500-hour Master Barber program starts at $4,600 (afternoon or weekend plans) or $5,600 (morning plan) — $500–$550 down and weekly payments of $150–$300 while you study. Books and tools are extra. ACCES-VR funding, Post-9/11 GI Bill® and VA benefits are accepted."),
+  ("How long is barber school in New York?",
+   "New York State requires 500 hours of training. Full-time at ABI takes about 4 months (17 weeks at 30 hours per week); the weekend schedule takes about 6–7 months (27 weeks)."),
+  ("How many hours per week will I be in school?",
+   "Full-time students train 30 hours per week, Monday to Friday, in morning (8:00 AM–2:00 PM) or afternoon (2:00 PM–8:00 PM) sessions. Weekend students train 18 hours per week on Saturdays and Sundays."),
+  ("Do I need a high school diploma to enroll?",
+   "A high school diploma or GED is required — or you can pass the Ability-To-Benefit (ATB) entrance exam at ABI instead. You must be at least 17 years old."),
+  ("Can I take barber school online?",
+   "No. New York State requires in-person, hands-on training hours. At ABI you practice on real clients in our supervised barber clinic from your first weeks — not on mannequins."),
+  ("What license will I get after the program?",
+   "The program prepares you for the New York State Master Barber license, including full NY State Board Exam preparation. Our job placement office helps you find work after you pass."),
+  ("Is financial aid available?",
+   "Yes — ACCES-VR can cover tuition, tools and books for qualified New Yorkers with disabilities; Post-9/11 GI Bill® and VA benefits are accepted; NYS Department of Labor grants may apply; and every plan includes weekly payments."),
+  ("When do classes start?",
+   "New classes begin the first Monday of every month at both the Manhattan and Bronx campuses. Call (212) 290-2289 to reserve your seat — classes fill fast."),
+ ],
+ "es": [
+  ("¿Cuánto cuesta la escuela de barbería en Nueva York?",
+   "En ABI, el programa de Barbero Maestro de 500 horas comienza desde $4,600 (planes de tarde o fin de semana) o $5,600 (plan de mañana) — $500–$550 de pago inicial y pagos semanales de $150–$300 mientras estudias. Libros y herramientas aparte. Se acepta ACCES-VR, Post-9/11 GI Bill® y beneficios de VA."),
+  ("¿Cuánto dura la escuela de barbería en Nueva York?",
+   "El Estado de Nueva York exige 500 horas de entrenamiento. A tiempo completo en ABI toma unos 4 meses (17 semanas a 30 horas por semana); el horario de fin de semana toma de 6 a 7 meses (27 semanas)."),
+  ("¿Cuántas horas por semana estaré en la escuela?",
+   "Los estudiantes de tiempo completo entrenan 30 horas por semana, de lunes a viernes, en sesiones de mañana (8:00 AM–2:00 PM) o tarde (2:00 PM–8:00 PM). Los estudiantes de fin de semana entrenan 18 horas por semana, sábados y domingos."),
+  ("¿Necesito diploma de preparatoria para inscribirme?",
+   "Se requiere diploma de preparatoria (HSD) o GED — o puedes aprobar el examen de admisión ATB en ABI. Debes tener al menos 17 años."),
+  ("¿Puedo estudiar barbería en línea?",
+   "No. El Estado de Nueva York exige horas prácticas presenciales. En ABI practicas con clientes reales en nuestra clínica supervisada desde las primeras semanas — no con maniquíes."),
+  ("¿Qué licencia obtendré al terminar el programa?",
+   "El programa te prepara para la licencia de Barbero Maestro del Estado de Nueva York, incluyendo la preparación completa para el Examen de la Junta Estatal. Nuestra oficina de empleo te ayuda a encontrar trabajo después de aprobar."),
+  ("¿Hay ayuda financiera disponible?",
+   "Sí — ACCES-VR puede cubrir matrícula, herramientas y libros para neoyorquinos calificados con discapacidades; se aceptan Post-9/11 GI Bill® y beneficios de VA; pueden aplicar subvenciones del Departamento de Trabajo de NY; y todos los planes incluyen pagos semanales."),
+  ("¿Cuándo comienzan las clases?",
+   "Las clases nuevas comienzan el primer lunes de cada mes en las sedes de Manhattan y el Bronx. Llama al (212) 290-0278 para reservar tu lugar — los cupos se llenan rápido."),
+ ],
+}
+VIDEOS = [
+ ("TFpNNqsc_EA", {"en":"Train to be a Master Barber at New York's #1 barber school","es":"Fórmate como Barbero Maestro en la escuela #1 de Nueva York"}),
+ ("iU0fUj3a8uw", {"en":"Our courses are hands-on, fun and engaging","es":"Nuestros cursos son prácticos, divertidos y motivadores"}),
+ ("ozV_RcSk0P4", {"en":"Tour our two-floor, 3,000 sq ft Manhattan campus","es":"Recorre nuestro campus de 3,000 pies² en Manhattan"}),
+]
+GALLERY = ["abi-students-001.jpg","abi-students-008.jpg","abi-students-017.jpg","abi-students-095.jpg",
+           "abi-nyc-005.jpg","abi-students-056.jpg","abi-students-065.jpg","abi-students-080.jpg"]
+
+def sec_faq(p, s):
+    es = p["lang"] == "es"
+    eb = "Preguntas Frecuentes" if es else "FAQs"
+    h = "Preguntas Frecuentes Sobre la Escuela de Barbería" if es else "Barber School Questions, Answered"
+    items = ""
+    for i, (q, a) in enumerate(FAQS[p["lang"]], 1):
+        items += ('<div class="acc-item%s"><button class="acc-btn" type="button"><span class="acc-num">%02d</span>'
+                  '<h3 style="font-size:1rem;font-weight:600;margin:0">%s</h3><span class="chev">%s</span></button>'
+                  '<div class="acc-body"><p style="color:var(--ink-soft);font-size:.95rem">%s</p></div></div>'
+                  % (" open" if i == 1 else "", i, q, icon("chev",18), a))
+    return ('<section class="sec sec-alt" id="faq"><div class="container rv" style="max-width:880px">'
+            '<span class="eyebrow">%s</span><h2>%s</h2><div class="acc">%s</div></div></section>' % (eb, h, items))
+
+def sec_videos(p, s, pre):
+    es = p["lang"] == "es"
+    eb = "Míranos" if es else "Watch Us"
+    h = "Mira a ABI en Acción" if es else "See ABI In Action"
+    cards = ""
+    for vid, cap in VIDEOS:
+        cards += ('<div class="rv"><button class="yt" data-yt="%s" aria-label="Play video">'
+                  '<img loading="lazy" src="https://i.ytimg.com/vi/%s/hqdefault.jpg" alt="%s">'
+                  '<span class="play"></span></button><p class="yt-cap">%s</p></div>' % (vid, vid, cap[p["lang"]], cap[p["lang"]]))
+    return ('<section class="sec"><div class="container"><div class="rv"><span class="eyebrow">%s</span><h2>%s</h2></div>'
+            '<div class="videos">%s</div></div></section>' % (eb, h, cards))
+
+def sec_gallery(p, s, pre):
+    es = p["lang"] == "es"
+    eb = "Galería" if es else "Gallery"
+    h = "La Vida en ABI" if es else "Life At ABI"
+    more = "Ver Galería Completa →" if es else "View Full Gallery →"
+    imgs = "".join('<a href="%sgallery.html"><img loading="lazy" src="%sassets/img/%s" alt="American Barber Institute students training"></a>'
+                   % (pre, pre, g) for g in GALLERY)
+    return ('<section class="sec sec-alt"><div class="container rv"><span class="eyebrow">%s</span><h2>%s</h2>'
+            '<div class="gal">%s</div><p style="margin-top:1.4rem"><a class="greview" href="%sgallery.html">%s</a></p>'
+            '</div></section>' % (eb, h, imgs, pre, more))
+
+def sec_dates(p, s):
+    es = p["lang"] == "es"
+    eb = "Fechas de Inicio" if es else "Start Dates"
+    h = "Próximas Fechas de Inicio de Clases" if es else "Upcoming Class Start Dates"
+    sub = ("Las clases nuevas comienzan el primer lunes de cada mes. Reserva tu lugar para la próxima fecha." if es
+           else "New classes begin the first Monday of every month. Reserve your seat for the next start.")
+    return ('<section class="sec" style="padding:2.8rem 0"><div class="container rv">'
+            '<span class="eyebrow">%s</span><h2>%s</h2><p class="lead">%s</p>'
+            '<div class="dates" data-start-dates></div></div></section>' % (eb, h, sub))
+
 def closing(p, s):
     return """
 <section class="closing"><div class="container">
@@ -765,7 +868,8 @@ def footer(p, s, pre):
     return """
 <footer class="ftr"><div class="container">
   <div class="ftr-in">
-    <div><h4>American Barber Institute</h4><p>%s</p></div>
+    <div><h4>American Barber Institute</h4><p>%s</p>
+      <p class="f-social"><a href="https://www.facebook.com/Abi.Education/" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.instagram.com/americanbarberinstitute/" target="_blank" rel="noopener">Instagram</a> · <a href="https://twitter.com/amerbarberedu" target="_blank" rel="noopener">X</a> · <a href="https://www.youtube.com/channel/UCy_pQUDfk2ldEp6_zyaIMhQ" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.pinterest.com/alexzholendz/american-barber-institute/" target="_blank" rel="noopener">Pinterest</a></p></div>
     <div><h4>%s</h4>%s</div>
     <div><h4>%s</h4>
       <a href="https://maps.google.com/?q=48+West+39th+Street,+New+York,+NY+10018" target="_blank" rel="noopener">48 West 39th Street, New York, NY 10018</a>
@@ -791,7 +895,7 @@ def footer(p, s, pre):
     <button class="btn btn-blue" data-exit-cta style="padding:.85rem 2rem">%s</button>
   </div>
 </div>
-<script src="%sassets/js/landing.js?v=8" defer></script>
+<script src="%sassets/js/landing.js?v=9" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
               p["campus"]["tel"], icon("phone",17), s["mbar_call"], s["mbar_cta"],
@@ -806,12 +910,15 @@ def build(p):
     parts = [head(p, s, pre), header(p, s, pre), hero(p, s, pre)]
     if p["type"] == "program":
         parts += [sec_about(p, s), sec_tech(p, s), sec_curr(p, s),
-                  sec_tuition(p, s), sec_reqs(p, s), sec_testi(p, s), sec_countdown(p, s)]
+                  sec_tuition(p, s), sec_reqs(p, s), sec_dates(p, s), sec_videos(p, s, pre),
+                  sec_gallery(p, s, pre), sec_testi(p, s), sec_faq(p, s), sec_countdown(p, s)]
     elif p["type"] == "splash":
         parts += [sec_steps(p, s), sec_earnings(p, s), sec_tuition(p, s),
-                  sec_testi(p, s), sec_countdown(p, s)]
+                  sec_dates(p, s), sec_videos(p, s, pre), sec_gallery(p, s, pre),
+                  sec_testi(p, s), sec_faq(p, s), sec_countdown(p, s)]
     elif p["type"] == "location":
-        parts += [sec_location(p, s), sec_tuition(p, s), sec_testi(p, s), sec_countdown(p, s)]
+        parts += [sec_location(p, s), sec_tuition(p, s), sec_dates(p, s), sec_videos(p, s, pre),
+                  sec_testi(p, s), sec_faq(p, s), sec_countdown(p, s)]
     parts += [closing(p, s), footer(p, s, pre)]
     out = os.path.join(ROOT, p["path"])
     os.makedirs(os.path.dirname(out), exist_ok=True)

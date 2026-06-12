@@ -169,3 +169,34 @@
     });
   });
 })();
+
+/* ── YouTube click-to-play facades ── */
+document.querySelectorAll('.yt').forEach(function (f) {
+  f.addEventListener('click', function () {
+    var id = f.getAttribute('data-yt');
+    var ifr = document.createElement('iframe');
+    ifr.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+    ifr.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture';
+    ifr.allowFullscreen = true;
+    f.innerHTML = ''; f.appendChild(ifr);
+  }, { once: true });
+});
+
+/* ── Upcoming start dates (first Monday of each month) ── */
+(function () {
+  var host = document.querySelector('[data-start-dates]');
+  if (!host) return;
+  var lang = document.documentElement.lang === 'es' ? 'es-US' : 'en-US';
+  var fmt = new Intl.DateTimeFormat(lang, { weekday: 'short', month: 'short', day: 'numeric' });
+  var out = [], d = new Date(), m = d.getMonth(), y = d.getFullYear();
+  while (out.length < 6) {
+    var c = new Date(y, m, 1);
+    while (c.getDay() !== 1) c.setDate(c.getDate() + 1);
+    if (c > new Date()) out.push(c);
+    m++; if (m > 11) { m = 0; y++; }
+  }
+  host.innerHTML = out.map(function (c, i) {
+    var t = fmt.format(c);
+    return '<span class="date-pill' + (i === 0 ? ' next' : '') + '">' + t + (i === 0 ? ' ★' : '') + '</span>';
+  }).join('');
+})();
