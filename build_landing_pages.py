@@ -340,10 +340,10 @@ PAGES.append({"type":"splash","lang":"en","path":"index.html",
  "hero_img":"lp-hero.jpg","dur":"~4 Months","tui":"$4,600","variant":1})
 PAGES.append({"type":"splash","lang":"es","path":"es/index.html",
  "url":"/es","alt":"/",
- "title":"Escuela de Barberia en NYC | American Barber Institute — Conviertete en Barbero Licenciado",
- "desc":"La unica escuela de barberia dedicada en Nueva York. Licenciada por el Departamento de Educacion del Estado de NY. Cambiando vidas por mas de 30 anos. Clases nuevas el primer lunes de cada mes.",
+ "title":"Escuela de Barbería en NYC | American Barber Institute — Conviértete en Barbero Licenciado",
+ "desc":"La única escuela de barbería dedicada en Nueva York. Licenciada por el Departamento de Educación del Estado de NY. Cambiando vidas por más de 30 años. Clases nuevas el primer lunes de cada mes.",
  "campus":MANHATTAN,"h1a":"Tu Futuro.","h1b":"Tu Carrera.","script":"Empieza Hoy.",
- "sub":"Conviertete en barbero licenciado en tan solo <b>17 semanas</b>. Entrenamiento practico. Habilidades reales. Oportunidades reales.",
+ "sub":"Conviértete en barbero licenciado en tan solo <b>17 semanas</b>. Entrenamiento práctico. Habilidades reales. Oportunidades reales.",
  "hero_img":"lp-hero.jpg","dur":"~4 Meses","tui":"$4,600","variant":1})
 # location pages (EN only, matching live site)
 for L in LOCATIONS:
