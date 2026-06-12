@@ -147,3 +147,25 @@
     });
   }
 })();
+
+/* ── Theme switcher (synced with interior pages) ── */
+(function () {
+  var KEY = 'abi-theme';
+  function apply(t) {
+    if (!t || t === 'blue' || t === 'midnight-default') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', t);
+    document.querySelectorAll('.tdot').forEach(function (d) {
+      d.setAttribute('aria-pressed', d.getAttribute('data-set-theme') === (t || 'blue') ? 'true' : 'false');
+    });
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  apply(saved);
+  document.querySelectorAll('.tdot').forEach(function (d) {
+    d.addEventListener('click', function () {
+      var t = d.getAttribute('data-set-theme');
+      apply(t);
+      try { localStorage.setItem(KEY, t); } catch (e) {}
+    });
+  });
+})();

@@ -379,7 +379,7 @@ PAGES.append({"type":"program","lang":"en","path":"master-barber-program-bronx/i
  "campus":BRONX,"h1a":"Barber Operator","h1b":"Program.","script":"Start Today.",
  "sub":"Become a licensed Master Barber with affordable payment plans, full-time and weekend schedules, and <b>bilingual instruction</b> at our Bronx campus. Se habla español.",
  "about":ABOUT_BX_EN,"about_h":"About the Program","tech":TECH_BX_EN,"curr":CURR_BX_EN,
- "hero_img":"lp-hero-bronx.jpg","dur":"~4 Months","tui":"$4,600"})
+ "hero_img":"lp-hero.jpg","dur":"~4 Months","tui":"$4,600"})
 PAGES.append({"type":"program","lang":"es","path":"es/master-barber-program-bronx/index.html",
  "url":"/es/master-barber-program-bronx","alt":"/master-barber-program-bronx",
  "title":"Programa de Barbero Maestro — Bronx | American Barber Institute",
@@ -387,7 +387,7 @@ PAGES.append({"type":"program","lang":"es","path":"es/master-barber-program-bron
  "campus":BRONX,"h1a":"Programa de Barbero","h1b":"Operador.","script":"Empieza Hoy.",
  "sub":"Conviértete en Barbero Maestro licenciado con planes de pago asequibles, horarios de tiempo completo y fines de semana, e <b>instrucción bilingüe</b> en nuestra sede del Bronx. Se habla español.",
  "about":ABOUT_BX_ES,"about_h":"Sobre el Programa","tech":TECH_BX_ES,"curr":CURR_BX_ES,
- "hero_img":"lp-hero-bronx.jpg","dur":"~4 Meses","tui":"$4,600"})
+ "hero_img":"lp-hero.jpg","dur":"~4 Meses","tui":"$4,600"})
 # splash pages
 for n, (h1a_en,h1b_en,h1a_es,h1b_es) in (
     (1,("Your Future.","Your Career.","Tu Futuro.","Tu Carrera.")),
@@ -465,7 +465,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=5">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=6">
 %s
 </head>
 <body>""" % (p["lang"], p["title"], p["desc"], SITE, p["url"], alt,
@@ -502,7 +502,7 @@ def header(p, s, pre):
             drawer += '<a href="%s%s">%s</a>' % (pre, target, label)
     drawer += ('<a href="%s"><b>%s</b></a>' % (alt_href, "English" if lang == "es" else "Español"))
     return """
-<div class="topbar">%s</div>
+<div class="topbar">%s<span class="theme-dots" role="group" aria-label="Color theme"><button class="tdot tdot-blue" data-set-theme="blue" aria-label="ABI Blue" title="ABI Blue"></button><button class="tdot tdot-midnight" data-set-theme="midnight" aria-label="Midnight Gold" title="Midnight Gold"></button><button class="tdot tdot-classic" data-set-theme="classic" aria-label="Classic Americana" title="Classic Americana"></button><button class="tdot tdot-emerald" data-set-theme="emerald" aria-label="Emerald" title="Emerald"></button><button class="tdot tdot-noir" data-set-theme="noir" aria-label="Crimson Noir" title="Crimson Noir"></button></span></div>
 <header class="hdr">
   <div class="hdr-in">
     <a class="logo" href="%s" aria-label="American Barber Institute">
@@ -790,7 +790,7 @@ def footer(p, s, pre):
     <button class="btn btn-blue" data-exit-cta style="padding:.85rem 2rem">%s</button>
   </div>
 </div>
-<script src="%sassets/js/landing.js?v=5" defer></script>
+<script src="%sassets/js/landing.js?v=6" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
               p["campus"]["tel"], icon("phone",17), s["mbar_call"], s["mbar_cta"],

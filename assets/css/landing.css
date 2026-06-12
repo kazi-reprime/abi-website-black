@@ -275,3 +275,31 @@ html.js .rv.in{opacity:1;transform:none}
 .mn-lang{border:1px solid var(--line);border-radius:8px;padding:.2rem .65rem;font-weight:600;color:#8a90a0}
 .mn-lang a:hover{color:var(--blue)}
 @media (max-width:1080px){.mainnav{display:none}}
+
+/* ── Multiple themes (synced with interior pages via abi-theme) ── */
+html[data-theme="midnight"]{--blue:#c9a227;--blue-dark:#a98b1f;--blue-light:#faf3dd;--on-accent:#14110a}
+html[data-theme="classic"]{--blue:#b22234;--blue-dark:#8e1b2a;--blue-light:#fdeef0;--on-accent:#ffffff}
+html[data-theme="emerald"]{--blue:#0e8f62;--blue-dark:#0a6e4b;--blue-light:#e8f7f1;--on-accent:#ffffff}
+html[data-theme="noir"]{--blue:#c8102e;--blue-dark:#a00d25;--blue-light:#fdecef;--on-accent:#ffffff}
+:root{--on-accent:#ffffff}
+.btn-blue,.mbar .mbar-cta,.btn-submit,.formcard-ico{color:var(--on-accent)}
+.btn-blue{color:var(--on-accent)}
+
+/* theme dots in topbar */
+.topbar{position:relative}
+.theme-dots{position:absolute;right:1rem;top:50%;transform:translateY(-50%);display:flex;gap:7px;align-items:center}
+.tdot{width:15px;height:15px;border-radius:50%;border:2px solid rgba(255,255,255,.75);cursor:pointer;padding:0;transition:transform .15s}
+.tdot:hover{transform:scale(1.25)}
+.tdot[aria-pressed="true"]{outline:2px solid #fff;outline-offset:1px}
+.tdot-blue{background:#1b2fd9}.tdot-midnight{background:#c9a227}.tdot-classic{background:#b22234}.tdot-emerald{background:#0e8f62}.tdot-noir{background:#c8102e}
+@media (max-width:840px){.theme-dots{display:none}}
+
+/* ── Glassmorphism ───────────────────────── */
+.hdr{background:rgba(255,255,255,.78);backdrop-filter:blur(16px) saturate(1.5);-webkit-backdrop-filter:blur(16px) saturate(1.5)}
+.mainnav{background:rgba(255,255,255,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.formcard{background:rgba(255,255,255,.88);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border:1px solid rgba(255,255,255,.65)}
+.startpill{background:rgba(255,255,255,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.count-cell{background:rgba(255,255,255,.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.chip{background:rgba(255,255,255,.8);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.exit-card{background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.bubble-tip{background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}

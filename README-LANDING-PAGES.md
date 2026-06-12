@@ -21,6 +21,12 @@ URL paths mirror the live abi.edu structure (canonical + hreflang tags included)
 1. **Lead form endpoint** — open `assets/js/landing.js`, line with `FORM_ENDPOINT`. Create a free form at formspree.io (deliver to admission@abi.edu) and replace `REPLACE_WITH_FORM_ID`. Until then the form shows an error on submit (with the phone number as fallback). Optional: forward Formspree → LeadConnector CRM via webhook/Zapier so leads land in GoHighLevel like the current site.
 2. **Hero photos** — drop the approved campus photo at `assets/img/lp-hero.jpg` (and optionally `assets/img/lp-hero-bronx.jpg` for the Bronx pages). Until then pages fall back to `assets/img/about.jpg`, then to the live image on abi-website-black.vercel.app.
 
+## Themes & glassmorphism
+
+Five color themes selectable from the dots in the top bar of every page (landing + interior), persisted in localStorage (`abi-theme`) and synced site-wide: ABI Blue (default), Midnight Gold, Classic Americana, Emerald, Crimson Noir. Landing pages use glassmorphism (frosted-glass header, form card, pills, countdown).
+
+**Hero photo:** save the approved barbershop photo as `assets/img/lp-hero.jpg` — every landing page in every language uses that one file automatically (current fallback: about.jpg).
+
 ## Built-in conversion features
 
 Dynamic "Next Start" date (first Monday of next month, localized EN/ES — fixes the Spanish-date bug on the live site), live countdown timer, sticky mobile Call/CTA bar, chat-style bubble that scrolls to the form, exit-intent popup (desktop, once per session), inline AJAX form with success state + gtag/fbq lead events if analytics are installed, scroll-reveal animations (JS-gated, no-JS safe), JSON-LD TradeSchool schema, full responsive layout.

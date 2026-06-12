@@ -1,7 +1,5 @@
 /* ABI Blue brand — unifies interior pages with the landing page design */
-:root,
-html[data-theme="midnight"], html[data-theme="classic"],
-html[data-theme="emerald"], html[data-theme="noir"] {
+:root, html[data-theme="blue"] {
   --ink: #10131a;
   --ink-2: #171c26;
   --ink-3: #242b3a;
@@ -26,7 +24,7 @@ html[data-theme="emerald"], html[data-theme="noir"] {
   --font-display: "Poppins", "Segoe UI", sans-serif;
   --font-body: "Poppins", -apple-system, "Segoe UI", sans-serif;
 }
-.theme-picker { display: none !important; }
+.t-blue { background: #1b2fd9; }
 .topbar { background: var(--blue); color: #fff; border-bottom: none; }
 .topbar a { color: #fff; }
 .topbar .langs a { color: #cdd4ff; }
@@ -34,7 +32,7 @@ html[data-theme="emerald"], html[data-theme="noir"] {
 .btn-gold, .btn.btn-gold { border-radius: 10px; }
 
 /* White header on interior pages (match landing pages) */
-.site-head { background: #fff; backdrop-filter: none; border-bottom: 1px solid var(--card-border); }
+.site-head { background: rgba(255,255,255,.82); border-bottom: 1px solid var(--card-border); }
 .brand { color: var(--text-dark); }
 .brand small { color: var(--text-mute); }
 .nav > a, .nav .has-sub > a { color: var(--text-dark); }
@@ -46,4 +44,4 @@ html[data-theme="emerald"], html[data-theme="noir"] {
 .mobile-nav, .m-nav { background: #fff; }
 
 /* Header must stay solid white at all scroll positions */
-.site-head, .site-head.scrolled, header.site-head { background: #fff !important; }
+.site-head, .site-head.scrolled, header.site-head { background: rgba(255,255,255,.82) !important; backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); }

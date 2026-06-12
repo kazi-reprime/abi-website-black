@@ -28,9 +28,9 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{root}assets/css/style.css?v=5">
-<link rel="stylesheet" href="{root}assets/css/brand.css?v=5">
-<link rel="stylesheet" href="{root}assets/css/effects.css?v=5">
+<link rel="stylesheet" href="{root}assets/css/style.css?v=6">
+<link rel="stylesheet" href="{root}assets/css/brand.css?v=6">
+<link rel="stylesheet" href="{root}assets/css/effects.css?v=6">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 {schema}
 </head>
@@ -43,7 +43,7 @@ TEMPLATE = """<!DOCTYPE html>
     <div style="display:flex;align-items:center;gap:22px">
       <div class="theme-picker" role="group" aria-label="Color theme">
         <span class="tp-label">Theme</span>
-        <button class="theme-dot t-midnight" data-theme="midnight" aria-pressed="true" aria-label="Midnight Gold theme" title="Midnight Gold"></button>
+        <button class="theme-dot t-blue" data-theme="blue" aria-pressed="true" aria-label="ABI Blue theme" title="ABI Blue"></button><button class="theme-dot t-midnight" data-theme="midnight" aria-pressed="false" aria-label="Midnight Gold theme" title="Midnight Gold"></button>
         <button class="theme-dot t-classic" data-theme="classic" aria-pressed="false" aria-label="Classic Americana theme" title="Classic Americana"></button>
         <button class="theme-dot t-emerald" data-theme="emerald" aria-pressed="false" aria-label="Emerald Lounge theme" title="Emerald Lounge"></button>
         <button class="theme-dot t-noir" data-theme="noir" aria-pressed="false" aria-label="Crimson Noir theme" title="Crimson Noir"></button>
@@ -220,8 +220,8 @@ TEMPLATE = """<!DOCTYPE html>
 </div>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script src="{root}assets/js/main.js?v=5" defer></script>
-<script src="{root}assets/js/effects.js?v=5" defer></script>
+<script src="{root}assets/js/main.js?v=6" defer></script>
+<script src="{root}assets/js/effects.js?v=6" defer></script>
 </body>
 </html>
 """
