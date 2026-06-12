@@ -38,7 +38,7 @@ TEMPLATE = """<!DOCTYPE html>
 
 <div class="topbar">
   <div class="wrap">
-    <div>Schedule your tour today! <a href="tel:+12122902289">(212) 290-2289</a> English · <a href="tel:+12122900278">(212) 290-0278</a> Español</div>
+    <div>🔥 <b>Limited seats — start your barber journey for only $150/week*</b> · <a href="{lp}" style="text-decoration:underline;font-weight:700">Reserve Your Spot →</a> · <a href="tel:+12122902289">(212) 290-2289</a> · <a href="tel:+12122900278">(212) 290-0278</a> Español</div>
     <div style="display:flex;align-items:center;gap:22px">
       <div class="theme-picker" role="group" aria-label="Color theme">
         <span class="tp-label">Theme</span>
@@ -76,6 +76,7 @@ TEMPLATE = """<!DOCTYPE html>
       <div class="has-sub">
         <a href="{root}programs/index.html">Programs</a>
         <div class="sub">
+          <a href="{lp}" style="font-weight:700">⚡ Reserve Your Spot — Start Today</a>
           <a href="{root}programs/500-hour-master-barber.html">500-Hour Master Barber (4 Months)</a>
           <a href="{root}programs/200-hour-barber-fundamentals.html">200-Hour Barber Fundamentals</a>
           <a href="{root}programs/50-hour-barber-refresher.html">50-Hour Barber Refresher</a>
@@ -99,6 +100,20 @@ TEMPLATE = """<!DOCTYPE html>
         <div class="sub">
           <a href="{root}jobs.html">Job Placement</a>
           <a href="{root}jobs.html#shops">Shop Registration</a>
+        </div>
+      </div>
+      <div class="has-sub">
+        <a href="{root}barber-school-queens-ny/">Locations</a>
+        <div class="sub">
+          <a href="{root}barber-school-queens-ny/">Queens</a>
+          <a href="{root}barber-school-brooklyn-new-york/">Brooklyn</a>
+          <a href="{root}barber-school-yonkers-new-york/">Yonkers</a>
+          <a href="{root}barber-school-westchester-ny/">Westchester</a>
+          <a href="{root}barber-school-long-island-ny/">Long Island</a>
+          <a href="{root}barber-school-mount-vernon-ny/">Mount Vernon</a>
+          <a href="{root}barber-school-port-chester-ny/">Port Chester</a>
+          <a href="{root}barber-school-connecticut/">Connecticut</a>
+          <a href="{root}barber-school-pennsylvania/">Pennsylvania</a>
         </div>
       </div>
       <a href="{root}gallery.html">Gallery</a>
@@ -148,6 +163,17 @@ TEMPLATE = """<!DOCTYPE html>
           <li><a href="{root}programs/50-hour-barber-refresher.html">50-Hour Refresher</a></li>
           <li><a href="{root}programs/scalp-micro-pigmentation.html">Scalp Micro-Pigmentation</a></li>
           <li><a href="{root}programs/contagious-diseases.html">Contagious Diseases Course</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Locations We Serve</h4>
+        <ul>
+          <li><a href="{root}barber-school-queens-ny/">Barber School Queens</a></li>
+          <li><a href="{root}barber-school-brooklyn-new-york/">Barber School Brooklyn</a></li>
+          <li><a href="{root}barber-school-yonkers-new-york/">Barber School Yonkers</a></li>
+          <li><a href="{root}barber-school-westchester-ny/">Barber School Westchester</a></li>
+          <li><a href="{root}barber-school-long-island-ny/">Barber School Long Island</a></li>
+          <li><a href="{root}barber-school-mount-vernon-ny/">Barber School Mount Vernon</a></li>
           <li><a href="{root}programs/license-transfer.html">License Transfer</a></li>
         </ul>
       </div>
@@ -397,6 +423,7 @@ def build():
         html = TEMPLATE.format(
             lang=lang, title=title, desc=desc, canonical=canonical, site=SITE_URL,
             root=root, body=body, schema=schema_tags,
+            lp=root + ('es/' if lang == 'es' else '') + '500-hours-master-barber-program-landing-page/',
             en_cur='aria-current="true"' if lang == 'en' else '',
             es_cur='aria-current="true"' if lang == 'es' else '')
         dest = os.path.join(ROOT, out)
@@ -404,6 +431,7 @@ def build():
         open(dest, 'w', encoding='utf-8').write(html)
         written.append(out)
     # sitemap
+    written += ['500-hours-master-barber-program-landing-page/index.html', 'es/500-hours-master-barber-program-landing-page/index.html', 'master-barber-program-bronx/index.html', 'es/master-barber-program-bronx/index.html', 'splash-page-1/index.html', 'splash-page-2/index.html', 'es/splash-page-1/index.html', 'es/splash-page-2/index.html', 'barber-school-queens-ny/index.html', 'barber-school-brooklyn-new-york/index.html', 'barber-school-yonkers-new-york/index.html', 'barber-school-westchester-ny/index.html', 'barber-school-long-island-ny/index.html', 'barber-school-mount-vernon-ny/index.html', 'barber-school-port-chester-ny/index.html', 'barber-school-connecticut/index.html', 'barber-school-pennsylvania/index.html']
     urls = '\n'.join(
         f'  <url><loc>{SITE_URL}/{o}</loc></url>'.replace('/index.html', '/')
         for o in written)
