@@ -1,6 +1,6 @@
 # ABI Landing Pages — Implementation Notes
 
-17 conversion-focused landing pages matching the approved mockup design, generated from one template (`build_landing_pages.py`).
+17 conversion-focused landing pages matching the approved mockup design, generated from one template (`build.py`).
 
 ## Pages
 
@@ -27,7 +27,7 @@ Dynamic "Next Start" date (first Monday of next month, localized EN/ES — fixes
 
 ## Regenerating
 
-Edit copy/data in `build.py`, then: `python3 build_landing_pages.py`
+Edit copy/data in `build.py`, then: `python3 build.py`
 
 ## Research findings worth acting on (from live-site audit)
 

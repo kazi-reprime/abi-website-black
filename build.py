@@ -1,417 +1,691 @@
 #!/usr/bin/env python3
-"""Static site builder for the American Barber Institute website.
-Merges src/pages/*.html content partials into the base template.
-Usage: python3 build.py
+# -*- coding: utf-8 -*-
+"""ABI landing page generator — one template, 17 pages (EN/ES, multi-location).
+Run: python3 build.py   → writes pages next to this script.
 """
-import json, os, re
+import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-SRC = os.path.join(ROOT, 'src', 'pages')
-SITE_URL = 'https://www.abi.edu'
+SITE = "https://www.abi.edu"
 
-# ---------------------------------------------------------------- template
-TEMPLATE = """<!DOCTYPE html>
-<html lang="{lang}">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title}</title>
-<meta name="description" content="{desc}">
-<link rel="canonical" href="{canonical}">
-<meta property="og:title" content="{title}">
-<meta property="og:description" content="{desc}">
-<meta property="og:type" content="website">
-<meta property="og:url" content="{canonical}">
-<meta property="og:image" content="{site}/assets/img/og-cover.jpg">
-<meta name="theme-color" content="#101316">
-<link rel="icon" href="{root}assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{root}assets/css/style.css">
-<link rel="stylesheet" href="{root}assets/css/effects.css">
-<script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
-{schema}
-</head>
-<body>
-<a class="skip" href="#main">Skip to content</a>
+# ───────────────────────── icons ─────────────────────────
+def icon(name, size=22):
+    P = {
+        "phone": '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.22a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>',
+        "badge": '<circle cx="12" cy="9" r="6"/><path d="M9 14.5 7.5 22l4.5-2.5L16.5 22 15 14.5"/><path d="m10 9 1.5 1.5L14.5 7"/>',
+        "cal": '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>',
+        "mic": '<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v1a7 7 0 0 0 14 0v-1M12 18v4M8 22h8"/>',
+        "hand": '<circle cx="12" cy="6" r="3.4"/><path d="M12 4.6v2.8M10.9 5.4h2.2"/><path d="M3 15.5c2-1.6 4-1.6 5.6-.6l3 1.8c.9.6.9 1.9-.2 2.2H8M11.4 18.9l5.2.1c2 0 3.4-.9 4.4-2.3"/>',
+        "case": '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20"/>',
+        "bldg": '<rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 21v-4h6v4M8 7h2M14 7h2M8 11h2M14 11h2"/>',
+        "shield": '<path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="m9 11.5 2 2 4-4.5"/>',
+        "people": '<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><circle cx="17" cy="9" r="2.4"/><path d="M16.5 14.7c2.6.3 4.5 2.2 4.5 4.8"/>',
+        "star": '<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/>',
+        "cert": '<rect x="3" y="3" width="14" height="18" rx="2"/><path d="M7 8h6M7 12h6M7 16h3"/><circle cx="17.5" cy="16.5" r="3"/><path d="m16 19 -.5 3 2-1 2 1-.5-3"/>',
+        "user": '<circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/>',
+        "mail": '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7L22 7"/>',
+        "pin": '<path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/>',
+        "check": '<circle cx="12" cy="12" r="10"/><path d="m8 12.2 2.6 2.6L16 9.5"/>',
+        "chat": '<path d="M21 12a8.5 8.5 0 0 1-8.5 8.5c-1.6 0-3-.4-4.3-1L3 21l1.6-4.8A8.5 8.5 0 1 1 21 12z"/>',
+        "chev": '<path d="m6 9 6 6 6-6"/>',
+        "clock": '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+        "train": '<rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M9.5 17 7 21M14.5 17 17 21M9 14h.01M15 14h.01"/>',
+    }
+    return ('<svg width="%d" height="%d" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+            'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg>'
+            % (size, size, P[name]))
 
-<div class="topbar">
-  <div class="wrap">
-    <div>Schedule your tour today! <a href="tel:+12122902289">(212) 290-2289</a> English · <a href="tel:+12122900278">(212) 290-0278</a> Español</div>
-    <div style="display:flex;align-items:center;gap:22px">
-      <div class="theme-picker" role="group" aria-label="Color theme">
-        <span class="tp-label">Theme</span>
-        <button class="theme-dot t-midnight" data-theme="midnight" aria-pressed="true" aria-label="Midnight Gold theme" title="Midnight Gold"></button>
-        <button class="theme-dot t-classic" data-theme="classic" aria-pressed="false" aria-label="Classic Americana theme" title="Classic Americana"></button>
-        <button class="theme-dot t-emerald" data-theme="emerald" aria-pressed="false" aria-label="Emerald Lounge theme" title="Emerald Lounge"></button>
-        <button class="theme-dot t-noir" data-theme="noir" aria-pressed="false" aria-label="Crimson Noir theme" title="Crimson Noir"></button>
-      </div>
-      <div class="langs"><a href="{root}index.html" {en_cur}>EN</a>&nbsp;|&nbsp;<a href="{root}es/index.html" {es_cur}>ES</a></div>
-    </div>
-  </div>
-</div>
-
-<header class="site-head">
-  <div class="wrap">
-    <a class="brand" href="{root}index.html" aria-label="American Barber Institute home">
-      <svg width="40" height="40" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <rect x="2" y="2" width="44" height="44" rx="8" fill="#c9a227"/>
-        <rect x="19" y="6" width="10" height="36" rx="5" fill="#101316"/>
-        <path d="M19 12 L29 18 M19 22 L29 28 M19 32 L29 38" stroke="#c9a227" stroke-width="3.4" stroke-linecap="round"/>
-        <circle cx="24" cy="6.5" r="3.2" fill="#101316"/>
-      </svg>
-      <span><b>American Barber<br>Institute</b><small>NYC · Est. 1996</small></span>
-    </a>
-    <nav class="nav" aria-label="Main">
-      <div class="has-sub">
-        <a href="{root}about.html">About</a>
-        <div class="sub">
-          <a href="{root}about.html">About ABI &amp; Mission</a>
-          <a href="{root}about.html#instructors">Our Instructors</a>
-          <a href="{root}about.html#skills">Skills &amp; Techniques</a>
-          <a href="{root}about.html#tour">Virtual Tour</a>
-        </div>
-      </div>
-      <div class="has-sub">
-        <a href="{root}programs/index.html">Programs</a>
-        <div class="sub">
-          <a href="{root}programs/500-hour-master-barber.html">500-Hour Master Barber (4 Months)</a>
-          <a href="{root}programs/200-hour-barber-fundamentals.html">200-Hour Barber Fundamentals</a>
-          <a href="{root}programs/50-hour-barber-refresher.html">50-Hour Barber Refresher</a>
-          <a href="{root}programs/scalp-micro-pigmentation.html">50-Hour Scalp Micro-Pigmentation</a>
-          <a href="{root}programs/contagious-diseases.html">3-Hour Contagious Diseases</a>
-          <a href="{root}programs/license-transfer.html">License Transfer</a>
-        </div>
-      </div>
-      <div class="has-sub">
-        <a href="{root}financial-aid.html">Financial Aid</a>
-        <div class="sub">
-          <a href="{root}financial-aid.html">Financial Aid Options</a>
-          <a href="{root}veterans.html">Veterans · GI Bill®</a>
-          <a href="{root}access-vr.html">ACCESS-VR Program</a>
-        </div>
-      </div>
-      <a href="{root}admissions.html">Admissions</a>
-      <a href="{root}haircuts.html">$3 Haircuts</a>
-      <div class="has-sub">
-        <a href="{root}jobs.html">Jobs</a>
-        <div class="sub">
-          <a href="{root}jobs.html">Job Placement</a>
-          <a href="{root}jobs.html#shops">Shop Registration</a>
-        </div>
-      </div>
-      <a href="{root}gallery.html">Gallery</a>
-      <a href="{root}faq.html">FAQs</a>
-      <a href="{root}contact.html">Contact</a>
-    </nav>
-    <a class="btn btn-gold head-cta" href="{root}contact.html">Book a Tour</a>
-    <button class="menu-btn" aria-label="Open menu" aria-expanded="false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
-  </div>
-</header>
-
-<main id="main">
-{body}
-</main>
-
-<section class="cta-band">
-  <div class="wrap">
-    <p class="kicker" style="justify-content:center">Classes begin the first Monday of each month</p>
-    <h2>Next class starts <span data-start-date>soon</span></h2>
-    <p>Seats fill fast. Call us, book a tour, or apply today — our admissions team will guide you every step of the way, in English or Spanish.</p>
-    <div class="hero-ctas">
-      <a class="btn btn-gold btn-lg" href="{root}contact.html">Get More Info</a>
-      <a class="btn btn-ghost btn-lg" href="tel:+12122902289">Call (212) 290-2289</a>
-    </div>
-  </div>
-</section>
-
-<footer class="site">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <h4>American Barber Institute</h4>
-        <p>New York's only dedicated barber school — changing lives for over 30 years. Licensed by the New York State Department of Education. Est. 1996.</p>
-        <div class="socials">
-          <a href="https://www.facebook.com/Abi.Education/" aria-label="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.2c0-.9.2-1.5 1.5-1.5h1.4V5.1C16.1 5 15.2 5 14.2 5c-2.2 0-3.7 1.3-3.7 3.8V11H8v3h2.5v7h3z"/></svg></a>
-          <a href="https://www.instagram.com/americanbarberinstitute/" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
-          <a href="https://twitter.com/amerbarberedu" aria-label="Twitter / X"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3l-6.6 7.6L22 21h-6.1l-4.8-6.3L5.6 21h-3l7.1-8.1L2 3h6.3l4.3 5.7L17.8 3zm-1 16.2h1.7L7.3 4.7H5.5l11.3 14.5z"/></svg></a>
-        </div>
-      </div>
-      <div>
-        <h4>Programs</h4>
-        <ul>
-          <li><a href="{root}programs/500-hour-master-barber.html">500-Hour Master Barber</a></li>
-          <li><a href="{root}programs/200-hour-barber-fundamentals.html">200-Hour Fundamentals</a></li>
-          <li><a href="{root}programs/50-hour-barber-refresher.html">50-Hour Refresher</a></li>
-          <li><a href="{root}programs/scalp-micro-pigmentation.html">Scalp Micro-Pigmentation</a></li>
-          <li><a href="{root}programs/contagious-diseases.html">Contagious Diseases Course</a></li>
-          <li><a href="{root}programs/license-transfer.html">License Transfer</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="{root}admissions.html">Admissions &amp; Schedule</a></li>
-          <li><a href="{root}financial-aid.html">Financial Aid</a></li>
-          <li><a href="{root}veterans.html">Veterans · GI Bill®</a></li>
-          <li><a href="{root}access-vr.html">ACCESS-VR</a></li>
-          <li><a href="{root}haircuts.html">$3 Haircut Menu</a></li>
-          <li><a href="{root}resources.html">Resources</a></li>
-          <li><a href="{root}blog/index.html">Blog</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Visit Us</h4>
-        <ul>
-          <li><a href="https://maps.google.com/?q=48+West+39th+Street,+New+York,+NY+10018">48 West 39th Street<br>New York, NY 10018</a></li>
-          <li><a href="https://maps.google.com/?q=121+Westchester+Square,+Bronx,+NY+10461">121 Westchester Square<br>Bronx, NY 10461</a></li>
-          <li><a href="tel:+12122902289">(212) 290-2289 (English)</a></li>
-          <li><a href="tel:+12122900278">(212) 290-0278 (Español)</a></li>
-          <li><a href="mailto:admission@abi.edu">admission@abi.edu</a></li>
-          <li>Mon–Fri · 8:00 AM – 8:00 PM</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="foot-legal">
-    <div class="wrap">
-      <div>© <span id="yr"></span> American Barber Institute (ABI). All rights reserved. · <a href="{root}privacy.html">Privacy Policy</a></div>
-      <div>GI BILL® is a registered trademark of the U.S. Department of Veterans Affairs (VA). Info: <a href="https://www.benefits.va.gov/gibill" rel="noopener">benefits.va.gov/gibill</a></div>
-    </div>
-  </div>
-</footer>
-
-<div class="mobile-cta">
-  <a class="call" href="tel:+12122902289">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
-    Call Now
-  </a>
-  <a class="apply" href="{root}contact.html">Book a Tour</a>
-</div>
-
-<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script src="{root}assets/js/main.js" defer></script>
-<script src="{root}assets/js/effects.js" defer></script>
-</body>
-</html>
-"""
-
-ORG_SCHEMA = {
-    "@context": "https://schema.org",
-    "@type": ["TradeSchool", "LocalBusiness"],
-    "name": "American Barber Institute",
-    "alternateName": "ABI",
-    "url": SITE_URL,
-    "logo": SITE_URL + "/assets/img/favicon.svg",
-    "foundingDate": "1996",
-    "description": "New York's only dedicated barber school. NYS-licensed 500-hour Master Barber program in Midtown Manhattan with financial aid, veterans GI Bill and ACCESS-VR options, and job placement.",
-    "telephone": "+1-212-290-2289",
-    "email": "admission@abi.edu",
-    "address": [{
-        "@type": "PostalAddress",
-        "streetAddress": "48 West 39th Street",
-        "addressLocality": "New York",
-        "addressRegion": "NY",
-        "postalCode": "10018",
-        "addressCountry": "US"
-    }, {
-        "@type": "PostalAddress",
-        "streetAddress": "121 Westchester Square",
-        "addressLocality": "Bronx",
-        "addressRegion": "NY",
-        "postalCode": "10461",
-        "addressCountry": "US"
-    }],
-    "geo": {"@type": "GeoCoordinates", "latitude": 40.7522, "longitude": -73.9849},
-    "openingHours": "Mo-Fr 08:00-20:00",
-    "sameAs": [
-        "https://www.facebook.com/Abi.Education/",
-        "https://www.instagram.com/americanbarberinstitute/",
-        "https://twitter.com/amerbarberedu"
-    ]
+# ───────────────────────── shared strings ─────────────────────────
+S = {
+ "en": {
+  "topbar": "Start your barber journey today for only $150 per week*",
+  "limited": "🔥 LIMITED SEATS AVAILABLE! 🔥", "reserve": "Reserve Your Spot Today",
+  "next_start": "Next Start:", "call": "Call",
+  "form_sub": "Fill out the form and an Admissions Advisor will contact you.",
+  "fn": "First Name", "ln": "Last Name", "ph": "Phone", "em": "Email",
+  "q_loc": "Which School Location Would You Prefer To Attend?",
+  "q_fmt": "What is your Preferred Learning Format?",
+  "opt_loc": "Select a location", "opt_fmt": "Select an option",
+  "locs": ["Manhattan Campus — 48 West 39th Street", "Bronx Campus — 121 Westchester Square"],
+  "fmts": ["Morning · Mon–Fri 8:00 AM–2:00 PM", "Afternoon · Mon–Fri 2:00 PM–8:00 PM", "Weekend · Sat–Sun 9:00 AM–7:00 PM"],
+  "submit": "Submit",
+  "consent": "By clicking “submit” you consent that ABI can contact you via phone, SMS or email for booking confirmations or promotional offers.",
+  "success_h": "Thank you!", "success_p": "An ABI admissions agent will call you within 24 hours.",
+  "form_err": "Something went wrong. Please try again or call us at",
+  "trust": [("shield","30+ Years of Excellence Training Future Barbers"),
+            ("people","Thousands of Successful Graduates"),
+            ("star","Top-Rated Barber School in New York"),
+            ("cert","Approved by NYSED · Licensed by BPSS")],
+  "features": [("badge","Licensed by NYSED (BPSS)"),("cal","Day, evening, weekend schedules"),
+               ("mic","Hands-on training in our professional Barber clinic"),
+               ("hand","Financial assistance ACCES-VR, VA & more"),
+               ("case","Career support · Job placement assistance"),
+               ("bldg","Modern campus in the heart of New York City and Bronx")],
+  "about_eb": "Overview", "tech_eb": "Techniques", "tech_h": "Skills & Techniques You'll Master",
+  "curr_eb": "Curriculum", "curr_h": "Course Modules",
+  "tuition_eb": "Tuition", "tuition_h": "Flexible Payment Plans",
+  "tuition_lead": "Every plan includes NY State Board Exam prep, hands-on training and job placement support. Pay weekly while you attend.",
+  "plans": [
+    {"name":"Plan A — Morning","sched":"Mon–Fri · 8:00 AM – 2:00 PM","hours":"30 hrs/week · 17 weeks (~4 months)",
+     "price":"$5,600","terms":"$500 down (incl. $100 registration) + 17 weekly payments of $300","pop":False},
+    {"name":"Plan B — Afternoon","sched":"Mon–Fri · 2:00 PM – 8:00 PM","hours":"30 hrs/week · 17 weeks (~4 months)",
+     "price":"$4,600","terms":"$500 down (incl. $100 registration) + 16 weekly payments of $250 + final $100","pop":True},
+    {"name":"Plan C — Weekend","sched":"Sat & Sun · 9:00 AM – 7:00 PM","hours":"18 hrs/week · 27 weeks (~6–7 months)",
+     "price":"$4,600","terms":"$550 down (incl. $100 registration) + 27 weekly payments of $150","pop":False}],
+  "pop_tag": "Most Popular", "plan_cta": "Let's Do It ✂",
+  "plans_note": "Additional fees: books, tools and supplies can be purchased from ABI or other suppliers. ACCES-VR financial assistance available. Post-9/11 GI Bill® and VA benefits accepted.",
+  "req_eb": "Admissions", "req_h": "Entrance Requirements",
+  "reqs": ["Social Security Card","High School Diploma (HSD) or GED — or pass the ATB entrance exam at ABI",
+           "Must be at least 17 years of age","Proof of residential address",
+           "Valid photo ID or Driver's License","$500 down payment"],
+  "testi_eb": "Student Stories", "testi_h": "What Our Students Say",
+  "testi_sub": "Real reviews from our Google profile.",
+  "testi": [
+    {"q":"The level of knowledge and training is superb! One of the best teachers around, King David, will show you everything there is to know about barbering — 100% commitment from this school.","n":"Jerrick Matthews","r":"Current student"},
+    {"q":"I'm a student here and King David has been awesome!! He has 30 years of experience, gives us great techniques and keeps polishing our basic skills.","n":"Carlos Perez","r":"Student"},
+    {"q":"Passed by the barber school for only 3 dollars for a regular haircut — and it's actually good! Great that we could help student trainees practice toward their 500 hours.","n":"Vincybie Lee","r":"Haircut client"}],
+  "closing_h": "Ready to Start Your Barbering Career?",
+  "closing_p": "New classes begin the first Monday of every month. Seats fill fast — call us or reserve your spot today, in English or Spanish.",
+  "closing_cta": "Reserve Your Spot", "closing_call": "Call",
+  "mbar_call": "Call Now", "mbar_cta": "Become a Barber",
+  "bubble_tip": "Hey, I'm one of the assistants at ABI. How can I help?",
+  "exit_h": "Wait — your chair is waiting ✂",
+  "exit_p": "Classes start the first Monday of every month and seats are limited. Leave your info and an admissions advisor will call you within 24 hours.",
+  "exit_cta": "Reserve My Spot",
+  "f_about": "New York's only dedicated barber school — changing lives for over 30 years. Licensed by the New York State Department of Education. Est. 1996.",
+  "f_visit": "Visit Us", "f_links": "Quick Links",
+  "f_linkitems": [("Programs","/programs/index.html"),("Financial Aid","/financial-aid.html"),
+                  ("Veterans · GI Bill®","/veterans.html"),("Admissions","/admissions.html"),
+                  ("$3 Haircuts","/haircuts.html"),("Contact","/contact.html")],
+  "gibill": "GI BILL® is a registered trademark of the U.S. Department of Veterans Affairs (VA).",
+  "details_h": "Program Details", "d_dur": "Duration", "d_tui": "Tuition", "d_from": "from", "d_sch": "Schedules",
+  "d_sch_v": "Morning · Afternoon · Weekend",
+  "count_h": "Next class starts in", "count_lbl": ["Days","Hours","Min","Sec"],
+  "en_es_phones": [("English","(212) 290-2289","+12122902289"),("Spanish","(212) 290-0278","+12122900278")],
+ },
+ "es": {
+  "topbar": "Comienza tu carrera de barbero hoy por solo $150 por semana*",
+  "limited": "🔥 ¡CUPOS LIMITADOS! 🔥", "reserve": "Reserva Tu Lugar Hoy",
+  "next_start": "Próximo Inicio:", "call": "Llamar",
+  "form_sub": "Completa el formulario y un asesor de admisiones te contactará.",
+  "fn": "Nombre", "ln": "Apellido", "ph": "Teléfono", "em": "Correo Electrónico",
+  "q_loc": "¿A cuál sede te gustaría asistir?",
+  "q_fmt": "¿Cuál es tu horario preferido?",
+  "opt_loc": "Selecciona una sede", "opt_fmt": "Selecciona una opción",
+  "locs": ["Sede de Manhattan — 48 West 39th Street", "Sede del Bronx — 121 Westchester Square"],
+  "fmts": ["Mañanas · Lun–Vie 8:00 AM–2:00 PM", "Tardes · Lun–Vie 2:00 PM–8:00 PM", "Fines de Semana · Sáb–Dom 9:00 AM–7:00 PM"],
+  "submit": "Enviar",
+  "consent": "Al hacer clic en “enviar” aceptas que ABI pueda contactarte por teléfono, SMS o correo electrónico para confirmaciones de citas u ofertas promocionales.",
+  "success_h": "¡Gracias!", "success_p": "Un agente de admisiones de ABI te llamará dentro de 24 horas.",
+  "form_err": "Algo salió mal. Inténtalo de nuevo o llámanos al",
+  "trust": [("shield","Más de 30 Años de Excelencia Formando Barberos"),
+            ("people","Miles de Graduados Exitosos"),
+            ("star","Escuela de Barbería Mejor Calificada de Nueva York"),
+            ("cert","Aprobada por NYSED · Licenciada por BPSS")],
+  "features": [("badge","Licenciada por NYSED (BPSS)"),("cal","Horarios de día, tarde y fin de semana"),
+               ("mic","Entrenamiento práctico en nuestra clínica profesional de barbería"),
+               ("hand","Asistencia financiera ACCES-VR, VA y más"),
+               ("case","Apoyo profesional · Asistencia de empleo"),
+               ("bldg","Campus moderno en el corazón de Nueva York y el Bronx")],
+  "about_eb": "Resumen", "tech_eb": "Técnicas", "tech_h": "Habilidades y Técnicas Que Dominarás",
+  "curr_eb": "Plan de Estudios", "curr_h": "Módulos del Curso",
+  "tuition_eb": "Matrícula", "tuition_h": "Planes de Pago Flexibles",
+  "tuition_lead": "Todos los planes incluyen preparación para el examen del Estado de NY, entrenamiento práctico y apoyo para la colocación laboral. Paga semanalmente mientras estudias.",
+  "plans": [
+    {"name":"Plan A — Mañanas","sched":"Lun–Vie · 8:00 AM – 2:00 PM","hours":"30 hrs/semana · 17 semanas (~4 meses)",
+     "price":"$5,600","terms":"$500 de pago inicial (incluye $100 de inscripción) + 17 pagos semanales de $300","pop":False},
+    {"name":"Plan B — Tardes","sched":"Lun–Vie · 2:00 PM – 8:00 PM","hours":"30 hrs/semana · 17 semanas (~4 meses)",
+     "price":"$4,600","terms":"$500 de pago inicial (incluye $100 de inscripción) + 16 pagos semanales de $250 + pago final de $100","pop":True},
+    {"name":"Plan C — Fines de Semana","sched":"Sáb y Dom · 9:00 AM – 7:00 PM","hours":"18 hrs/semana · 27 semanas (~6–7 meses)",
+     "price":"$4,600","terms":"$550 de pago inicial (incluye $100 de inscripción) + 27 pagos semanales de $150","pop":False}],
+  "pop_tag": "Más Popular", "plan_cta": "¡Hagámoslo! ✂",
+  "plans_note": "Tarifas adicionales: libros, herramientas y suministros se pueden comprar en ABI o con otros proveedores. Asistencia financiera ACCES-VR disponible. Beneficios de Post-9/11 GI Bill® y VA aceptados.",
+  "req_eb": "Admisiones", "req_h": "Requisitos de Admisión",
+  "reqs": ["Tarjeta de Seguro Social","Diploma de Preparatoria (HSD) o GED — o aprobar el examen ATB de admisión en ABI",
+           "Tener al menos 17 años de edad","Comprobante de domicilio",
+           "Identificación con foto válida o licencia de conducir","Pago inicial de $500"],
+  "testi_eb": "Historias de Estudiantes", "testi_h": "Lo Que Dicen Nuestros Estudiantes",
+  "testi_sub": "Reseñas reales de nuestro perfil de Google.",
+  "testi": [
+    {"q":"¡El nivel de conocimiento y entrenamiento es excelente! Uno de los mejores maestros, King David, te enseña todo lo que hay que saber sobre barbería — 100% de compromiso de esta escuela.","n":"Jerrick Matthews","r":"Estudiante actual"},
+    {"q":"Soy estudiante aquí y ¡King David ha sido increíble! Tiene 30 años de experiencia, nos da grandes técnicas y sigue puliendo nuestras habilidades básicas.","n":"Carlos Perez","r":"Estudiante"},
+    {"q":"Pasé por la escuela de barbería: solo $3 por un corte regular — ¡y de verdad está bueno! Genial poder ayudar a los estudiantes a practicar para sus 500 horas.","n":"Vincybie Lee","r":"Cliente de corte"}],
+  "closing_h": "¿Listo para Empezar Tu Carrera de Barbería?",
+  "closing_p": "Las clases nuevas comienzan el primer lunes de cada mes. Los cupos se llenan rápido — llámanos o reserva tu lugar hoy.",
+  "closing_cta": "Reserva Tu Lugar", "closing_call": "Llámanos",
+  "mbar_call": "Llámanos", "mbar_cta": "Conviértete en Barbero",
+  "bubble_tip": "Hola, soy uno de los asistentes de ABI. ¿Cómo puedo ayudarte?",
+  "exit_h": "Espera — tu silla te está esperando ✂",
+  "exit_p": "Las clases comienzan el primer lunes de cada mes y los cupos son limitados. Déjanos tu información y un asesor de admisiones te llamará dentro de 24 horas.",
+  "exit_cta": "Reservar Mi Lugar",
+  "f_about": "La única escuela de barbería dedicada de Nueva York — cambiando vidas por más de 30 años. Licenciada por el Departamento de Educación del Estado de NY. Est. 1996.",
+  "f_visit": "Visítanos", "f_links": "Enlaces Rápidos",
+  "f_linkitems": [("Programas","/programs/index.html"),("Ayuda Financiera","/financial-aid.html"),
+                  ("Veteranos · GI Bill®","/veterans.html"),("Admisiones","/admissions.html"),
+                  ("Cortes de $3","/haircuts.html"),("Contacto","/contact.html")],
+  "gibill": "GI BILL® es una marca registrada del Departamento de Asuntos de Veteranos de EE. UU. (VA).",
+  "details_h": "Detalles del Programa", "d_dur": "Duración", "d_tui": "Matrícula", "d_from": "desde", "d_sch": "Horarios",
+  "d_sch_v": "Mañanas · Tardes · Fines de Semana",
+  "count_h": "La próxima clase comienza en", "count_lbl": ["Días","Horas","Min","Seg"],
+  "en_es_phones": [("English","(212) 290-2289","+12122902289"),("Español","(212) 290-0278","+12122900278")],
+ },
 }
 
-def course_schema(name, desc, hours, weeks, price):
-    return {
-        "@context": "https://schema.org",
-        "@type": "Course",
-        "name": name,
-        "description": desc,
-        "provider": {"@type": "TradeSchool", "name": "American Barber Institute", "url": SITE_URL},
-        "offers": {"@type": "Offer", "price": str(price), "priceCurrency": "USD", "category": "Tuition"},
-        "hasCourseInstance": {
-            "@type": "CourseInstance",
-            "courseMode": "onsite",
-            "courseWorkload": f"PT{hours}H",
-            "location": {"@type": "Place", "name": "American Barber Institute",
-                         "address": "48 West 39th Street, New York, NY 10018"}
-        },
-        "totalHistoricalEnrollment": None,
-        "timeRequired": f"P{weeks}W"
-    }
+MANHATTAN = {"name_en":"Manhattan Campus","name_es":"Sede de Manhattan",
+             "addr":"48 West 39th Street, New York, NY 10018","tel_disp":"(212) 290-2289","tel":"+12122902289"}
+BRONX = {"name_en":"Bronx Campus","name_es":"Sede del Bronx",
+         "addr":"121 Westchester Square, Bronx, NY 10461","tel_disp":"(718) 676-0640","tel":"+17186760640"}
 
-# ---------------------------------------------------------------- pages
-PAGES = [
-    # (output, partial, title, description, lang, extra_schema)
-    ("index.html", "home.html",
-     "Barber School NYC | American Barber Institute — 500-Hour Master Barber Program",
-     "NYC's only dedicated barber school, est. 1996. NYS-licensed 500-hour Master Barber program, financial aid, veterans GI Bill®, ACCESS-VR & job placement. New classes monthly.",
-     "en", [ORG_SCHEMA]),
-    ("about.html", "about.html",
-     "About Us | American Barber Institute — NYC Barber School Since 1996",
-     "Learn about ABI: 3,000 sq ft Midtown Manhattan campus, NYS-licensed curriculum, expert instructors who are all ABI graduates, and our mission to build lifetime barbering careers.",
-     "en", []),
-    ("admissions.html", "admissions.html",
-     "Admissions, Requirements & Schedule | American Barber Institute",
-     "How to get started at ABI: entrance requirements, class schedules (morning, afternoon, weekend), holiday calendar, and the 4 simple steps to enroll. Classes start monthly.",
-     "en", []),
-    ("financial-aid.html", "financial-aid.html",
-     "Financial Aid | NYSDOL Grant, ACCESS-VR & GI Bill® | American Barber Institute",
-     "Financial assistance for those who qualify: NYSDOL Grant, ACCESS-VR, Veterans GI Bill®, and weekly payment plans on every program. Pay while you attend school.",
-     "en", []),
-    ("veterans.html", "veterans.html",
-     "Veterans Program — GI Bill® Approved Barber Training | American Barber Institute",
-     "VA-approved barber training in NYC under Title 38 USC § 3676. Use your GI Bill® benefits to become a licensed Master Barber. We guide you through every step.",
-     "en", []),
-    ("access-vr.html", "access-vr.html",
-     "ACCESS-VR Program — Tuition Covered Barber Training | American Barber Institute",
-     "ACCESS-VR pays tuition, tools and books for qualified New Yorkers with disabilities. Train as a barber at ABI with full vocational rehabilitation support.",
-     "en", []),
-    ("haircuts.html", "haircuts.html",
-     "$3 Haircuts in Manhattan — Services Menu | American Barber Institute",
-     "Get a quality $3 haircut by supervised student barbers in Midtown Manhattan: fades, tapers, shape-ups, razor shaves and more. Free haircut coupon available.",
-     "en", []),
-    ("jobs.html", "jobs.html",
-     "Job Placement & Shop Registration | American Barber Institute",
-     "ABI maintains a full-time job placement office. Graduates often finish with multiple offers. Barbershop owners: register your shop to hire our trained graduates.",
-     "en", []),
-    ("gallery.html", "gallery.html",
-     "Gallery — Student Work & Campus | American Barber Institute",
-     "See our students' haircuts, our 3,000 sq ft Midtown Manhattan campus, and life at New York's only dedicated barber school.",
-     "en", []),
-    ("faq.html", "faq.html",
-     "Frequently Asked Questions | American Barber Institute",
-     "Answers about tuition costs, program length, schedules, age requirements, ACCESS-VR, job placement, and why students choose ABI.",
-     "en", ["FAQ_SCHEMA"]),
-    ("contact.html", "contact.html",
-     "Contact & Directions | American Barber Institute — Midtown Manhattan",
-     "Visit ABI at 48 West 39th Street, NYC — minutes from Penn Station, Grand Central & Times Square. Call (212) 290-2289 or book your free tour today.",
-     "en", [ORG_SCHEMA]),
-    ("resources.html", "resources.html",
-     "Barbering Resources & State Licensing Boards | American Barber Institute",
-     "Regulatory agencies, state-by-state barber and cosmetology licensing boards, education resources and industry associations.",
-     "en", []),
-    ("privacy.html", "privacy.html",
-     "Privacy Policy | American Barber Institute",
-     "How American Barber Institute collects, uses, and protects your personal information.",
-     "en", []),
-    ("programs/index.html", "programs-index.html",
-     "Barber Programs in NYC | American Barber Institute",
-     "Compare ABI's NYS-licensed programs: 500-hour Master Barber, 200-hour Fundamentals, 50-hour Refresher, Scalp Micro-Pigmentation, Contagious Diseases course & License Transfer.",
-     "en", []),
-    ("programs/500-hour-master-barber.html", "program-500.html",
-     "500-Hour Master Barber Program (4 Months) | American Barber Institute",
-     "Become a licensed Master Barber in NY in 4 months. Morning, afternoon or weekend schedules from $4,600 with weekly payment plans. NYS Board Exam prep & job placement.",
-     "en", [course_schema("500 Hour Master Barber Program",
-        "Four-month NYS-licensed master barber training: theory, practical work on real clients, State Board exam prep and job placement.", 500, 17, 4600)]),
-    ("programs/200-hour-barber-fundamentals.html", "program-200.html",
-     "200-Hour Barber Fundamentals Program (2 Months) | American Barber Institute",
-     "Hands-on 200-hour barbering fundamentals for apprentices and licensed cosmetologists. $3,600 with a weekly payment plan. Monday–Friday afternoons.",
-     "en", [course_schema("200 Hour Barber Fundamentals Program",
-        "Two-month program training apprentice registrants and licensed cosmetologists in practical and theoretical barbering.", 200, 8, 3600)]),
-    ("programs/50-hour-barber-refresher.html", "program-50.html",
-     "50-Hour Barber Refresher Program (2 Weeks) | American Barber Institute",
-     "Sharpen your skills and prepare for the NY State Board Exam in 2 weeks. For cosmetologists, hairdressers and barber apprentices. $1,500 with split payments.",
-     "en", [course_schema("50 Hour Barber Refresher Program",
-        "Two-week refresher preparing licensed professionals for the New York State Barbering Licensing Examination.", 50, 2, 1500)]),
-    ("programs/scalp-micro-pigmentation.html", "program-smp.html",
-     "50-Hour Scalp Micro-Pigmentation Program | American Barber Institute",
-     "Weekend SMP certification in NYC: hairline design, pigments, device work and client care. $3,500 including tool kit, over 4 weekends.",
-     "en", [course_schema("50 Hour Scalp Micro-Pigmentation Program",
-        "Weekend program teaching scalp micro-pigmentation: hairline design, pigment selection, hygiene and client care.", 50, 4, 3500)]),
-    ("programs/contagious-diseases.html", "program-cd.html",
-     "3-Hour Contagious Diseases Program (Home Study) — $100 | American Barber Institute",
-     "NY-required Transmission of Contagious Diseases course for barber operators and apprentices. Complete by mail for $100 — booklet, exam and two certificates.",
-     "en", [course_schema("3 Hours Contagious Diseases Program",
-        "Home-study course on transmission of contagious diseases, sanitation and sterilization required for NY barber licensure.", 3, 1, 100)]),
-    ("programs/license-transfer.html", "program-lt.html",
-     "NY Barber & Cosmetology License Transfer Service | American Barber Institute",
-     "Working with a license from another state or country? ABI manages your entire NYS licensure or reciprocity application from start to finish.",
-     "en", []),
-    ("blog/index.html", "blog-index.html",
-     "Blog — Barbering Career Advice & News | American Barber Institute",
-     "Advice from NYC's only dedicated barber school: licensing, careers, shop ownership, marketing your barbershop, and life after barber school.",
-     "en", []),
-    ("es/index.html", "es-home.html",
-     "Escuela de Barbería en NYC | American Barber Institute",
-     "La única escuela dedicada a la barbería en Nueva York, desde 1996. Programa de Master Barber de 500 horas con licencia del Estado de NY, ayuda financiera y colocación laboral. Llame al (212) 290-0278.",
-     "es", [ORG_SCHEMA]),
+# ───────────────────────── page data ─────────────────────────
+CURR_MAN_EN = [
+ ("Theory & Science",["Sanitation & Sterilization","Barber History","NY State Laws & Regulations","Shop Management","Professional Ethics"]),
+ ("Cutting Techniques",["Fades (Low, Mid, High)","Tapers & Classic Cuts","Clipper Over Comb","Scissor Over Comb","Flat Tops & High-Top Fades"]),
+ ("Styling & Finishing",["Razor Lineups & Shape Ups","Blowouts & Pompadours","Afro & Mohawk Styling","Beard Trimming & Design","Shampoo & Conditioning"]),
+ ("Shaving & Skin Care",["Straight Razor Shaving","Facial Massage Techniques","Hot Towel Treatments","Skin & Scalp Analysis","Safety & Hygiene"]),
+ ("Business & Career",["Client Consultation Skills","Barbershop Operation","Building a Clientele","Job Placement Prep","NY State Board Exam Prep"])]
+CURR_MAN_ES = [
+ ("Teoría y Ciencia",["Sanitización y Esterilización","Historia de la Barbería","Leyes y Regulaciones del Estado de NY","Administración de Barbería","Ética Profesional"]),
+ ("Técnicas de Corte",["Fades (Bajos, Medios, Altos)","Tapers y Cortes Clásicos","Clipper Sobre Peine","Tijera Sobre Peine","Flat Tops y High-Top Fades"]),
+ ("Estilizado y Acabado",["Líneas con Navaja y Shape Ups","Blowouts y Pompadours","Estilizado de Afro y Mohawk","Recortes y Diseño de Barba","Lavado y Acondicionamiento"]),
+ ("Afeitado y Cuidado de la Piel",["Afeitado con Navaja","Técnicas de Masaje Facial","Tratamientos con Toallas Calientes","Análisis de Piel y Cuero Cabelludo","Seguridad e Higiene"]),
+ ("Negocio y Carrera",["Habilidades de Consulta con el Cliente","Operación de Barbería","Construcción de Clientela","Preparación para Empleo","Preparación del Examen del Estado de NY"])]
+CURR_BX_EN = [
+ ("Theory & Science",["Sanitation & Sterilization","Infection Control","Anatomy & Chemistry","NY State Laws & Regulations","Professional Ethics"]),
+ CURR_MAN_EN[1], CURR_MAN_EN[3], CURR_MAN_EN[4]]
+CURR_BX_ES = [
+ ("Teoría y Ciencia",["Sanitización y Esterilización","Control de Infecciones","Anatomía y Química","Leyes y Regulaciones del Estado de NY","Ética Profesional"]),
+ CURR_MAN_ES[1], CURR_MAN_ES[3], CURR_MAN_ES[4]]
+
+TECH_MAN_EN = ["Classic Tapers","Low Fades","Mid Fades","High Fades","High-Top Fades","Pompadours","Fohawks","Caesars","Bald Heads","Afros","Flat Tops","Razor Lineups","Classical Haircuts","Beard Trims","Shape Ups","Blowouts","Mohawks","Shampoos","Shaving Techniques","Facial Massage","Clipper Over Comb","Scissor Over Comb"]
+TECH_MAN_ES = ["Degradados Clásicos","Fades Bajos","Fades Medios","Fades Altos","High-Top Fades","Pompadours","Mohawks","Caesars","Cabezas Rapadas","Afro","Flat Tops","Líneas con Navaja","Cortes Clásicos","Recortes de Barba","Shape Ups","Blowouts","Lavados","Técnicas de Afeitado","Masaje Facial","Clipper Sobre Peine","Tijera Sobre Peine"]
+TECH_BX_EN = ["Shear Over Comb","Clipper Cutting","Razor Cutting","Point Cutting","Thinning Shears","Straight Razor Shaving","Beard Maintenance","Mustache & Beard Design","Classic Tapers","Low · Mid · High Fades","Pompadours","Caesars","Flat Tops","Razor Lineups","Shape Ups","Blowouts","Mohawks","Shaving Techniques","Facial Massage"]
+TECH_BX_ES = ["Tijera Sobre Peine","Corte con Clipper","Corte con Navaja","Point Cutting","Tijeras de Entresacado","Afeitado con Navaja","Mantenimiento de Barba","Diseño de Bigote y Barba","Degradados Clásicos","Fades Bajos · Medios · Altos","Pompadours","Caesars","Flat Tops","Líneas con Navaja","Shape Ups","Blowouts","Mohawks","Técnicas de Afeitado","Masaje Facial"]
+
+ABOUT_MAN_EN = [
+ "Our Master Barber Program offers a comprehensive curriculum designed to prepare students for success in the thriving barbering industry. Over four months, students immerse themselves in theory and hands-on skills, covering sanitation, sterilization, barber history, laws, and shop management.",
+ "Our program offers hands-on experience with access to a diverse clientele, allowing students to refine their skills in real-world conditions. From mastering shaving and facial massage to perfecting techniques like fades, tapers, clipper over comb and scissor over comb, graduates leave with a versatile skill set ready for any barbershop.",
+ "Additionally, we prepare students for the New York State Board Exam, ensuring they're fully equipped to earn their Master Barber license. Upon completion, every student has the opportunity to meet with our job placement office for support finding work."]
+ABOUT_MAN_ES = [
+ "Nuestro Programa de Barbero Maestro ofrece un plan de estudios integral diseñado para preparar a los estudiantes para el éxito en la próspera industria de la barbería. Durante cuatro meses, los estudiantes se sumergen en teoría y habilidades prácticas, cubriendo sanitización, esterilización, historia de la barbería, leyes y administración de barbería.",
+ "Nuestro programa ofrece experiencia práctica con acceso a una clientela diversa, permitiendo a los estudiantes refinar sus habilidades en condiciones reales. Desde dominar el afeitado y masaje facial hasta perfeccionar técnicas como fades, tapers, clipper sobre peine, tijera sobre peine y mucho más, los graduados se gradúan con un conjunto de habilidades versátil listo para emplearse en cualquier barbería.",
+ "Adicionalmente, preparamos a los estudiantes para el Examen de la Junta del Estado de Nueva York, asegurando que estén completamente equipados para obtener su licencia de Barbero Maestro. Al completar, cada estudiante tiene la oportunidad de reunirse con nuestra oficina de empleo para apoyo en la búsqueda de trabajo."]
+ABOUT_BX_EN = [
+ "Welcome to the Bronx campus of the American Barber Institute, where we offer a comprehensive Master Barber Program that prepares students for success in the thriving barbering industry. Our 4-month full-time program covers everything you need to excel in this dynamic field, including safety regulations, infection control, anatomy, chemistry, and hair care techniques.",
+ "Students learn and master the art of haircutting, shaving, facial massage and hairstyling. We also offer training in artificial hair and hair coloring procedures, including semi-permanent and temporary color, as well as techniques for working with wigs and hairpieces. Additionally, students gain proficiency in hair replacement methods.",
+ "Hands-on experience is central to our program — students work with a diverse clientele to refine their skills in real-world conditions. Graduates leave with a versatile skill set, ready to work in any barbershop, mastering techniques like fades, tapers, clipper over comb and scissor over comb.",
+ "We prepare students for the New York State Board Exam, ensuring they're fully equipped to earn their Master Barber license and launch their careers — whether the goal is a traditional shop, freelance work, or opening their own business."]
+ABOUT_BX_ES = [
+ "Bienvenido a la sede del Bronx del American Barber Institute, donde ofrecemos un Programa integral de Barbero Maestro que prepara a los estudiantes para el éxito en la próspera industria de la barbería. Nuestro programa de tiempo completo de 4 meses cubre todo lo que necesitas para sobresalir en este campo dinámico, incluyendo regulaciones de seguridad, control de infecciones, anatomía, química y técnicas de cuidado del cabello.",
+ "Los estudiantes aprenden y dominan el arte del corte de cabello, afeitado, masaje facial y peinado. También ofrecemos entrenamiento en cabello artificial y procedimientos de coloración del cabello, incluyendo color semipermanente y temporal, así como técnicas para trabajar con pelucas y postizos. Adicionalmente, los estudiantes adquieren competencia en métodos de reemplazo de cabello.",
+ "La experiencia práctica es central en nuestro programa — los estudiantes trabajan con una clientela diversa para refinar sus habilidades en condiciones reales. Los graduados se gradúan con un conjunto de habilidades versátil, listos para trabajar en cualquier barbería.",
+ "Preparamos a los estudiantes para el Examen de la Junta del Estado de Nueva York, asegurando que estén completamente equipados para obtener su licencia de Barbero Maestro y lanzar sus carreras. Al completar, los estudiantes se conectan con nuestra oficina de empleo — ya sea su meta una barbería tradicional, trabajo independiente o abrir su propio negocio."]
+
+LOCATIONS = [
+ {"slug":"barber-school-queens-ny","loc":"Queens, NY","h1":"Barber School for Queens Residents","campus":MANHATTAN,
+  "title":"Barber School for Queens, NY | American Barber Institute",
+  "desc":"Train as a licensed Master Barber at NYC's only dedicated barber school — a quick train ride from Queens to Midtown Manhattan. 500-hour program, flexible schedules, payment plans. Next class starts soon.",
+  "intro":["From Astoria and Long Island City to Jackson Heights, Flushing and Jamaica — Queens residents train for a real career behind the chair at one of New York City's only dedicated barber schools, just a quick ride away in Midtown Manhattan.",
+           "Earn your NYS Master Barber license in as little as 4 months with hands-on training, real clients, and schedules built around Queens commuters."],
+  "getting":"A quick E, F, M, R, or 7 train into Midtown drops you blocks from our Manhattan campus on West 39th Street; the LIRR into Penn Station works too."},
+ {"slug":"barber-school-brooklyn-new-york","loc":"Brooklyn, NY","h1":"Barber School for Brooklyn, NY","campus":MANHATTAN,
+  "title":"Barber School for Brooklyn, NY | American Barber Institute",
+  "desc":"Become a licensed Master Barber — our Midtown Manhattan campus is 20–40 minutes from most of Brooklyn. 500-hour hands-on program, flexible schedules, weekly payment plans.",
+  "intro":["From Williamsburg and Bushwick to Bed-Stuy, Flatbush, Bay Ridge and Coney Island — Brooklyn students train for a real career behind the chair at New York's only dedicated barber school.",
+           "Most Brooklyn neighborhoods reach our campus in 20–40 minutes, and our morning, afternoon and weekend schedules fit work and family."],
+  "getting":"Most Brooklyn neighborhoods reach our West 39th Street campus in 20–40 minutes on the B, D, N, Q, R or 2/3/4/5 trains."},
+ {"slug":"barber-school-yonkers-new-york","loc":"Yonkers, NY","h1":"Barber School for Yonkers, NY","campus":BRONX,
+  "title":"Barber School for Yonkers, NY | American Barber Institute",
+  "desc":"Yonkers sits right on the Bronx border — our Westchester Square campus is one of the closest dedicated barber schools to you. Bilingual instruction, payment plans, NYS license prep.",
+  "intro":["Yonkers sits right on the Bronx border, making our Bronx campus one of the closest dedicated barber schools to the city — from Getty Square to Park Hill, your new career is minutes away.",
+           "Train hands-on with real clients, with bilingual instruction (se habla español) and flexible payment plans."],
+  "getting":"A short drive down the Major Deegan or Saw Mill, or a Metro-North + local bus hop from downtown Yonkers."},
+ {"slug":"barber-school-westchester-ny","loc":"Westchester, NY","h1":"Barber School for Westchester County","campus":BRONX,
+  "title":"Barber School for Westchester, NY | American Barber Institute",
+  "desc":"Westchester County residents: train as a licensed Master Barber at our Bronx campus — easy via Metro-North or I-95. Hands-on clinic, flexible schedules, weekly payment plans.",
+  "intro":["From Mount Vernon and New Rochelle to White Plains — Westchester students earn their NYS Master Barber license at our Bronx campus, an easy trip via Metro-North or I-95.",
+           "Our program puts clippers in your hands early with real clinic clients, so you graduate shop-ready."],
+  "getting":"Via Metro-North (Harlem line) plus a short connection, or straight down I-95 / the Hutchinson River Parkway."},
+ {"slug":"barber-school-long-island-ny","loc":"Long Island, NY","h1":"Barber School for Long Island, NY","campus":MANHATTAN,
+  "title":"Barber School for Long Island, NY | American Barber Institute",
+  "desc":"One LIRR ride from Nassau & Suffolk: our Manhattan campus is just blocks from Penn Station. 500-hour Master Barber program with weekend and afternoon schedules that suit the commute.",
+  "intro":["Nassau and Suffolk students: our Manhattan campus is just blocks from Penn Station, making the LIRR commute straightforward.",
+           "Weekend and afternoon schedules suit a commute from the Island — earn your NYS Master Barber license in as little as 4 months."],
+  "getting":"Take the LIRR straight into Penn Station; our West 39th Street campus is a short walk away."},
+ {"slug":"barber-school-mount-vernon-ny","loc":"Mount Vernon, NY","h1":"Barber School for Mount Vernon, NY","campus":BRONX,
+  "title":"Barber School for Mount Vernon, NY | American Barber Institute",
+  "desc":"Mount Vernon borders the Bronx — our Westchester Square campus is right around the corner. Train hands-on for the NYS Master Barber license with flexible payment plans.",
+  "intro":["Mount Vernon borders the Bronx, so our Westchester Square campus is right around the corner — minutes from home, with a real-client clinic on the floor.",
+           "Train mornings, afternoons or weekends, with bilingual instruction and weekly payment plans."],
+  "getting":"Minutes away by car, or a short 2/5 train plus local bus from Mount Vernon."},
+ {"slug":"barber-school-port-chester-ny","loc":"Port Chester, NY","h1":"Barber School for Port Chester, NY","campus":BRONX,
+  "title":"Barber School for Port Chester, NY | American Barber Institute",
+  "desc":"The closest dedicated barber school heading south from eastern Westchester — reach our Bronx campus via Metro-North or I-95 in 30–40 minutes. NYS license prep, payment plans.",
+  "intro":["Heading south from eastern Westchester, ABI's Bronx campus is the closest dedicated barber school — roughly 30–40 minutes from Port Chester.",
+           "Hands-on training with real clients, bilingual instructors, and schedules that work around your job."],
+  "getting":"Via Metro-North (New Haven line) or straight down I-95 — roughly 30–40 minutes south."},
+ {"slug":"barber-school-connecticut","loc":"Connecticut","h1":"Barber School for Connecticut Commuters","campus":BRONX,
+  "title":"Barber School Near Connecticut | American Barber Institute",
+  "desc":"Greenwich, Stamford, Norwalk: train just over the state line at our Bronx campus. Note: our program prepares you for the New York State Master Barber license.",
+  "intro":["From Greenwich, Stamford and Norwalk — Fairfield County commuters train just over the state line at our Bronx campus, one of the closest dedicated barber schools to Connecticut.",
+           "Earn the New York State Master Barber license with hands-on clinic training and weekly payment plans."],
+  "getting":"Via Metro-North (New Haven line) into the Bronx, or down I-95 — Fairfield County is just over the state line.",
+  "disclaimer":"Please note: American Barber Institute is licensed by the New York State Department of Education, and our program prepares you for the New York State Master Barber license. Connecticut residents are welcome to train here; check Connecticut's own licensing requirements if you intend to work in CT."},
+ {"slug":"barber-school-pennsylvania","loc":"Pennsylvania","h1":"Barber School for Pennsylvania Students","campus":MANHATTAN,
+  "title":"Barber School Near Pennsylvania | American Barber Institute",
+  "desc":"Eastern PA students moving to or commuting into NYC: our Manhattan campus is a short walk from Penn Station. Prepares you for the New York State Master Barber license.",
+  "intro":["For students in eastern Pennsylvania who are moving to or commuting into the New York City area, ABI's Manhattan campus is a short walk from Penn Station.",
+           "Train hands-on for the New York State Master Barber license, with morning, afternoon and weekend schedules."],
+  "getting":"A short walk from Penn Station for those arriving by train or bus into the city.",
+  "disclaimer":"Please note: American Barber Institute is licensed by the New York State Department of Education, and our program prepares you for the New York State Master Barber license. If you plan to work in PA, check Pennsylvania's own barber licensing requirements."},
 ]
 
-# blog posts generated by src/make_blog.py
-_blog_manifest = os.path.join(ROOT, 'src', 'blog_manifest.json')
-if os.path.exists(_blog_manifest):
-    for _p in json.load(open(_blog_manifest)):
-        PAGES.append((
-            f"blog/{_p['slug']}.html", _p['partial'],
-            f"{_p['title']} | American Barber Institute Blog",
-            f"{_p['title']} — career advice and industry insight from NYC's only dedicated barber school.",
-            "en", []))
+PAGES = []
+# program pages
+PAGES.append({"type":"program","lang":"en","path":"500-hours-master-barber-program-landing-page/index.html",
+ "url":"/500-hours-master-barber-program-landing-page","alt":"/es/500-hours-master-barber-program-landing-page",
+ "title":"500 Hour Master Barber Program — Manhattan | American Barber Institute",
+ "desc":"Become a licensed Master Barber in New York in as little as 4 months. Comprehensive 500-hour hands-on training in Manhattan with flexible schedules, job placement, and NY State Board Exam prep. Starting at $4,600.",
+ "campus":MANHATTAN,"h1a":"500 Hours.","h1b":"Barber Program.","script":"Start Today.",
+ "sub":"Become a licensed Barber in as little as <b>4 months</b>. Comprehensive hands-on training and full NY State Board Exam prep at our Manhattan campus.",
+ "about":ABOUT_MAN_EN,"about_h":"About the Program","tech":TECH_MAN_EN,"curr":CURR_MAN_EN,
+ "hero_img":"lp-hero.jpg","dur":"~4 Months","tui":"$4,600"})
+PAGES.append({"type":"program","lang":"es","path":"es/500-hours-master-barber-program-landing-page/index.html",
+ "url":"/es/500-hours-master-barber-program-landing-page","alt":"/500-hours-master-barber-program-landing-page",
+ "title":"Programa de Barbero Maestro de 500 Horas — Manhattan | American Barber Institute",
+ "desc":"Conviértete en Barbero Maestro licenciado en Nueva York en tan solo 4 meses. Entrenamiento práctico de 500 horas en Manhattan, horarios flexibles, asistencia de empleo y preparación para el examen del Estado de NY. Desde $4,600.",
+ "campus":MANHATTAN,"h1a":"500 Horas.","h1b":"Programa de Barbero.","script":"Empieza Hoy.",
+ "sub":"Conviértete en Barbero Maestro licenciado en tan solo <b>cuatro meses</b>. Entrenamiento práctico integral y preparación completa para el examen del Estado de NY en nuestra sede de Manhattan.",
+ "about":ABOUT_MAN_ES,"about_h":"Sobre el Programa","tech":TECH_MAN_ES,"curr":CURR_MAN_ES,
+ "hero_img":"lp-hero.jpg","dur":"~4 Meses","tui":"$4,600"})
+PAGES.append({"type":"program","lang":"en","path":"master-barber-program-bronx/index.html",
+ "url":"/master-barber-program-bronx","alt":"/es/master-barber-program-bronx",
+ "title":"Master Barber Program — Bronx | American Barber Institute",
+ "desc":"Become a licensed Master Barber in New York at our Bronx campus. 500-hour hands-on training with full-time and weekend schedules, flexible payment plans, and NY State Board Exam prep. Starting at $4,600. Se habla español.",
+ "campus":BRONX,"h1a":"Barber Operator","h1b":"Program.","script":"Start Today.",
+ "sub":"Become a licensed Master Barber with affordable payment plans, full-time and weekend schedules, and <b>bilingual instruction</b> at our Bronx campus. Se habla español.",
+ "about":ABOUT_BX_EN,"about_h":"About the Program","tech":TECH_BX_EN,"curr":CURR_BX_EN,
+ "hero_img":"lp-hero-bronx.jpg","dur":"~4 Months","tui":"$4,600"})
+PAGES.append({"type":"program","lang":"es","path":"es/master-barber-program-bronx/index.html",
+ "url":"/es/master-barber-program-bronx","alt":"/master-barber-program-bronx",
+ "title":"Programa de Barbero Maestro — Bronx | American Barber Institute",
+ "desc":"Conviértete en Barbero Maestro licenciado en Nueva York en nuestra sede del Bronx. Entrenamiento práctico de 500 horas con horarios de tiempo completo y fines de semana, planes de pago flexibles y preparación para el examen del Estado de NY. Desde $4,600. Se habla español.",
+ "campus":BRONX,"h1a":"Programa de Barbero","h1b":"Operador.","script":"Empieza Hoy.",
+ "sub":"Conviértete en Barbero Maestro licenciado con planes de pago asequibles, horarios de tiempo completo y fines de semana, e <b>instrucción bilingüe</b> en nuestra sede del Bronx. Se habla español.",
+ "about":ABOUT_BX_ES,"about_h":"Sobre el Programa","tech":TECH_BX_ES,"curr":CURR_BX_ES,
+ "hero_img":"lp-hero-bronx.jpg","dur":"~4 Meses","tui":"$4,600"})
+# splash pages
+for n, (h1a_en,h1b_en,h1a_es,h1b_es) in (
+    (1,("Your Future.","Your Career.","Tu Futuro.","Tu Carrera.")),
+    (2,("A New Career.","In 17 Weeks.","Una Nueva Carrera.","En 17 Semanas."))):
+    PAGES.append({"type":"splash","lang":"en","path":"splash-page-%d/index.html"%n,
+     "url":"/splash-page-%d"%n,"alt":"/es/splash-page-%d"%n,
+     "title":"Become a Licensed Barber in NYC | American Barber Institute",
+     "desc":"New York's only dedicated barber school — changing lives for over 30 years. Become a licensed barber in as little as 17 weeks. Hands-on training. Real skills. Real opportunities.",
+     "campus":MANHATTAN,"h1a":h1a_en,"h1b":h1b_en,"script":"Start Today.",
+     "sub":"Become a licensed barber in as little as <b>17 weeks</b>. Hands-on training. Real skills. Real opportunities.",
+     "hero_img":"lp-hero.jpg","dur":"~4 Months","tui":"$4,600","variant":n})
+    PAGES.append({"type":"splash","lang":"es","path":"es/splash-page-%d/index.html"%n,
+     "url":"/es/splash-page-%d"%n,"alt":"/splash-page-%d"%n,
+     "title":"Conviértete en Barbero Licenciado en NYC | American Barber Institute",
+     "desc":"La única escuela de barbería dedicada en Nueva York. Licenciada por el Departamento de Educación del Estado de NY. Cambiando vidas por más de 30 años.",
+     "campus":MANHATTAN,"h1a":h1a_es,"h1b":h1b_es,"script":"Empieza Hoy.",
+     "sub":"Conviértete en barbero licenciado en tan solo <b>17 semanas</b>. Entrenamiento práctico. Habilidades reales. Oportunidades reales.",
+     "hero_img":"lp-hero.jpg","dur":"~4 Meses","tui":"$4,600","variant":n})
+# location pages (EN only, matching live site)
+for L in LOCATIONS:
+    PAGES.append({"type":"location","lang":"en","path":L["slug"]+"/index.html",
+     "url":"/"+L["slug"],"alt":None,"title":L["title"],"desc":L["desc"],
+     "campus":L["campus"],"h1a":L["h1"],"h1b":"","script":"Start Today.",
+     "sub":L["intro"][0],"loc":L,"hero_img":"lp-hero.jpg","dur":"~4 Months","tui":"$4,600"})
 
-FAQ_SCHEMA_PLACEHOLDER = "FAQ_SCHEMA"
+# ───────────────────────── template parts ─────────────────────────
+def head(p, s, pre):
+    alt = ""
+    if p["alt"]:
+        en_url = p["url"] if p["lang"] == "en" else p["alt"]
+        es_url = p["alt"] if p["lang"] == "en" else p["url"]
+        alt = ('<link rel="alternate" hreflang="en" href="%s%s">\n'
+               '<link rel="alternate" hreflang="es" href="%s%s">\n'
+               '<link rel="alternate" hreflang="x-default" href="%s%s">' % (SITE,en_url,SITE,es_url,SITE,en_url))
+    jsonld = """<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TradeSchool","name":"American Barber Institute",
+"url":"%s%s","telephone":"%s","foundingDate":"1996",
+"address":{"@type":"PostalAddress","streetAddress":"%s"},
+"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.3","reviewCount":"100"}}
+</script>""" % (SITE, p["url"], p["campus"]["tel_disp"], p["campus"]["addr"])
+    return """<!DOCTYPE html>
+<html lang="%s">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>%s</title>
+<meta name="description" content="%s">
+<link rel="canonical" href="%s%s">
+%s
+<meta property="og:title" content="%s">
+<meta property="og:description" content="%s">
+<meta property="og:type" content="website">
+<meta property="og:url" content="%s%s">
+<meta name="theme-color" content="#1b2fd9">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="%sassets/css/landing.css">
+%s
+</head>
+<body>""" % (p["lang"], p["title"], p["desc"], SITE, p["url"], alt,
+             p["title"], p["desc"], SITE, p["url"], pre, jsonld)
 
-def faq_schema_from(body):
-    """Build FAQPage JSON-LD from the faq partial's <summary>/<div class="a"> pairs."""
-    qa = re.findall(r'<summary>(.*?)</summary>\s*<div class="a">(.*?)</div>', body, re.S)
-    items = []
-    for q, a in qa:
-        clean_a = re.sub(r'<[^>]+>', ' ', a)
-        clean_a = re.sub(r'\s+', ' ', clean_a).strip()
-        items.append({"@type": "Question", "name": re.sub(r'<[^>]+>', '', q).strip(),
-                      "acceptedAnswer": {"@type": "Answer", "text": clean_a}})
-    return {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": items}
+def header(p, s, pre):
+    pills = "".join(
+        '<a class="phone-pill" href="tel:%s">%s<span><span class="lbl">%s: </span>%s</span></a>'
+        % (tel, icon("phone",16), lbl, disp) for lbl, disp, tel in s["en_es_phones"])
+    links = "".join('<a href="%s%s">%s</a>' % (pre.rstrip("/").replace("../","",0) and "" or "", u.lstrip("/") and pre+u.lstrip("/") or pre, t) for t,u in [])
+    nav = "".join('<a href="%s">%s</a>' % (pre + u.lstrip("/"), t) for t, u in s["f_linkitems"])
+    return """
+<div class="topbar">%s</div>
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="logo" href="%sindex.html" aria-label="American Barber Institute">
+      <span class="logo-abi">ABI</span>
+      <span class="logo-words">American<br>Barber Institute<sup>®</sup></span>
+    </a>
+    <div class="hdr-phones">%s
+      <a class="btn btn-blue btn-call" href="tel:%s">%s&nbsp;%s</a>
+    </div>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <nav class="nav-drawer"><div class="container">%s</div></nav>
+</header>
+<div class="urgency">
+  <div class="urgency-flame">%s</div>
+  <div class="urgency-sub">%s</div>
+</div>
+<div class="startpill-wrap">
+  <span class="startpill">%s <span>%s</span> <span class="dot">•</span> <span>%s <b data-next-start></b></span></span>
+</div>""" % (s["topbar"], pre, pills, p["campus"]["tel"], icon("phone",16), s["call"], nav,
+             s["limited"], s["reserve"],
+             icon("pin",16), p["campus"]["name_"+p["lang"]], s["next_start"])
 
-def build():
-    written = []
-    for out, partial, title, desc, lang, schemas in PAGES:
-        path = os.path.join(SRC, partial)
-        if not os.path.exists(path):
-            print(f'  !! missing partial {partial} — skipped')
-            continue
-        body = open(path, encoding='utf-8').read()
-        depth = out.count('/')
-        root = '../' * depth
-        canonical = f"{SITE_URL}/{out}".replace('/index.html', '/')
-        resolved = []
-        for s in schemas:
-            if s == FAQ_SCHEMA_PLACEHOLDER:
-                resolved.append(faq_schema_from(body))
-            else:
-                resolved.append(s)
-        schema_tags = '\n'.join(
-            f'<script type="application/ld+json">{json.dumps(s, ensure_ascii=False)}</script>'
-            for s in resolved)
-        html = TEMPLATE.format(
-            lang=lang, title=title, desc=desc, canonical=canonical, site=SITE_URL,
-            root=root, body=body, schema=schema_tags,
-            en_cur='aria-current="true"' if lang == 'en' else '',
-            es_cur='aria-current="true"' if lang == 'es' else '')
-        dest = os.path.join(ROOT, out)
-        os.makedirs(os.path.dirname(dest), exist_ok=True)
-        open(dest, 'w', encoding='utf-8').write(html)
-        written.append(out)
-    # sitemap
-    urls = '\n'.join(
-        f'  <url><loc>{SITE_URL}/{o}</loc></url>'.replace('/index.html', '/')
-        for o in written)
-    open(os.path.join(ROOT, 'sitemap.xml'), 'w').write(
-        f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n')
-    open(os.path.join(ROOT, 'robots.txt'), 'w').write(
-        f'User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n')
-    print(f'built {len(written)} pages + sitemap.xml + robots.txt')
+def lead_form(p, s):
+    locs = "".join('<option>%s</option>' % o for o in s["locs"])
+    fmts = "".join('<option>%s</option>' % o for o in s["fmts"])
+    return """
+<div class="formcard" id="reserve">
+  <div class="formcard-head">
+    <div class="formcard-ico">%s</div>
+    <div>
+      <div class="formcard-title">%s</div>
+      <div class="formcard-sub">%s</div>
+    </div>
+  </div>
+  <form class="leadform" novalidate>
+    <input type="hidden" name="page" value="%s">
+    <input type="hidden" name="language" value="%s">
+    <div class="field"><label>%s <span class="req">*</span></label>
+      <input type="text" name="first_name" placeholder="%s" required autocomplete="given-name"></div>
+    <div class="field"><label>%s <span class="req">*</span></label>
+      <input type="text" name="last_name" placeholder="%s" required autocomplete="family-name"></div>
+    <div class="field has-ico"><label>%s <span class="req">*</span></label>
+      %s<input type="tel" name="phone" placeholder="(917) 693-0872" required autocomplete="tel"></div>
+    <div class="field has-ico"><label>%s <span class="req">*</span></label>
+      %s<input type="email" name="email" placeholder="name@email.com" required autocomplete="email"></div>
+    <div class="field select"><label>%s <span class="req">*</span></label>
+      <select name="campus_preference" required><option value="" selected disabled>%s</option>%s</select></div>
+    <div class="field select"><label>%s <span class="req">*</span></label>
+      <select name="schedule_preference" required><option value="" selected disabled>%s</option>%s</select></div>
+    <button class="btn btn-blue btn-submit" type="submit">%s</button>
+    <div class="form-error">%s <a href="tel:%s"><b>%s</b></a></div>
+    <p class="form-consent">%s</p>
+  </form>
+  <div class="form-success">%s<h3>%s</h3><p>%s</p></div>
+</div>""" % (icon("user",20), s["reserve"], s["form_sub"], p["url"], p["lang"],
+             s["fn"], s["fn"], s["ln"], s["ln"],
+             s["ph"], icon("phone",15), s["em"], icon("mail",15),
+             s["q_loc"], s["opt_loc"], locs, s["q_fmt"], s["opt_fmt"], fmts,
+             s["submit"], s["form_err"], p["campus"]["tel"], p["campus"]["tel_disp"], s["consent"],
+             icon("check",42), s["success_h"], s["success_p"])
 
-if __name__ == '__main__':
-    build()
+def hero(p, s, pre):
+    feats = "".join('<div class="feature">%s<span>%s</span></div>' % (icon(i,20), t) for i, t in s["features"])
+    h1b = '<span class="accent">%s</span><br>' % p["h1b"] if p["h1b"] else ""
+    return """
+<section class="hero">
+  <div class="hero-bg" style="background-image:url('%sassets/img/%s'),url('%sassets/img/about.jpg'),url('https://abi-website-black.vercel.app/assets/img/about.jpg')"></div>
+  <div class="hero-grad"></div>
+  <div class="container hero-in">
+    <div class="hero-copy">
+      <h1 class="hero-h1">%s<br>%s<span class="hero-script">%s</span></h1>
+      <p class="hero-sub">%s</p>
+      <div class="features">%s</div>
+    </div>
+    %s
+  </div>
+</section>
+<section class="trust"><div class="container trust-in">%s</div></section>""" % (
+        pre, p["hero_img"], pre,
+        p["h1a"], h1b, p["script"], p["sub"], feats, lead_form(p, s),
+        "".join('<div class="trust-item">%s<span>%s</span></div>' % (icon(i,30), t) for i, t in s["trust"]))
+
+def sec_about(p, s):
+    paras = "".join("<p>%s</p>" % x for x in p["about"])
+    return """
+<section class="sec"><div class="container split">
+  <div class="rv"><span class="eyebrow">%s</span><h2>%s</h2><div class="prose">%s</div></div>
+  <div class="rv">
+    <div class="campus">
+      <h3>%s</h3><p>%s %s</p>
+      <p><a href="tel:%s"><b>%s</b></a></p>
+      <a class="maplink" href="https://maps.google.com/?q=%s" target="_blank" rel="noopener">Google Maps →</a>
+      <hr style="border:none;border-top:1px solid var(--line);margin:1.1rem 0">
+      <h3>%s</h3>
+      <p><b>%s:</b> %s</p><p><b>%s:</b> %s %s</p><p><b>%s:</b> %s</p>
+    </div>
+  </div>
+</div></section>""" % (s["about_eb"], p["about_h"], paras,
+        p["campus"]["name_"+p["lang"]], icon("pin",15), p["campus"]["addr"],
+        p["campus"]["tel"], p["campus"]["tel_disp"], p["campus"]["addr"].replace(" ","+"),
+        s["details_h"], s["d_dur"], p["dur"], s["d_tui"], s["d_from"], p["tui"], s["d_sch"], s["d_sch_v"])
+
+def sec_tech(p, s):
+    chips = "".join('<span class="chip">%s</span>' % t for t in p["tech"])
+    return """
+<section class="sec sec-alt"><div class="container rv">
+  <span class="eyebrow">%s</span><h2>%s</h2>
+  <div class="chips">%s</div>
+</div></section>""" % (s["tech_eb"], s["tech_h"], chips)
+
+def sec_curr(p, s):
+    items = ""
+    for i, (name, lis) in enumerate(p["curr"], 1):
+        body = "".join("<li>%s</li>" % x for x in lis)
+        items += """<div class="acc-item%s">
+  <button class="acc-btn" type="button"><span class="acc-num">0%d</span>%s<span class="chev">%s</span></button>
+  <div class="acc-body"><ul>%s</ul></div></div>""" % (" open" if i == 1 else "", i, name, icon("chev",18), body)
+    return """
+<section class="sec"><div class="container rv" style="max-width:880px">
+  <span class="eyebrow">%s</span><h2>%s</h2>
+  <div class="acc">%s</div>
+</div></section>""" % (s["curr_eb"], s["curr_h"], items)
+
+def sec_tuition(p, s):
+    cards = ""
+    for pl in s["plans"]:
+        cards += """<div class="plan%s rv">%s
+  <div class="plan-name">%s</div>
+  <div class="plan-sched">%s</div><div class="plan-hours">%s</div>
+  <div class="plan-price">%s</div><div class="plan-terms">%s</div>
+  <a class="btn btn-blue" href="#reserve">%s</a></div>""" % (
+            " popular" if pl["pop"] else "",
+            '<div class="plan-tag">%s</div>' % s["pop_tag"] if pl["pop"] else "",
+            pl["name"], pl["sched"], pl["hours"], pl["price"], pl["terms"], s["plan_cta"])
+    return """
+<section class="sec sec-alt"><div class="container">
+  <div class="rv"><span class="eyebrow">%s</span><h2>%s</h2><p class="lead">%s</p></div>
+  <div class="plans">%s</div>
+  <p class="plans-note">%s</p>
+</div></section>""" % (s["tuition_eb"], s["tuition_h"], s["tuition_lead"], cards, s["plans_note"])
+
+def sec_reqs(p, s):
+    items = "".join('<div class="req-item">%s<span>%s</span></div>' % (icon("check",18), r) for r in s["reqs"])
+    return """
+<section class="sec"><div class="container rv">
+  <span class="eyebrow">%s</span><h2>%s</h2>
+  <div class="reqs">%s</div>
+</div></section>""" % (s["req_eb"], s["req_h"], items)
+
+def sec_testi(p, s):
+    cards = ""
+    for t in s["testi"]:
+        ini = "".join(w[0] for w in t["n"].split()[:2])
+        cards += """<div class="testi-card rv"><div class="stars">★★★★★</div><p>"%s"</p>
+  <div class="testi-who"><div class="testi-av">%s</div><div><b>%s</b><span>%s</span></div></div></div>""" % (
+            t["q"], ini, t["n"], t["r"])
+    return """
+<section class="sec sec-alt"><div class="container">
+  <div class="rv"><span class="eyebrow">%s</span><h2>%s</h2><p class="lead">%s</p></div>
+  <div class="testi">%s</div>
+</div></section>""" % (s["testi_eb"], s["testi_h"], s["testi_sub"], cards)
+
+def sec_countdown(p, s):
+    cells = "".join('<div class="count-cell"><b data-cd-%s>0</b><span>%s</span></div>'
+                    % (k, lbl) for k, lbl in zip("dhms", s["count_lbl"]))
+    return """
+<section class="sec" style="padding:2.6rem 0;text-align:center"><div class="container rv">
+  <span class="eyebrow">%s</span>
+  <div class="count" data-countdown>%s</div>
+  <a class="btn btn-blue" style="padding:.85rem 2.2rem" href="#reserve">%s</a>
+</div></section>""" % (s["count_h"], cells, s["reserve"])
+
+def sec_steps(p, s):
+    if p["lang"] == "es":
+        steps = [("Comienza","Envía tu información para iniciar tu camino en la barbería."),
+                 ("Habla con un Asesor","Un asesor de admisiones de ABI responderá tus preguntas y revisará las opciones de planes de pago que se ajusten a tu presupuesto."),
+                 ("Comienza el Entrenamiento","Completa tu matrícula y comienza a construir tu carrera en la barbería.")]
+        eb, h = "3 Pasos Sencillos", "Conviértete en Barbero Profesional en 3 Pasos"
+    else:
+        steps = [("Get Started","Submit your info to start your barbering journey."),
+                 ("Speak With an Advisor","An ABI admissions advisor will answer your questions and review payment plan options that fit your budget."),
+                 ("Start Training","Complete your enrollment and start building your barbering career.")]
+        eb, h = "3 Easy Steps", "Become a Professional Barber in 3 Easy Steps"
+    cards = "".join('<div class="step rv"><div class="step-num">0%d</div><b>%s</b><p>%s</p></div>'
+                    % (i, t, d) for i, (t, d) in enumerate(steps, 1))
+    return '<section class="sec"><div class="container"><div class="rv"><span class="eyebrow">%s</span><h2>%s</h2></div><div class="steps">%s</div></div></section>' % (eb, h, cards)
+
+def sec_earnings(p, s):
+    if p["lang"] == "es":
+        eb, h = "Ingresos de Carrera", "Ingresos de una Carrera de Barbero"
+        rows = [("AÑO 1 · Barbero Principiante","$35,000–$45,000","Empezando en una barbería, construyendo tu clientela y refinando tu técnica.",False),
+                ("AÑOS 2–3 · Barbero Establecido","$50,000–$70,000","Clientela leal, servicio más rápido e ingresos mayores conforme crece tu reputación.",True),
+                ("AÑO 3+ · Inquilino de Silla / Dueño","$75,000–$100,000+","Control total de tu horario y ganancias — el camino hacia el verdadero emprendimiento.",False)]
+        note = "Las cifras de ingresos son solo estimaciones y no están garantizadas. El ingreso real variará según el esfuerzo individual, horas trabajadas, ubicación y condiciones del mercado."
+    else:
+        eb, h = "Career Earnings", "Barber Career Earnings"
+        rows = [("YEAR 1 · Entry-Level","$35,000–$45,000","Starting out in a shop, building your clientele and refining your technique.",False),
+                ("YEARS 2–3 · Established","$50,000–$70,000","Loyal clientele, faster service and higher earnings as your reputation grows.",True),
+                ("YEAR 3+ · Booth Renter / Shop Owner","$75,000–$100,000+","Full control of your schedule and earnings — the path to true entrepreneurship.",False)]
+        note = "Earnings figures are estimates only and are not guaranteed. Actual income will vary based on individual effort, hours worked, location and market conditions."
+    cards = "".join('<div class="earn-card%s rv"><div class="earn-yr">%s</div><div class="earn-amt">%s</div><p>%s</p></div>'
+                    % (" mid" if mid else "", yr, amt, d) for yr, amt, d, mid in rows)
+    return '<section class="sec sec-alt"><div class="container"><div class="rv"><span class="eyebrow">%s</span><h2>%s</h2></div><div class="earn">%s</div><p class="earn-note">%s</p></div></section>' % (eb, h, cards, note)
+
+def sec_location(p, s):
+    L = p["loc"]
+    c = L["campus"]
+    why = [("badge","Licensed by NYSED (BPSS)","State-approved curriculum, programs and instructors."),
+           ("mic","Hands-on from the first weeks","Real clients in our professional barber clinic — not mannequins."),
+           ("cal","Morning · Afternoon · Weekend","Schedules built around work and family."),
+           ("hand","Financial assistance","ACCES-VR, Post-9/11 GI Bill® and VA benefits accepted."),
+           ("people","Bilingual — se habla español","Instruction and admissions support in English and Spanish."),
+           ("case","Job placement + Board Exam prep","Graduate license-ready, with placement support waiting.")]
+    whyhtml = "".join('<div class="why-item rv">%s<b>%s</b>%s</div>' % (icon(i,24), t, d) for i, t, d in why)
+    disc = '<p class="plans-note" style="margin-top:1.6rem">%s</p>' % L["disclaimer"] if L.get("disclaimer") else ""
+    return """
+<section class="sec"><div class="container split">
+  <div class="rv"><span class="eyebrow">%s</span><h2>Why Train With Us</h2>
+    <div class="prose"><p>%s</p></div></div>
+  <div class="rv"><div class="campus">
+    <h3>Your Nearest Campus — %s</h3>
+    <p>%s %s</p><p><a href="tel:%s"><b>%s</b></a></p>
+    <a class="maplink" href="https://maps.google.com/?q=%s" target="_blank" rel="noopener">Google Maps →</a>
+    <hr style="border:none;border-top:1px solid var(--line);margin:1.1rem 0">
+    <h3>%s Getting Here</h3><p>%s</p>
+  </div></div>
+</div>
+<div class="container"><div class="why">%s</div>%s</div></section>""" % (
+        L["loc"], L["intro"][1],
+        c["name_en"], icon("pin",15), c["addr"], c["tel"], c["tel_disp"], c["addr"].replace(" ","+"),
+        icon("train",18), L["getting"], whyhtml, disc)
+
+def closing(p, s):
+    return """
+<section class="closing"><div class="container">
+  <h2>%s</h2><p>%s</p>
+  <a class="btn btn-blue" href="#reserve">%s</a>
+  <a class="tel" href="tel:%s">%s %s</a>
+</div></section>""" % (s["closing_h"], s["closing_p"], s["closing_cta"],
+                       p["campus"]["tel"], s["closing_call"], p["campus"]["tel_disp"])
+
+def footer(p, s, pre):
+    links = "".join('<a href="%s">%s</a>' % (pre + u.lstrip("/"), t) for t, u in s["f_linkitems"])
+    return """
+<footer class="ftr"><div class="container">
+  <div class="ftr-in">
+    <div><h4>American Barber Institute</h4><p>%s</p></div>
+    <div><h4>%s</h4>%s</div>
+    <div><h4>%s</h4>
+      <a href="https://maps.google.com/?q=48+West+39th+Street,+New+York,+NY+10018" target="_blank" rel="noopener">48 West 39th Street, New York, NY 10018</a>
+      <a href="https://maps.google.com/?q=121+Westchester+Square,+Bronx,+NY+10461" target="_blank" rel="noopener">121 Westchester Square, Bronx, NY 10461</a>
+      <a href="tel:+12122902289">(212) 290-2289 · English</a>
+      <a href="tel:+12122900278">(212) 290-0278 · Español</a>
+      <a href="tel:+17186760640">(718) 676-0640 · Bronx</a>
+      <a href="mailto:admission@abi.edu">admission@abi.edu</a>
+    </div>
+  </div>
+  <div class="ftr-legal">© American Barber Institute (ABI). All rights reserved. · %s · *$150/week refers to Plan C weekly payments.</div>
+</div></footer>
+<div class="mbar">
+  <a class="mbar-call" href="tel:%s">%s %s</a>
+  <a class="mbar-cta" href="#reserve">%s</a>
+</div>
+<div class="bubble-tip">%s<button class="tip-x" aria-label="Close">✕</button></div>
+<button class="bubble" aria-label="%s">%s</button>
+<div class="exit" role="dialog" aria-modal="true">
+  <div class="exit-card">
+    <button class="exit-x" aria-label="Close">✕</button>
+    <h3>%s</h3><p>%s</p>
+    <button class="btn btn-blue" data-exit-cta style="padding:.85rem 2rem">%s</button>
+  </div>
+</div>
+<script src="%sassets/js/landing.js" defer></script>
+</body>
+</html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
+              p["campus"]["tel"], icon("phone",17), s["mbar_call"], s["mbar_cta"],
+              s["bubble_tip"], s["reserve"], icon("chat",26),
+              s["exit_h"], s["exit_p"], s["exit_cta"], pre)
+
+# ───────────────────────── assemble ─────────────────────────
+def build(p):
+    s = S[p["lang"]]
+    depth = p["path"].count("/")
+    pre = "../" * depth
+    parts = [head(p, s, pre), header(p, s, pre), hero(p, s, pre)]
+    if p["type"] == "program":
+        parts += [sec_about(p, s), sec_tech(p, s), sec_curr(p, s),
+                  sec_tuition(p, s), sec_reqs(p, s), sec_testi(p, s), sec_countdown(p, s)]
+    elif p["type"] == "splash":
+        parts += [sec_steps(p, s), sec_earnings(p, s), sec_tuition(p, s),
+                  sec_testi(p, s), sec_countdown(p, s)]
+    elif p["type"] == "location":
+        parts += [sec_location(p, s), sec_tuition(p, s), sec_testi(p, s), sec_countdown(p, s)]
+    parts += [closing(p, s), footer(p, s, pre)]
+    out = os.path.join(ROOT, p["path"])
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    with open(out, "w", encoding="utf-8") as f:
+        f.write("\n".join(parts))
+    return p["path"]
+
+if __name__ == "__main__":
+    for p in PAGES:
+        print("✓", build(p))
+    print("\n%d pages generated." % len(PAGES))
