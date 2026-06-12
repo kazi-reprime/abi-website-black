@@ -494,7 +494,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=10">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=11">
 <script>(function(){try{var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
 </head>
@@ -933,7 +933,7 @@ def footer(p, s, pre):
     <button class="btn btn-blue" data-exit-cta style="padding:.85rem 2rem">%s</button>
   </div>
 </div>
-<script src="%sassets/js/landing.js?v=10" defer></script>
+<script src="%sassets/js/landing.js?v=11" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
               p["campus"]["tel"], icon("phone",17), s["mbar_call"], s["mbar_cta"],

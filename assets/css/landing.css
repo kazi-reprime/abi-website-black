@@ -369,3 +369,14 @@ html.js .bubble{animation:ring 3s ease-out infinite}
 @media (prefers-reduced-motion:reduce){
   html.js .hero-bg,.topbar,html.js .btn-submit,html.js .bubble,.ticker-track,html.js .hero-script::after{animation:none}
 }
+
+/* ── Responsive hardening (all devices) ── */
+html,body{overflow-x:clip}
+.ticker{max-width:100%}
+@media (max-width:560px){
+  .hdr-in{flex-wrap:wrap;row-gap:.45rem;padding-bottom:.6rem}
+  .hdr-phones{order:3;flex:1 1 100%;flex-direction:row;justify-content:center;gap:.5rem;align-items:center}
+  .phone-pill{flex:1 1 0;min-width:0;justify-content:center;font-size:.8rem;padding:.45rem .4rem;white-space:nowrap}
+  .logo-abi{font-size:1.7rem}
+  .logo-words{font-size:.66rem}
+}
