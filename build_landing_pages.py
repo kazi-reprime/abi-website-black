@@ -83,7 +83,9 @@ S = {
   "testi": [
     {"q":"The level of knowledge and training is superb! One of the best teachers around, King David, will show you everything there is to know about barbering — 100% commitment from this school.","n":"Jerrick Matthews","r":"Current student"},
     {"q":"I'm a student here and King David has been awesome!! He has 30 years of experience, gives us great techniques and keeps polishing our basic skills.","n":"Carlos Perez","r":"Student"},
-    {"q":"Passed by the barber school for only 3 dollars for a regular haircut — and it's actually good! Great that we could help student trainees practice toward their 500 hours.","n":"Vincybie Lee","r":"Haircut client"}],
+    {"q":"Passed by the barber school for only 3 dollars for a regular haircut — and it's actually good! Great that we could help student trainees practice toward their 500 hours.","n":"Vincybie Lee","r":"Haircut client"},
+    {"q":"Donovan gave me a great haircut. He did exactly what I asked him to do… Well worth $3 plus a $7 tip. $10 for a haircut!!!","n":"Tina Banee","r":"Haircut client"},
+    {"q":"I'm currently enrolled here and I'm happy with the progress from learning from the teachers and classmates. Nothing but positivity and eager to learn more in this field.","n":"Zyee Fin","r":"Current student"}],
   "closing_h": "Ready to Start Your Barbering Career?",
   "closing_p": "New classes begin the first Monday of every month. Seats fill fast — call us or reserve your spot today, in English or Spanish.",
   "closing_cta": "Reserve Your Spot", "closing_call": "Call",
@@ -149,7 +151,9 @@ S = {
   "testi": [
     {"q":"¡El nivel de conocimiento y entrenamiento es excelente! Uno de los mejores maestros, King David, te enseña todo lo que hay que saber sobre barbería — 100% de compromiso de esta escuela.","n":"Jerrick Matthews","r":"Estudiante actual"},
     {"q":"Soy estudiante aquí y ¡King David ha sido increíble! Tiene 30 años de experiencia, nos da grandes técnicas y sigue puliendo nuestras habilidades básicas.","n":"Carlos Perez","r":"Estudiante"},
-    {"q":"Pasé por la escuela de barbería: solo $3 por un corte regular — ¡y de verdad está bueno! Genial poder ayudar a los estudiantes a practicar para sus 500 horas.","n":"Vincybie Lee","r":"Cliente de corte"}],
+    {"q":"Pasé por la escuela de barbería: solo $3 por un corte regular — ¡y de verdad está bueno! Genial poder ayudar a los estudiantes a practicar para sus 500 horas.","n":"Vincybie Lee","r":"Cliente de corte"},
+    {"q":"Donovan me dio un gran corte. Hizo exactamente lo que le pedí… Bien vale los $3 más $7 de propina. ¡¡$10 por un corte!!","n":"Tina Banee","r":"Cliente de corte"},
+    {"q":"Estoy inscrito aquí y estoy feliz con el progreso aprendiendo de los maestros y compañeros. Pura positividad y ganas de aprender más en este campo.","n":"Zyee Fin","r":"Estudiante actual"}],
   "closing_h": "¿Listo para Empezar Tu Carrera de Barbería?",
   "closing_p": "Las clases nuevas comienzan el primer lunes de cada mes. Los cupos se llenan rápido — llámanos o reserva tu lugar hoy.",
   "closing_cta": "Reserva Tu Lugar", "closing_call": "Llámanos",
@@ -490,7 +494,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=9">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=10">
 <script>(function(){try{var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
 </head>
@@ -616,6 +620,23 @@ def hero(p, s, pre):
         pre, p["hero_img"], pre,
         p["h1a"], h1b, p["script"], p["sub"], feats, lead_form(p, s),
         "".join('<div class="trust-item">%s<span>%s</span></div>' % (icon(i,30), t) for i, t in s["trust"]))
+
+TICKER = {
+ "en": ["Classic Tapers","Low Fades","Mid Fades","High Fades","Razor Lineups","Hot Towel Shaves","Pompadours","Beard Trims","Shape Ups","Caesars","Flat Tops","High-Top Fades","Mohawks","Blowouts"],
+ "es": ["Degradados Clásicos","Fades Bajos","Fades Medios","Fades Altos","Líneas con Navaja","Afeitado con Toalla Caliente","Pompadours","Recortes de Barba","Shape Ups","Caesars","Flat Tops","High-Top Fades","Mohawks","Blowouts"],
+}
+def sec_ticker(p, s):
+    items = "".join('<span>%s</span><span class="sc">✂</span>' % t for t in TICKER[p["lang"]])
+    return '<div class="ticker" aria-hidden="true"><div class="ticker-track">%s%s</div></div>' % (items, items)
+
+def sec_stats(p, s):
+    es = p["lang"] == "es"
+    data = [(30,"+","Años en el Negocio" if es else "Years in Business"),
+            (10000,"+","Graduados" if es else "Graduates"),
+            (80,"%","Tasa de Graduación" if es else "Graduation Rate"),
+            (4,"","Meses Para Tu Licencia" if es else "Months To Get Licensed")]
+    cells = "".join('<div class="stat"><b data-count="%d" data-suffix="%s">0</b><span>%s</span></div>' % d for d in data)
+    return '<section class="stats"><div class="container stats-in">%s</div></section>' % cells
 
 def sec_about(p, s):
     paras = "".join("<p>%s</p>" % x for x in p["about"])
@@ -912,7 +933,7 @@ def footer(p, s, pre):
     <button class="btn btn-blue" data-exit-cta style="padding:.85rem 2rem">%s</button>
   </div>
 </div>
-<script src="%sassets/js/landing.js?v=9" defer></script>
+<script src="%sassets/js/landing.js?v=10" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
               p["campus"]["tel"], icon("phone",17), s["mbar_call"], s["mbar_cta"],
@@ -924,7 +945,7 @@ def build(p):
     s = S[p["lang"]]
     depth = p["path"].count("/")
     pre = "../" * depth
-    parts = [head(p, s, pre), header(p, s, pre), hero(p, s, pre)]
+    parts = [head(p, s, pre), header(p, s, pre), hero(p, s, pre), sec_ticker(p, s), sec_stats(p, s)]
     if p["type"] == "program":
         parts += [sec_about(p, s), sec_tech(p, s), sec_curr(p, s),
                   sec_tuition(p, s), sec_reqs(p, s), sec_dates(p, s), sec_videos(p, s, pre),

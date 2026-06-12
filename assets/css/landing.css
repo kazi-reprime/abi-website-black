@@ -328,3 +328,44 @@ html[data-theme="noir"]{--blue:#c8102e;--blue-dark:#a00d25;--blue-light:#fdecef;
 .f-social{margin-top:.9rem;font-size:.85rem}
 .f-social a{display:inline !important;padding:0 !important}
 @media (max-width:840px){.videos{grid-template-columns:1fr}.gal{grid-template-columns:repeat(2,1fr)}}
+
+/* ══ ALIVE: glow + motion + deep glass ══ */
+/* hero photo slow ken-burns */
+html.js .hero-bg{animation:kenburns 24s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.09)}}
+/* script underline draws itself */
+html.js .hero-script::after{animation:draw 1.2s .4s ease both}
+@keyframes draw{from{right:100%}to{right:14%}}
+/* topbar shimmer */
+.topbar{background:linear-gradient(100deg,var(--blue) 0%,var(--blue-dark) 35%,var(--blue) 60%,var(--blue-dark) 100%);background-size:220% 100%;animation:shimmer 9s linear infinite}
+@keyframes shimmer{to{background-position:-220% 0}}
+/* glowing accents */
+.btn-blue:hover{box-shadow:0 6px 26px color-mix(in srgb,var(--blue) 55%,transparent)}
+html.js .btn-submit{animation:glowpulse 2.6s ease-in-out infinite}
+@keyframes glowpulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--blue) 45%,transparent)}50%{box-shadow:0 0 22px 2px color-mix(in srgb,var(--blue) 45%,transparent)}}
+.tdot{box-shadow:0 0 7px 1px currentColor}
+.hero-h1 .accent{text-shadow:0 0 34px color-mix(in srgb,var(--blue) 65%,transparent)}
+.startpill b{text-shadow:0 0 14px color-mix(in srgb,var(--blue) 40%,transparent)}
+html.js .bubble{animation:ring 3s ease-out infinite}
+@keyframes ring{0%{box-shadow:0 8px 24px rgba(0,0,0,.3),0 0 0 0 color-mix(in srgb,var(--red) 55%,transparent)}70%{box-shadow:0 8px 24px rgba(0,0,0,.3),0 0 0 16px transparent}100%{box-shadow:0 8px 24px rgba(0,0,0,.3),0 0 0 0 transparent}}
+/* glass cards everywhere + lift on hover */
+.plan,.testi-card,.why-item,.step,.earn-card,.acc,.campus{background:rgba(255,255,255,.72);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3)}
+.plan,.testi-card,.why-item,.step,.earn-card{transition:transform .25s ease,box-shadow .25s ease}
+.plan:hover,.testi-card:hover,.why-item:hover,.step:hover,.earn-card:hover{transform:translateY(-5px);box-shadow:0 16px 36px color-mix(in srgb,var(--blue) 18%,rgba(16,19,26,.12))}
+.sec-alt{background:linear-gradient(180deg,#f7f8fc 0%,color-mix(in srgb,var(--blue) 4%,#f7f8fc) 100%)}
+/* skills ticker marquee */
+.ticker{background:var(--ink);color:#fff;overflow:hidden;padding:.7rem 0;white-space:nowrap}
+.ticker-track{display:inline-block;animation:ticker 36s linear infinite}
+.ticker span{margin:0 1.1rem;font-weight:600;font-size:.92rem;letter-spacing:.04em}
+.ticker .sc{color:var(--blue);filter:brightness(1.6)}
+@keyframes ticker{to{transform:translateX(-50%)}}
+.ticker:hover .ticker-track{animation-play-state:paused}
+/* animated stats band */
+.stats{background:var(--blue);color:var(--on-accent);padding:2.6rem 0;transition:background .3s}
+.stats-in{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;text-align:center}
+.stat b{display:block;font-size:2.4rem;font-weight:800;line-height:1.1}
+.stat span{font-size:.85rem;opacity:.92}
+@media (max-width:840px){.stats-in{grid-template-columns:repeat(2,1fr);gap:1.6rem 0}}
+@media (prefers-reduced-motion:reduce){
+  html.js .hero-bg,.topbar,html.js .btn-submit,html.js .bubble,.ticker-track,html.js .hero-script::after{animation:none}
+}
