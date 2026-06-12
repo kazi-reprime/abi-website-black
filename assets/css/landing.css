@@ -261,3 +261,17 @@ html.js .rv.in{opacity:1;transform:none}
   .phone-pill{justify-content:center}
   .formcard{padding:1.3rem 1.2rem}
 }
+
+/* ── Full main nav on landing pages ───────── */
+.mainnav{display:flex;gap:1.5rem;justify-content:center;align-items:center;border-top:1px solid var(--line);padding:.55rem 1rem;font-size:.92rem;font-weight:500;flex-wrap:wrap}
+.mainnav>a:hover{color:var(--blue)}
+.mn-sub{position:relative}
+.mn-sub>a{display:inline-flex;align-items:center;gap:.25rem}
+.mn-sub>a svg{margin-top:1px}
+.mn-drop{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);padding:.5rem 0;min-width:220px;z-index:85}
+.mn-sub:hover .mn-drop,.mn-sub:focus-within .mn-drop{display:block}
+.mn-drop a{display:block;padding:.45rem 1.2rem;white-space:nowrap}
+.mn-drop a:hover{background:var(--blue-light);color:var(--blue)}
+.mn-lang{border:1px solid var(--line);border-radius:8px;padding:.2rem .65rem;font-weight:600;color:#8a90a0}
+.mn-lang a:hover{color:var(--blue)}
+@media (max-width:1080px){.mainnav{display:none}}

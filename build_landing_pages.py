@@ -279,6 +279,81 @@ LOCATIONS = [
   "disclaimer":"Please note: American Barber Institute is licensed by the New York State Department of Education, and our program prepares you for the New York State Master Barber license. If you plan to work in PA, check Pennsylvania's own barber licensing requirements."},
 ]
 
+
+NAV = {
+ "en": [("About","about.html"),("Programs","programs/index.html"),("Financial Aid","financial-aid.html"),
+        ("Admissions","admissions.html"),("$3 Haircuts","haircuts.html"),("Jobs","jobs.html"),
+        ("LOCATIONS", None),("Gallery","gallery.html"),("FAQs","faq.html"),("Contact","contact.html")],
+ "es": [("Nosotros","about.html"),("Programas","programs/index.html"),("Ayuda Financiera","financial-aid.html"),
+        ("Admisiones","admissions.html"),("Cortes de $3","haircuts.html"),("Empleos","jobs.html"),
+        ("LOCATIONS", None),("Galería","gallery.html"),("Preguntas","faq.html"),("Contacto","contact.html")],
+}
+NAV_LOC_LABEL = {"en": "Locations", "es": "Ubicaciones"}
+LOC_NAMES = [("Queens","barber-school-queens-ny"),("Brooklyn","barber-school-brooklyn-new-york"),
+ ("Yonkers","barber-school-yonkers-new-york"),("Westchester","barber-school-westchester-ny"),
+ ("Long Island","barber-school-long-island-ny"),("Mount Vernon","barber-school-mount-vernon-ny"),
+ ("Port Chester","barber-school-port-chester-ny"),("Connecticut","barber-school-connecticut"),
+ ("Pennsylvania","barber-school-pennsylvania")]
+
+LOC_ES = {
+ "barber-school-queens-ny": {"loc":"Queens, NY","h1":"Escuela de Barbería para Residentes de Queens",
+  "title":"Escuela de Barbería en Queens, NY | American Barber Institute",
+  "desc":"Fórmate como Barbero Maestro licenciado en la única escuela de barbería dedicada de NYC — a un corto viaje en tren desde Queens hasta Midtown Manhattan. Programa de 500 horas, horarios flexibles, planes de pago semanales.",
+  "intro":["Desde Astoria y Long Island City hasta Jackson Heights, Flushing y Jamaica — los residentes de Queens se forman para una verdadera carrera detrás de la silla en una de las únicas escuelas de barbería dedicadas de Nueva York, a un corto viaje de Midtown Manhattan.",
+           "Obtén tu licencia de Barbero Maestro del Estado de NY en tan solo 4 meses con entrenamiento práctico, clientes reales y horarios pensados para quienes viajan desde Queens."],
+  "getting":"Un viaje rápido en los trenes E, F, M, R o 7 hasta Midtown te deja a pocas cuadras de nuestra sede de Manhattan en West 39th Street; el LIRR hasta Penn Station también funciona."},
+ "barber-school-brooklyn-new-york": {"loc":"Brooklyn, NY","h1":"Escuela de Barbería para Brooklyn, NY",
+  "title":"Escuela de Barbería en Brooklyn, NY | American Barber Institute",
+  "desc":"Conviértete en Barbero Maestro licenciado — nuestra sede de Midtown Manhattan está a 20–40 minutos de la mayor parte de Brooklyn. Programa práctico de 500 horas, horarios flexibles, planes de pago semanales.",
+  "intro":["Desde Williamsburg y Bushwick hasta Bed-Stuy, Flatbush, Bay Ridge y Coney Island — los estudiantes de Brooklyn se forman para una verdadera carrera detrás de la silla en la única escuela de barbería dedicada de Nueva York.",
+           "La mayoría de los vecindarios de Brooklyn llegan a nuestra sede en 20–40 minutos, y nuestros horarios de mañana, tarde y fin de semana se adaptan al trabajo y la familia."],
+  "getting":"La mayoría de los vecindarios de Brooklyn llegan a nuestra sede de West 39th Street en 20–40 minutos en los trenes B, D, N, Q, R o 2/3/4/5."},
+ "barber-school-yonkers-new-york": {"loc":"Yonkers, NY","h1":"Escuela de Barbería para Yonkers, NY",
+  "title":"Escuela de Barbería en Yonkers, NY | American Barber Institute",
+  "desc":"Yonkers está justo en el límite con el Bronx — nuestra sede de Westchester Square es una de las escuelas de barbería dedicadas más cercanas. Instrucción bilingüe, planes de pago, preparación para la licencia de NY.",
+  "intro":["Yonkers está justo en el límite con el Bronx, lo que hace de nuestra sede del Bronx una de las escuelas de barbería dedicadas más cercanas — desde Getty Square hasta Park Hill, tu nueva carrera está a minutos.",
+           "Entrena de forma práctica con clientes reales, con instrucción bilingüe (se habla español) y planes de pago flexibles."],
+  "getting":"Un corto trayecto por la Major Deegan o la Saw Mill, o Metro-North más un bus local desde el centro de Yonkers."},
+ "barber-school-westchester-ny": {"loc":"Westchester, NY","h1":"Escuela de Barbería para el Condado de Westchester",
+  "title":"Escuela de Barbería en Westchester, NY | American Barber Institute",
+  "desc":"Residentes del Condado de Westchester: fórmate como Barbero Maestro licenciado en nuestra sede del Bronx — fácil por Metro-North o la I-95. Clínica práctica, horarios flexibles, planes de pago semanales.",
+  "intro":["Desde Mount Vernon y New Rochelle hasta White Plains — los estudiantes de Westchester obtienen su licencia de Barbero Maestro del Estado de NY en nuestra sede del Bronx, un viaje fácil por Metro-North o la I-95.",
+           "Nuestro programa pone las máquinas en tus manos desde el principio con clientes reales de la clínica, para que te gradúes listo para trabajar."],
+  "getting":"Por Metro-North (línea Harlem) más una conexión corta, o directo por la I-95 / Hutchinson River Parkway."},
+ "barber-school-long-island-ny": {"loc":"Long Island, NY","h1":"Escuela de Barbería para Long Island, NY",
+  "title":"Escuela de Barbería en Long Island, NY | American Barber Institute",
+  "desc":"A un viaje en LIRR desde Nassau y Suffolk: nuestra sede de Manhattan está a pocas cuadras de Penn Station. Programa de Barbero Maestro de 500 horas con horarios de tarde y fin de semana que se adaptan al viaje.",
+  "intro":["Estudiantes de Nassau y Suffolk: nuestra sede de Manhattan está a pocas cuadras de Penn Station, lo que hace el viaje en LIRR muy sencillo.",
+           "Los horarios de tarde y fin de semana se adaptan al viaje desde la Isla — obtén tu licencia de Barbero Maestro del Estado de NY en tan solo 4 meses."],
+  "getting":"Toma el LIRR directo hasta Penn Station; nuestra sede de West 39th Street está a una corta caminata."},
+ "barber-school-mount-vernon-ny": {"loc":"Mount Vernon, NY","h1":"Escuela de Barbería para Mount Vernon, NY",
+  "title":"Escuela de Barbería en Mount Vernon, NY | American Barber Institute",
+  "desc":"Mount Vernon limita con el Bronx — nuestra sede de Westchester Square está a la vuelta de la esquina. Entrena de forma práctica para la licencia de Barbero Maestro de NY con planes de pago flexibles.",
+  "intro":["Mount Vernon limita con el Bronx, así que nuestra sede de Westchester Square está a la vuelta de la esquina — a minutos de casa, con una clínica de clientes reales.",
+           "Entrena en mañanas, tardes o fines de semana, con instrucción bilingüe y planes de pago semanales."],
+  "getting":"A minutos en auto, o un corto viaje en los trenes 2/5 más un bus local desde Mount Vernon."},
+ "barber-school-port-chester-ny": {"loc":"Port Chester, NY","h1":"Escuela de Barbería para Port Chester, NY",
+  "title":"Escuela de Barbería en Port Chester, NY | American Barber Institute",
+  "desc":"La escuela de barbería dedicada más cercana hacia el sur desde el este de Westchester — llega a nuestra sede del Bronx por Metro-North o la I-95 en 30–40 minutos. Preparación para la licencia de NY, planes de pago.",
+  "intro":["Bajando desde el este de Westchester, la sede del Bronx de ABI es la escuela de barbería dedicada más cercana — aproximadamente a 30–40 minutos de Port Chester.",
+           "Entrenamiento práctico con clientes reales, instructores bilingües y horarios que se adaptan a tu trabajo."],
+  "getting":"Por Metro-North (línea New Haven) o directo por la I-95 — aproximadamente 30–40 minutos al sur."},
+ "barber-school-connecticut": {"loc":"Connecticut","h1":"Escuela de Barbería para Quienes Viajan desde Connecticut",
+  "title":"Escuela de Barbería Cerca de Connecticut | American Barber Institute",
+  "desc":"Greenwich, Stamford, Norwalk: entrena justo cruzando la línea estatal en nuestra sede del Bronx. Nota: nuestro programa te prepara para la licencia de Barbero Maestro del Estado de Nueva York.",
+  "intro":["Desde Greenwich, Stamford y Norwalk — quienes viajan desde el Condado de Fairfield entrenan justo cruzando la línea estatal en nuestra sede del Bronx, una de las escuelas de barbería dedicadas más cercanas a Connecticut.",
+           "Obtén la licencia de Barbero Maestro del Estado de Nueva York con entrenamiento práctico en clínica y planes de pago semanales."],
+  "getting":"Por Metro-North (línea New Haven) hasta el Bronx, o por la I-95 — el Condado de Fairfield está justo cruzando la línea estatal.",
+  "disclaimer":"Ten en cuenta: American Barber Institute está licenciado por el Departamento de Educación del Estado de Nueva York y nuestro programa te prepara para la licencia de Barbero Maestro del Estado de NY. Los residentes de Connecticut son bienvenidos; verifica los requisitos de licencia propios de Connecticut si planeas trabajar en CT."},
+ "barber-school-pennsylvania": {"loc":"Pennsylvania","h1":"Escuela de Barbería para Estudiantes de Pennsylvania",
+  "title":"Escuela de Barbería Cerca de Pennsylvania | American Barber Institute",
+  "desc":"Estudiantes del este de PA que se mudan o viajan al área de NYC: nuestra sede de Manhattan está a una corta caminata de Penn Station. Te prepara para la licencia de Barbero Maestro del Estado de Nueva York.",
+  "intro":["Para estudiantes del este de Pennsylvania que se mudan o viajan al área de la Ciudad de Nueva York, la sede de Manhattan de ABI está a una corta caminata de Penn Station.",
+           "Entrena de forma práctica para la licencia de Barbero Maestro del Estado de Nueva York, con horarios de mañana, tarde y fin de semana."],
+  "getting":"A una corta caminata de Penn Station para quienes llegan en tren o autobús a la ciudad.",
+  "disclaimer":"Ten en cuenta: American Barber Institute está licenciado por el Departamento de Educación del Estado de Nueva York y nuestro programa te prepara para la licencia de Barbero Maestro del Estado de NY. Si planeas trabajar en PA, verifica los requisitos de licencia de barbero propios de Pennsylvania."},
+}
+
 PAGES = []
 # program pages
 PAGES.append({"type":"program","lang":"en","path":"500-hours-master-barber-program-landing-page/index.html",
@@ -345,12 +420,18 @@ PAGES.append({"type":"splash","lang":"es","path":"es/index.html",
  "campus":MANHATTAN,"h1a":"Tu Futuro.","h1b":"Tu Carrera.","script":"Empieza Hoy.",
  "sub":"Conviértete en barbero licenciado en tan solo <b>17 semanas</b>. Entrenamiento práctico. Habilidades reales. Oportunidades reales.",
  "hero_img":"lp-hero.jpg","dur":"~4 Meses","tui":"$4,600","variant":1})
-# location pages (EN only, matching live site)
+# location pages (EN + ES)
 for L in LOCATIONS:
     PAGES.append({"type":"location","lang":"en","path":L["slug"]+"/index.html",
-     "url":"/"+L["slug"],"alt":None,"title":L["title"],"desc":L["desc"],
+     "url":"/"+L["slug"],"alt":"/es/"+L["slug"],"title":L["title"],"desc":L["desc"],
      "campus":L["campus"],"h1a":L["h1"],"h1b":"","script":"Start Today.",
      "sub":L["intro"][0],"loc":L,"hero_img":"lp-hero.jpg","dur":"~4 Months","tui":"$4,600"})
+    E = LOC_ES[L["slug"]]
+    LE = dict(L); LE.update(E)
+    PAGES.append({"type":"location","lang":"es","path":"es/"+L["slug"]+"/index.html",
+     "url":"/es/"+L["slug"],"alt":"/"+L["slug"],"title":E["title"],"desc":E["desc"],
+     "campus":L["campus"],"h1a":E["h1"],"h1b":"","script":"Empieza Hoy.",
+     "sub":E["intro"][0],"loc":LE,"hero_img":"lp-hero.jpg","dur":"~4 Meses","tui":"$4,600"})
 
 # ───────────────────────── template parts ─────────────────────────
 def head(p, s, pre):
@@ -391,16 +472,40 @@ def head(p, s, pre):
              p["title"], p["desc"], SITE, p["url"], pre, jsonld)
 
 def header(p, s, pre):
+    lang = p["lang"]
     pills = "".join(
         '<a class="phone-pill" href="tel:%s">%s<span><span class="lbl">%s: </span>%s</span></a>'
         % (tel, icon("phone",16), lbl, disp) for lbl, disp, tel in s["en_es_phones"])
-    links = "".join('<a href="%s%s">%s</a>' % (pre.rstrip("/").replace("../","",0) and "" or "", u.lstrip("/") and pre+u.lstrip("/") or pre, t) for t,u in [])
-    nav = "".join('<a href="%s">%s</a>' % (pre + u.lstrip("/"), t) for t, u in s["f_linkitems"])
+    home = pre + ("es/index.html" if lang == "es" else "index.html")
+    # language toggle target
+    alt = p.get("alt")
+    if alt is not None:
+        a = alt.strip("/")
+        alt_href = pre + (a + "/" if a else "")
+        if alt_href == "": alt_href = "./"
+    else:
+        alt_href = pre + ("index.html" if lang == "es" else "es/index.html")
+    en_href = alt_href if lang == "es" else "#"
+    es_href = alt_href if lang == "en" else "#"
+    # main nav
+    items = ""
+    drawer = '<a href="%s">%s</a>' % (home, "Inicio" if lang == "es" else "Home")
+    for label, target in NAV[lang]:
+        if target is None:
+            drop = "".join('<a href="%s%s%s/">%s</a>' % (pre, "es/" if lang == "es" else "", slug, name)
+                           for name, slug in LOC_NAMES)
+            items += ('<div class="mn-sub"><a href="%s%s%s/">%s %s</a><div class="mn-drop">%s</div></div>'
+                      % (pre, "es/" if lang == "es" else "", LOC_NAMES[0][1], NAV_LOC_LABEL[lang], icon("chev",13), drop))
+            drawer += '<a href="%s%s%s/">%s</a>' % (pre, "es/" if lang == "es" else "", LOC_NAMES[0][1], NAV_LOC_LABEL[lang])
+        else:
+            items += '<a href="%s%s">%s</a>' % (pre, target, label)
+            drawer += '<a href="%s%s">%s</a>' % (pre, target, label)
+    drawer += ('<a href="%s"><b>%s</b></a>' % (alt_href, "English" if lang == "es" else "Español"))
     return """
 <div class="topbar">%s</div>
 <header class="hdr">
   <div class="hdr-in">
-    <a class="logo" href="%sindex.html" aria-label="American Barber Institute">
+    <a class="logo" href="%s" aria-label="American Barber Institute">
       <span class="logo-abi">ABI</span>
       <span class="logo-words">American<br>Barber Institute<sup>®</sup></span>
     </a>
@@ -409,6 +514,9 @@ def header(p, s, pre):
     </div>
     <button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
+  <nav class="mainnav" aria-label="Main">%s
+    <span class="mn-lang"><a href="%s" %s>EN</a> | <a href="%s" %s>ES</a></span>
+  </nav>
   <nav class="nav-drawer"><div class="container">%s</div></nav>
 </header>
 <div class="urgency">
@@ -417,9 +525,11 @@ def header(p, s, pre):
 </div>
 <div class="startpill-wrap">
   <span class="startpill">%s <span>%s</span> <span class="dot">•</span> <span>%s <b data-next-start></b></span></span>
-</div>""" % (s["topbar"], pre, pills, p["campus"]["tel"], icon("phone",16), s["call"], nav,
+</div>""" % (s["topbar"], home, pills, p["campus"]["tel"], icon("phone",16), s["call"], items,
+             en_href, 'style="color:var(--blue)"' if lang == "en" else "",
+             es_href, 'style="color:var(--blue)"' if lang == "es" else "", drawer,
              s["limited"], s["reserve"],
-             icon("pin",16), p["campus"]["name_"+p["lang"]], s["next_start"])
+             icon("pin",16), p["campus"]["name_"+lang], s["next_start"])
 
 def lead_form(p, s):
     locs = "".join('<option>%s</option>' % o for o in s["locs"])
@@ -604,32 +714,41 @@ def sec_earnings(p, s):
     return '<section class="sec sec-alt"><div class="container"><div class="rv"><span class="eyebrow">%s</span><h2>%s</h2></div><div class="earn">%s</div><p class="earn-note">%s</p></div></section>' % (eb, h, cards, note)
 
 def sec_location(p, s):
-    L = p["loc"]
-    c = L["campus"]
-    why = [("badge","Licensed by NYSED (BPSS)","State-approved curriculum, programs and instructors."),
-           ("mic","Hands-on from the first weeks","Real clients in our professional barber clinic — not mannequins."),
-           ("cal","Morning · Afternoon · Weekend","Schedules built around work and family."),
-           ("hand","Financial assistance","ACCES-VR, Post-9/11 GI Bill® and VA benefits accepted."),
-           ("people","Bilingual — se habla español","Instruction and admissions support in English and Spanish."),
-           ("case","Job placement + Board Exam prep","Graduate license-ready, with placement support waiting.")]
-    whyhtml = "".join('<div class="why-item rv">%s<b>%s</b>%s</div>' % (icon(i,24), t, d) for i, t, d in why)
+    L = p["loc"]; c = L["campus"]; es = p["lang"] == "es"
+    if es:
+        why = [("badge","Licenciada por NYSED (BPSS)","Plan de estudios, programas e instructores aprobados por el estado."),
+               ("mic","Práctica desde las primeras semanas","Clientes reales en nuestra clínica profesional — no maniquíes."),
+               ("cal","Mañanas · Tardes · Fines de Semana","Horarios pensados para el trabajo y la familia."),
+               ("hand","Asistencia financiera","ACCES-VR, Post-9/11 GI Bill® y beneficios de VA aceptados."),
+               ("people","Bilingüe — se habla español","Instrucción y apoyo de admisiones en inglés y español."),
+               ("case","Colocación laboral + examen estatal","Gradúate listo para la licencia, con apoyo de empleo esperándote.")]
+        h_why, h_near, h_get = "Por Qué Entrenar Con Nosotros", "Tu Sede Más Cercana", "Cómo Llegar"
+    else:
+        why = [("badge","Licensed by NYSED (BPSS)","State-approved curriculum, programs and instructors."),
+               ("mic","Hands-on from the first weeks","Real clients in our professional barber clinic — not mannequins."),
+               ("cal","Morning · Afternoon · Weekend","Schedules built around work and family."),
+               ("hand","Financial assistance","ACCES-VR, Post-9/11 GI Bill® and VA benefits accepted."),
+               ("people","Bilingual — se habla español","Instruction and admissions support in English and Spanish."),
+               ("case","Job placement + Board Exam prep","Graduate license-ready, with placement support waiting.")]
+        h_why, h_near, h_get = "Why Train With Us", "Your Nearest Campus", "Getting Here"
+    whyhtml = "".join('<div class="why-item rv">%s<b>%s</b>%s</div>' % (icon(i2,24), t, d) for i2, t, d in why)
     disc = '<p class="plans-note" style="margin-top:1.6rem">%s</p>' % L["disclaimer"] if L.get("disclaimer") else ""
     return """
 <section class="sec"><div class="container split">
-  <div class="rv"><span class="eyebrow">%s</span><h2>Why Train With Us</h2>
+  <div class="rv"><span class="eyebrow">%s</span><h2>%s</h2>
     <div class="prose"><p>%s</p></div></div>
   <div class="rv"><div class="campus">
-    <h3>Your Nearest Campus — %s</h3>
+    <h3>%s — %s</h3>
     <p>%s %s</p><p><a href="tel:%s"><b>%s</b></a></p>
     <a class="maplink" href="https://maps.google.com/?q=%s" target="_blank" rel="noopener">Google Maps →</a>
     <hr style="border:none;border-top:1px solid var(--line);margin:1.1rem 0">
-    <h3>%s Getting Here</h3><p>%s</p>
+    <h3>%s %s</h3><p>%s</p>
   </div></div>
 </div>
 <div class="container"><div class="why">%s</div>%s</div></section>""" % (
-        L["loc"], L["intro"][1],
-        c["name_en"], icon("pin",15), c["addr"], c["tel"], c["tel_disp"], c["addr"].replace(" ","+"),
-        icon("train",18), L["getting"], whyhtml, disc)
+        L["loc"], h_why, L["intro"][1],
+        h_near, c["name_" + p["lang"]], icon("pin",15), c["addr"], c["tel"], c["tel_disp"], c["addr"].replace(" ","+"),
+        icon("train",18), h_get, L["getting"], whyhtml, disc)
 
 def closing(p, s):
     return """

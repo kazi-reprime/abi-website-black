@@ -27,8 +27,9 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="icon" href="{root}assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css">
+<link rel="stylesheet" href="{root}assets/css/brand.css">
 <link rel="stylesheet" href="{root}assets/css/effects.css">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 {schema}
@@ -56,9 +57,9 @@ TEMPLATE = """<!DOCTYPE html>
   <div class="wrap">
     <a class="brand" href="{root}index.html" aria-label="American Barber Institute home">
       <svg width="40" height="40" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <rect x="2" y="2" width="44" height="44" rx="8" fill="#c9a227"/>
+        <rect x="2" y="2" width="44" height="44" rx="8" fill="#1b2fd9"/>
         <rect x="19" y="6" width="10" height="36" rx="5" fill="#101316"/>
-        <path d="M19 12 L29 18 M19 22 L29 28 M19 32 L29 38" stroke="#c9a227" stroke-width="3.4" stroke-linecap="round"/>
+        <path d="M19 12 L29 18 M19 22 L29 28 M19 32 L29 38" stroke="#ffffff" stroke-width="3.4" stroke-linecap="round"/>
         <circle cx="24" cy="6.5" r="3.2" fill="#101316"/>
       </svg>
       <span><b>American Barber<br>Institute</b><small>NYC · Est. 1996</small></span>
@@ -431,7 +432,7 @@ def build():
         open(dest, 'w', encoding='utf-8').write(html)
         written.append(out)
     # sitemap
-    written += ['index.html', 'es/index.html', '500-hours-master-barber-program-landing-page/index.html', 'es/500-hours-master-barber-program-landing-page/index.html', 'master-barber-program-bronx/index.html', 'es/master-barber-program-bronx/index.html', 'splash-page-1/index.html', 'splash-page-2/index.html', 'es/splash-page-1/index.html', 'es/splash-page-2/index.html', 'barber-school-queens-ny/index.html', 'barber-school-brooklyn-new-york/index.html', 'barber-school-yonkers-new-york/index.html', 'barber-school-westchester-ny/index.html', 'barber-school-long-island-ny/index.html', 'barber-school-mount-vernon-ny/index.html', 'barber-school-port-chester-ny/index.html', 'barber-school-connecticut/index.html', 'barber-school-pennsylvania/index.html']
+    written += ['index.html', 'es/index.html', '500-hours-master-barber-program-landing-page/index.html', 'es/500-hours-master-barber-program-landing-page/index.html', 'master-barber-program-bronx/index.html', 'es/master-barber-program-bronx/index.html', 'splash-page-1/index.html', 'splash-page-2/index.html', 'es/splash-page-1/index.html', 'es/splash-page-2/index.html', 'barber-school-queens-ny/index.html', 'barber-school-brooklyn-new-york/index.html', 'barber-school-yonkers-new-york/index.html', 'barber-school-westchester-ny/index.html', 'barber-school-long-island-ny/index.html', 'barber-school-mount-vernon-ny/index.html', 'barber-school-port-chester-ny/index.html', 'barber-school-connecticut/index.html', 'barber-school-pennsylvania/index.html', 'es/barber-school-queens-ny/index.html', 'es/barber-school-brooklyn-new-york/index.html', 'es/barber-school-yonkers-new-york/index.html', 'es/barber-school-westchester-ny/index.html', 'es/barber-school-long-island-ny/index.html', 'es/barber-school-mount-vernon-ny/index.html', 'es/barber-school-port-chester-ny/index.html', 'es/barber-school-connecticut/index.html', 'es/barber-school-pennsylvania/index.html']
     urls = '\n'.join(
         f'  <url><loc>{SITE_URL}/{o}</loc></url>'.replace('/index.html', '/')
         for o in written)
