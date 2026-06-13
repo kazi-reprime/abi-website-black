@@ -456,9 +456,9 @@ html,body{overflow-x:clip}
 
 /* ═══════════ UI/UX upgrade — glassmorphism, vivid backgrounds, brighter CTAs (v15) ═══════════ */
 /* Per-page background image (different best photo per page) */
-body{background-image:linear-gradient(rgba(245,247,250,.34),rgba(245,247,250,.46)),var(--page-bg,url(../img/abi-nyc-001.jpg))!important;background-size:cover;background-position:center;background-attachment:fixed}
+body{background:#eef2f7!important}
 /* Vivid, visible page-hero photo per page — warm/light, no cold blue cast */
-.page-hero{position:relative;background:linear-gradient(115deg,rgba(14,12,9,.60) 0%,rgba(70,48,22,.30) 54%,rgba(40,30,16,.16) 100%),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center;color:#fff;padding:3.4rem 1rem 3rem;border:none}
+.page-hero{position:relative;overflow:hidden;background:linear-gradient(115deg,rgba(12,11,8,.66) 0%,rgba(60,42,20,.40) 54%,rgba(30,24,14,.30) 100%),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center 30%;background-repeat:no-repeat;color:#fff;padding:3.4rem 1rem 3rem;border:none}
 /* P2: avoid fixed-attachment jank/cost on mobile; U2: more visible photos */
 @media (max-width:768px){
   body{background-attachment:scroll!important}
@@ -481,13 +481,13 @@ body{background-image:linear-gradient(rgba(245,247,250,.34),rgba(245,247,250,.46
 .btn-blue:hover{box-shadow:0 10px 28px rgba(27,47,217,.6)}
 .btn-lg{letter-spacing:.01em}
 .cta-band,.foot-cta{position:relative;overflow:hidden}
-/* Glass sections: photo shows through, text stays readable (light-on-light = AA-safe) */
-section:not(.dark):not(.alt):not(.trust-strip):not(.visit360):not(.inst-hero):not(.cta-band){background:rgba(255,255,255,.40);backdrop-filter:blur(6px) saturate(1.12);-webkit-backdrop-filter:blur(6px) saturate(1.12)}
-section.alt{background:rgba(248,250,253,.30);backdrop-filter:blur(6px) saturate(1.12);-webkit-backdrop-filter:blur(6px) saturate(1.12)}
-@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-  section:not(.dark):not(.alt):not(.trust-strip):not(.visit360):not(.inst-hero):not(.cta-band){background:rgba(255,255,255,.66)}
-  section.alt{background:rgba(248,250,253,.58)}
-}
+/* Consistent photo band on EVERY page (shared template section) — contained, no overflow */
+.cta-band{background:linear-gradient(rgba(11,15,24,.84),rgba(11,15,24,.74)),url(../img/home-bg.jpg)!important;background-size:cover!important;background-position:center 35%!important;background-repeat:no-repeat!important;background-attachment:scroll}
+.cta-band .kicker{color:var(--gold-bright,#f4c44a)}
+.cta-band h2,.cta-band p{color:#fff}
+/* Clean content surfaces (photos live in dedicated bands, not behind every section) */
+section:not(.dark):not(.alt):not(.trust-strip):not(.visit360):not(.inst-hero):not(.cta-band):not(.photo-band){background:#ffffff}
+section.alt{background:#eef2f8}
 /* Gallery lightbox */
 .lightbox{position:fixed;inset:0;z-index:200;background:rgba(8,11,18,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center}
 .lightbox.open{display:flex}
