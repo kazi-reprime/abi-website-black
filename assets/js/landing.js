@@ -41,16 +41,18 @@
       d: cd.querySelector('[data-cd-d]'), h: cd.querySelector('[data-cd-h]'),
       m: cd.querySelector('[data-cd-m]'), s: cd.querySelector('[data-cd-s]')
     };
-    var tick = function () {
-      var diff = startDate.getTime() - Date.now();
-      if (diff < 0) diff = 0;
-      var s = Math.floor(diff / 1000);
-      cells.d.textContent = Math.floor(s / 86400);
-      cells.h.textContent = Math.floor((s % 86400) / 3600);
-      cells.m.textContent = Math.floor((s % 3600) / 60);
-      cells.s.textContent = s % 60;
-    };
-    tick(); setInterval(tick, 1000);
+    if (cells.d && cells.h && cells.m && cells.s) {
+      var tick = function () {
+        var diff = startDate.getTime() - Date.now();
+        if (diff < 0) diff = 0;
+        var s = Math.floor(diff / 1000);
+        cells.d.textContent = Math.floor(s / 86400);
+        cells.h.textContent = Math.floor((s % 86400) / 3600);
+        cells.m.textContent = Math.floor((s % 3600) / 60);
+        cells.s.textContent = s % 60;
+      };
+      tick(); setInterval(tick, 1000);
+    }
   }
 
   /* ── Hamburger ──────────────────────────────────────────── */

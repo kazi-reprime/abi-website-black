@@ -38,11 +38,11 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{root}assets/css/style.css?v=16">
-<link rel="stylesheet" href="{root}assets/css/brand.css?v=16">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=16">
+<link rel="stylesheet" href="{root}assets/css/style.css?v=17">
+<link rel="stylesheet" href="{root}assets/css/brand.css?v=17">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=17">
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
-<link rel="stylesheet" href="{root}assets/css/effects.css?v=16">
+<link rel="stylesheet" href="{root}assets/css/effects.css?v=17">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 {schema}
 </head>
@@ -188,9 +188,9 @@ TEMPLATE = """<!DOCTYPE html>
 </div>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script src="{root}assets/js/main.js?v=16" defer></script>
-<script src="{root}assets/js/effects.js?v=16" defer></script>
-<script src="{root}assets/js/landing.js?v=16" defer></script>
+<script src="{root}assets/js/main.js?v=17" defer></script>
+<script src="{root}assets/js/effects.js?v=17" defer></script>
+<script src="{root}assets/js/landing.js?v=17" defer></script>
 </body>
 </html>
 """
@@ -327,6 +327,10 @@ PAGES = [
      "Barbering Resources & State Licensing Boards | American Barber Institute",
      "Regulatory agencies, state-by-state barber and cosmetology licensing boards, education resources and industry associations.",
      "en", []),
+    ("404.html", "404.html",
+     "Page Not Found | American Barber Institute",
+     "The page you're looking for doesn't exist. Return to American Barber Institute's homepage or browse our barber programs.",
+     "en", []),
     ("privacy.html", "privacy.html",
      "Privacy Policy | American Barber Institute",
      "How American Barber Institute collects, uses, and protects your personal information.",
@@ -451,7 +455,8 @@ def build():
         dest = os.path.join(ROOT, out)
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         open(dest, 'w', encoding='utf-8').write(html)
-        written.append(out)
+        if out != '404.html':  # keep the error page out of the sitemap
+            written.append(out)
     # sitemap
     written += ['index.html', 'es/index.html', '500-hours-master-barber-program-landing-page/index.html', 'es/500-hours-master-barber-program-landing-page/index.html', 'master-barber-program-bronx/index.html', 'es/master-barber-program-bronx/index.html', 'splash-page-1/index.html', 'splash-page-2/index.html', 'es/splash-page-1/index.html', 'es/splash-page-2/index.html']
     urls = '\n'.join(

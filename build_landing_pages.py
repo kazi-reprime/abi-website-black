@@ -495,7 +495,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=16">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=17">
 <script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
 </head>
@@ -576,6 +576,8 @@ def lead_form(p, s):
   <form class="leadform" novalidate>
     <input type="hidden" name="page" value="%s">
     <input type="hidden" name="language" value="%s">
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+    <input type="hidden" name="_subject" value="New ABI website lead">
     <div class="field"><label>%s <span class="req">*</span></label>
       <input type="text" name="first_name" placeholder="%s" required autocomplete="given-name"></div>
     <div class="field"><label>%s <span class="req">*</span></label>
@@ -933,7 +935,7 @@ def footer(p, s, pre):
     <button class="btn btn-blue" data-exit-cta style="padding:.85rem 2rem">%s</button>
   </div>
 </div>
-<script src="%sassets/js/landing.js?v=16" defer></script>
+<script src="%sassets/js/landing.js?v=17" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
               p["campus"]["tel"], icon("phone",17), s["mbar_call"], s["mbar_cta"],

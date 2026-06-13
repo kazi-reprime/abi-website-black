@@ -460,7 +460,12 @@ html,body{overflow-x:clip}
 /* Per-page background image (different best photo per page) */
 body{background-image:linear-gradient(rgba(244,246,250,.90),rgba(244,246,250,.93)),var(--page-bg,url(../img/abi-nyc-001.jpg))!important;background-size:cover;background-position:center;background-attachment:fixed}
 /* Vivid, visible page-hero photo per page */
-.page-hero{position:relative;background:linear-gradient(120deg,rgba(15,20,32,.66),rgba(27,47,217,.42)),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center;color:#fff;padding:3.4rem 1rem 3rem;border:none}
+.page-hero{position:relative;background:linear-gradient(120deg,rgba(15,20,32,.58),rgba(27,47,217,.34)),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center;color:#fff;padding:3.4rem 1rem 3rem;border:none}
+/* P2: avoid fixed-attachment jank/cost on mobile; U2: more visible photos */
+@media (max-width:768px){
+  body{background-attachment:scroll!important}
+  .page-hero{background-attachment:scroll}
+}
 .page-hero h1,.page-hero p,.page-hero a{color:#fff}
 .page-hero .crumbs a{color:#fff;opacity:.85}
 .page-hero h1{text-shadow:0 2px 18px rgba(0,0,0,.35)}
