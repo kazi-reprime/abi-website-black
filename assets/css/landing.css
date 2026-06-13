@@ -458,7 +458,10 @@ html,body{overflow-x:clip}
 /* Per-page background image (different best photo per page) */
 body{background:#eef2f7!important}
 /* Vivid, visible page-hero photo per page — warm/light, no cold blue cast */
-.page-hero{position:relative;overflow:hidden;background:linear-gradient(115deg,rgba(12,11,8,.66) 0%,rgba(60,42,20,.40) 54%,rgba(30,24,14,.30) 100%),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center 30%;background-repeat:no-repeat;color:#fff;padding:3.4rem 1rem 3rem;border:none}
+.page-hero{position:relative;overflow:hidden;background:linear-gradient(100deg,rgba(8,10,14,.78) 0%,rgba(8,10,14,.55) 32%,rgba(8,10,14,.20) 64%,rgba(8,10,14,.06) 100%),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center 28%;background-repeat:no-repeat;color:#fff;padding:3.4rem 1rem 3rem;border:none}
+/* keep hero text crisp over the clearer photo */
+.page-hero h1{text-shadow:0 2px 16px rgba(0,0,0,.55)}
+.page-hero p,.page-hero .crumbs{text-shadow:0 1px 10px rgba(0,0,0,.5)}
 /* P2: avoid fixed-attachment jank/cost on mobile; U2: more visible photos */
 @media (max-width:768px){
   body{background-attachment:scroll!important}
@@ -481,8 +484,8 @@ body{background:#eef2f7!important}
 .btn-blue:hover{box-shadow:0 10px 28px rgba(27,47,217,.6)}
 .btn-lg{letter-spacing:.01em}
 .cta-band,.foot-cta{position:relative;overflow:hidden}
-/* Consistent photo band on EVERY page (shared template section) — contained, no overflow */
-.cta-band{background:linear-gradient(rgba(11,15,24,.84),rgba(11,15,24,.74)),url(../img/home-bg.jpg)!important;background-size:cover!important;background-position:center 35%!important;background-repeat:no-repeat!important;background-attachment:scroll}
+/* Clean navy CTA band (no photo) */
+.cta-band{background:linear-gradient(120deg,#0f1726 0%,#142a4d 100%)!important}
 .cta-band .kicker{color:var(--gold-bright,#f4c44a)}
 .cta-band h2,.cta-band p{color:#fff}
 /* Clean content surfaces (photos live in dedicated bands, not behind every section) */
