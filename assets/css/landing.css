@@ -455,6 +455,44 @@ html,body{overflow-x:clip}
 /* Micro-interaction polish */
 .trust-item strong{transition:transform .2s ease}
 .trust-strip .trust-item:hover strong{transform:scale(1.08)}
+
+/* ═══════════ UI/UX upgrade — glassmorphism, vivid backgrounds, brighter CTAs (v15) ═══════════ */
+/* Per-page background image (different best photo per page) */
+body{background-image:linear-gradient(rgba(244,246,250,.90),rgba(244,246,250,.93)),var(--page-bg,url(../img/abi-nyc-001.jpg))!important;background-size:cover;background-position:center;background-attachment:fixed}
+/* Vivid, visible page-hero photo per page */
+.page-hero{position:relative;background:linear-gradient(120deg,rgba(15,20,32,.78),rgba(27,47,217,.55)),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center;color:#fff;padding:3.4rem 1rem 3rem;border:none}
+.page-hero h1,.page-hero p,.page-hero a{color:#fff}
+.page-hero .crumbs a{color:#fff;opacity:.85}
+.page-hero h1{text-shadow:0 2px 18px rgba(0,0,0,.35)}
+/* Glassmorphism — header + cards */
+.hdr{background:rgba(255,255,255,.62)!important;backdrop-filter:blur(20px) saturate(1.7);-webkit-backdrop-filter:blur(20px) saturate(1.7);border-bottom:1px solid rgba(255,255,255,.5)}
+.mainnav{background:rgba(255,255,255,.45)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.phone-pill{background:rgba(255,255,255,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.card,.quote,.plan,.inst-card,.phil-card,.glance>div,.visit-card{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.card,.quote,.plan,.inst-card,.phil-card{background:rgba(255,255,255,.82)!important;border:1px solid rgba(255,255,255,.65);box-shadow:0 8px 30px rgba(15,20,32,.10)}
+.card:hover,.quote:hover,.inst-card:hover,.plan:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(27,47,217,.18);transition:transform .25s ease,box-shadow .25s ease}
+/* Brighter, bolder CTAs with glow */
+.btn-gold{background:linear-gradient(135deg,#ffc83d,#e5a019)!important;color:#1a1205!important;font-weight:800;box-shadow:0 6px 22px rgba(229,160,25,.5)}
+.btn-gold:hover{box-shadow:0 10px 30px rgba(229,160,25,.7);filter:brightness(1.05)}
+.btn-blue{box-shadow:0 6px 20px rgba(27,47,217,.45)}
+.btn-blue:hover{box-shadow:0 10px 28px rgba(27,47,217,.6)}
+.btn-lg{letter-spacing:.01em}
+.cta-band,.foot-cta{position:relative;overflow:hidden}
+/* Keep solid sections readable above the body photo */
+section:not(.dark):not(.alt):not(.trust-strip):not(.visit360):not(.inst-hero):not(.cta-band){background:rgba(255,255,255,.86)}
+/* Gallery lightbox */
+.lightbox{position:fixed;inset:0;z-index:200;background:rgba(8,11,18,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lightbox img{max-width:88vw;max-height:84vh;border-radius:10px;box-shadow:0 24px 70px rgba(0,0,0,.6);animation:lbIn .25s ease}
+@keyframes lbIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+.lightbox button{position:absolute;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;cursor:pointer;border-radius:50%;width:52px;height:52px;font-size:1.8rem;line-height:1;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.lightbox button:hover{background:rgba(255,255,255,.28)}
+.lb-close{top:22px;right:22px;width:46px;height:46px}
+.lb-prev{left:3vw;top:50%;transform:translateY(-50%)}
+.lb-next{right:3vw;top:50%;transform:translateY(-50%)}
+.lb-count{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);color:#fff;font-weight:700;letter-spacing:.05em;background:rgba(0,0,0,.4);padding:.35rem 1rem;border-radius:50px}
+.gallery-grid a{cursor:zoom-in}
+@media (max-width:560px){.lb-prev{left:6px}.lb-next{right:6px}.lightbox button{width:42px;height:42px}}
 .btn:hover{box-shadow:0 8px 22px rgba(27,47,217,.4)}
 /* Floating desktop sticky CTA */
 .desk-cta{position:fixed;right:24px;bottom:28px;z-index:90;display:inline-flex;align-items:center;gap:.55rem;background:var(--blue);color:#fff;font-weight:800;padding:.95rem 1.5rem;border-radius:50px;box-shadow:0 12px 32px rgba(27,47,217,.48);text-decoration:none;animation:deskPulse 2.6s ease-in-out infinite}

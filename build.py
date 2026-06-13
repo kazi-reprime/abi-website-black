@@ -38,15 +38,15 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{root}assets/css/style.css?v=14">
-<link rel="stylesheet" href="{root}assets/css/brand.css?v=14">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=14">
+<link rel="stylesheet" href="{root}assets/css/style.css?v=15">
+<link rel="stylesheet" href="{root}assets/css/brand.css?v=15">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=15">
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
-<link rel="stylesheet" href="{root}assets/css/effects.css?v=14">
+<link rel="stylesheet" href="{root}assets/css/effects.css?v=15">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 {schema}
 </head>
-<body>
+<body style="--page-bg:url('{root}assets/img/{pagebg}')">
 <a class="skip" href="#main">Skip to content</a>
 
 <div class="topbar">Start your barber journey today for only $150 per week*<span class="theme-dots" role="group" aria-label="Color theme"><button class="tdot tdot-blue" data-set-theme="blue" aria-label="Blue theme" title="Blue"></button><button class="tdot tdot-midnight" data-set-theme="midnight" aria-label="Midnight theme" title="Midnight"></button><button class="tdot tdot-classic" data-set-theme="classic" aria-label="Classic theme" title="Classic"></button><button class="tdot tdot-emerald" data-set-theme="emerald" aria-label="Emerald theme" title="Emerald"></button><button class="tdot tdot-noir" data-set-theme="noir" aria-label="Noir theme" title="Noir"></button></span></div>
@@ -61,7 +61,6 @@ TEMPLATE = """<!DOCTYPE html>
       <a class="phone-pill" href="tel:+12122902289"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.22a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span><span class="lbl">English:&nbsp;</span>(212)&nbsp;290-2289</span></a>
       <a class="phone-pill" href="tel:+12122900278"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.22a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span><span class="lbl">Spanish:&nbsp;</span>(212)&nbsp;290-0278</span></a>
     </div>
-    <a class="btn btn-blue btn-call" href="{root}contact.html">Request&nbsp;a&nbsp;Call</a>
     <button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
   <nav class="mainnav" aria-label="Main"><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}admissions.html">Admissions</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}jobs.html">Jobs</a><a href="{root}gallery.html">Gallery</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a>
@@ -189,9 +188,9 @@ TEMPLATE = """<!DOCTYPE html>
 </div>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script src="{root}assets/js/main.js?v=14" defer></script>
-<script src="{root}assets/js/effects.js?v=14" defer></script>
-<script src="{root}assets/js/landing.js?v=14" defer></script>
+<script src="{root}assets/js/main.js?v=15" defer></script>
+<script src="{root}assets/js/effects.js?v=15" defer></script>
+<script src="{root}assets/js/landing.js?v=15" defer></script>
 </body>
 </html>
 """
@@ -398,6 +397,21 @@ def faq_schema_from(body):
                       "acceptedAnswer": {"@type": "Answer", "text": clean_a}})
     return {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": items}
 
+PAGE_BG = {
+    'classic-home.html': 'abi-nyc-003.jpg', 'about.html': 'abi-nyc-007.jpg',
+    'instructors.html': 'abi-nyc-012.png', 'admissions.html': 'abi-nyc-014.jpg',
+    'financial-aid.html': 'abi-nyc-018.jpg', 'veterans.html': 'abi-nyc-021.jpeg',
+    'access-vr.html': 'abi-nyc-022.jpg', 'haircuts.html': 'abi-nyc-031.jpg',
+    'jobs.html': 'abi-nyc-033.jpg', 'gallery.html': 'abi-nyc-035.jpg',
+    'faq.html': 'abi-nyc-036.jpg', 'contact.html': 'abi-nyc-037.jpg',
+    'resources.html': 'abi-nyc-038.jpg', 'privacy.html': 'abi-nyc-004.jpg',
+    'programs/index.html': 'abi-nyc-005.jpg', 'programs/500-hour-master-barber.html': 'abi-nyc-006.jpg',
+    'programs/200-hour-barber-fundamentals.html': 'abi-nyc-008.jpg', 'programs/50-hour-barber-refresher.html': 'abi-nyc-009.jpg',
+    'programs/scalp-micro-pigmentation.html': 'abi-nyc-010.jpg', 'programs/contagious-diseases.html': 'abi-nyc-013.jpg',
+    'programs/license-transfer.html': 'abi-nyc-015.jpg', 'blog/index.html': 'abi-nyc-016.jpg',
+}
+_DEFAULT_BG = 'abi-nyc-001.jpg'
+
 def build():
     written = []
     for out, partial, title, desc, lang, schemas in PAGES:
@@ -429,6 +443,7 @@ def build():
         html = TEMPLATE.format(
             lang=lang, title=title, desc=desc, canonical=canonical, site=SITE_URL,
             oglocale='es_ES' if lang == 'es' else 'en_US',
+            pagebg=PAGE_BG.get(out.replace('es/', ''), _DEFAULT_BG),
             root=root, body=body, schema=schema_tags,
             lp=root + ('es/' if lang == 'es' else '') + '500-hours-master-barber-program-landing-page/',
             en_cur='aria-current="true"' if lang == 'en' else '',

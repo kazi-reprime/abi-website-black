@@ -495,7 +495,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=14">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=15">
 <script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
 </head>
@@ -542,7 +542,6 @@ def header(p, s, pre):
       <span class="logo-words">American Barber Institute<sup>®</sup></span>
     </a>
     <div class="hdr-phones">%s</div>
-    <a class="btn btn-blue btn-call" href="tel:%s">%s&nbsp;%s</a>
     <button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
   <nav class="mainnav" aria-label="Main">%s
@@ -556,7 +555,7 @@ def header(p, s, pre):
 </div>
 <div class="startpill-wrap">
   <span class="startpill">%s <span>%s</span> <span class="dot">•</span> <span>%s <b data-next-start></b></span></span>
-</div>""" % (s["topbar"], home, pills, p["campus"]["tel"], icon("phone",16), s["call"], items,
+</div>""" % (s["topbar"], home, pills, items,
              en_href, 'style="color:var(--blue)"' if lang == "en" else "",
              es_href, 'style="color:var(--blue)"' if lang == "es" else "", drawer,
              s["limited"], s["reserve"],
@@ -934,7 +933,7 @@ def footer(p, s, pre):
     <button class="btn btn-blue" data-exit-cta style="padding:.85rem 2rem">%s</button>
   </div>
 </div>
-<script src="%sassets/js/landing.js?v=14" defer></script>
+<script src="%sassets/js/landing.js?v=15" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
               p["campus"]["tel"], icon("phone",17), s["mbar_call"], s["mbar_cta"],
