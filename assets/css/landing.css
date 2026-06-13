@@ -380,3 +380,81 @@ html,body{overflow-x:clip}
   .logo-abi{font-size:1.7rem}
   .logo-words{font-size:.66rem}
 }
+
+/* ───────────────────────── Client revision pack (v13) ───────────────────────── */
+/* Bigger logo, one-line institute name */
+.logo-abi{font-size:2.5rem}
+.logo-words{white-space:nowrap;font-size:.95rem;line-height:1.1}
+/* Both phone numbers centered in the header, bigger + bolder */
+.hdr-phones{margin-left:auto;margin-right:auto;gap:1.1rem}
+.phone-pill{font-size:1.05rem;font-weight:700;border-width:2px;color:var(--blue)}
+.phone-pill .lbl{font-weight:800}
+/* Header "Request a Call" CTA — bolder, brighter */
+.btn-call{font-weight:800;box-shadow:0 5px 16px rgba(27,47,217,.45);white-space:nowrap}
+/* Bigger nav tabs + bigger EN/ES toggle */
+.mainnav{font-size:1.08rem;font-weight:600;gap:2rem}
+.mn-lang{font-size:1.05rem;font-weight:800;padding:.3rem .85rem}
+.mn-lang a{font-weight:800}
+/* All large CTAs bolder/brighter */
+.btn-lg{font-weight:800}
+.btn-gold{font-weight:800}
+.hero-value{display:inline-block;color:#fff;background:rgba(27,47,217,.35);border:1px solid rgba(255,255,255,.35);border-radius:50px;padding:.5rem 1.2rem;font-weight:700;font-size:.95rem;letter-spacing:.02em;margin:.2rem 0 1.1rem}
+/* ── Instructors page ── */
+.inst-hero{background:linear-gradient(120deg,var(--blue) 0%,var(--blue-dark) 100%);color:#fff;text-align:center;padding:3.6rem 1rem 3rem}
+.inst-hero h1{color:#fff;margin:.3rem 0 .6rem}
+.inst-hero .kicker{color:var(--gold-bright)}
+.inst-hero-sub{max-width:680px;margin:0 auto 1.4rem;opacity:.94;font-size:1.08rem}
+.inst-feature{display:grid;grid-template-columns:340px 1fr;gap:2.4rem;align-items:start;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:2rem;margin-top:1.4rem}
+.inst-feature h3{font-size:1.8rem;margin:.3rem 0 .8rem}
+.inst-stat-row{display:flex;gap:1.6rem;margin:.6rem 0 1rem}
+.inst-stat-row strong{display:block;font-size:1.9rem;color:var(--blue);font-weight:800;line-height:1}
+.inst-stat-row span{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:#6b7280}
+.inst-tag{display:inline-block;background:var(--blue-light,#eef0ff);color:var(--blue);font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;padding:.3rem .7rem;border-radius:6px}
+.inst-pill{display:inline-block;margin-top:.8rem;border:1px solid var(--line);border-radius:50px;padding:.3rem .9rem;font-weight:600;font-size:.82rem;color:#374151}
+.inst-diff-head{font-weight:800;text-transform:uppercase;letter-spacing:.05em;font-size:.82rem;color:var(--blue);margin:1rem 0 .5rem}
+.inst-diff{list-style:none;padding:0;margin:0;display:grid;gap:.5rem}
+.inst-diff li{position:relative;padding-left:1.5rem;font-size:.95rem;line-height:1.45}
+.inst-diff li::before{content:"✂";position:absolute;left:0;color:var(--gold,#caa14a)}
+.inst-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.4rem;margin-top:1.4rem}
+.inst-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.6rem;box-shadow:0 4px 18px rgba(15,20,32,.06);display:flex;flex-direction:column;gap:.6rem}
+.inst-card h3{font-size:1.25rem;margin:.4rem 0 .2rem}
+.inst-philosophy{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:1.4rem}
+.phil-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.6rem}
+.phil-num{font-family:'Oswald',sans-serif;font-size:1.6rem;font-weight:700;color:var(--gold-bright,#caa14a)}
+.phil-card h4{margin:.4rem 0 .4rem;font-size:1.1rem}
+.inst-reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin-top:1.4rem}
+.inst-reviews blockquote{background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:12px;padding:1.4rem;margin:0}
+.inst-reviews cite{display:block;margin-top:.8rem;font-style:normal;font-weight:700;color:var(--blue);font-size:.88rem}
+@media (max-width:760px){.inst-feature{grid-template-columns:1fr;padding:1.4rem}}
+.btn:hover{box-shadow:0 8px 22px rgba(27,47,217,.4)}
+/* Floating desktop sticky CTA */
+.desk-cta{position:fixed;right:24px;bottom:28px;z-index:90;display:inline-flex;align-items:center;gap:.55rem;background:var(--blue);color:#fff;font-weight:800;padding:.95rem 1.5rem;border-radius:50px;box-shadow:0 12px 32px rgba(27,47,217,.48);text-decoration:none;animation:deskPulse 2.6s ease-in-out infinite}
+.desk-cta:hover{background:var(--blue-dark);color:#fff}
+@keyframes deskPulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+/* Footer conversion CTA band */
+.foot-cta{background:linear-gradient(105deg,var(--blue) 0%,var(--blue-dark) 100%);color:#fff;text-align:center;padding:3.2rem 1rem}
+.foot-cta h3{font-family:'Oswald',sans-serif;font-size:2.1rem;text-transform:uppercase;letter-spacing:.02em;margin:0 0 .5rem}
+.foot-cta p{opacity:.92;margin:0 0 1.5rem;font-size:1.05rem}
+.foot-cta-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+/* Trust-signal strip */
+.trust-strip{background:#0f1420}
+.trust-strip .wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:2.4rem;padding:1.7rem 1rem}
+.trust-item{display:flex;flex-direction:column;align-items:center;color:#fff;min-width:118px}
+.trust-item strong{font-size:1.75rem;color:var(--gold-bright);font-weight:800;line-height:1}
+.trust-item span{font-size:.8rem;opacity:.85;text-transform:uppercase;letter-spacing:.07em;margin-top:.35rem;text-align:center}
+/* Page background photo treatment (subtle, behind all content) */
+body{background-image:linear-gradient(rgba(247,248,251,.94),rgba(247,248,251,.96)),url(../img/abi-nyc-003.jpg);background-size:cover;background-position:center;background-attachment:fixed}
+/* Mobile: keep hamburger pinned right, hide desktop sticky CTA */
+@media (max-width:1080px){
+  .hamburger{margin-left:auto;order:9}
+  .desk-cta{display:none}
+  .hdr-phones{margin-right:.6rem}
+}
+@media (max-width:560px){
+  .logo-abi{font-size:1.9rem}
+  .logo-words{font-size:.7rem;white-space:nowrap}
+  .foot-cta h3{font-size:1.6rem}
+  .trust-strip .wrap{gap:1.4rem}
+  .trust-item{min-width:30%}
+  .trust-item strong{font-size:1.4rem}
+}

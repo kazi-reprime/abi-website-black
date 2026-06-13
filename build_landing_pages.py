@@ -224,7 +224,8 @@ ABOUT_BX_ES = [
  "La experiencia práctica es central en nuestro programa — los estudiantes trabajan con una clientela diversa para refinar sus habilidades en condiciones reales. Los graduados se gradúan con un conjunto de habilidades versátil, listos para trabajar en cualquier barbería.",
  "Preparamos a los estudiantes para el Examen de la Junta del Estado de Nueva York, asegurando que estén completamente equipados para obtener su licencia de Barbero Maestro y lanzar sus carreras. Al completar, los estudiantes se conectan con nuestra oficina de empleo — ya sea su meta una barbería tradicional, trabajo independiente o abrir su propio negocio."]
 
-LOCATIONS = [
+LOCATIONS = []  # SEO location landing pages removed per client request (keep only Manhattan + Bronx campuses)
+_LOCATIONS_ARCHIVED = [
  {"slug":"barber-school-queens-ny","loc":"Queens, NY","h1":"Barber School for Queens Residents","campus":MANHATTAN,
   "title":"Barber School for Queens, NY | American Barber Institute",
   "desc":"Train as a licensed Master Barber at NYC's only dedicated barber school — a quick train ride from Queens to Midtown Manhattan. 500-hour program, flexible schedules, payment plans. Next class starts soon.",
@@ -285,12 +286,12 @@ LOCATIONS = [
 
 
 NAV = {
- "en": [("About","about.html"),("Programs","programs/index.html"),("Financial Aid","financial-aid.html"),
+ "en": [("About","about.html"),("Instructors","instructors.html"),("Programs","programs/index.html"),
         ("Admissions","admissions.html"),("$3 Haircuts","haircuts.html"),("Jobs","jobs.html"),
-        ("LOCATIONS", None),("Gallery","gallery.html"),("FAQs","faq.html"),("Contact","contact.html")],
- "es": [("Nosotros","about.html"),("Programas","programs/index.html"),("Ayuda Financiera","financial-aid.html"),
+        ("Gallery","gallery.html"),("FAQs","faq.html"),("Contact","contact.html")],
+ "es": [("Nosotros","about.html"),("Instructores","instructors.html"),("Programas","programs/index.html"),
         ("Admisiones","admissions.html"),("Cortes de $3","haircuts.html"),("Empleos","jobs.html"),
-        ("LOCATIONS", None),("Galería","gallery.html"),("Preguntas","faq.html"),("Contacto","contact.html")],
+        ("Galería","gallery.html"),("Preguntas","faq.html"),("Contacto","contact.html")],
 }
 NAV_LOC_LABEL = {"en": "Locations", "es": "Ubicaciones"}
 LOC_NAMES = [("Queens","barber-school-queens-ny"),("Brooklyn","barber-school-brooklyn-new-york"),
@@ -537,11 +538,10 @@ def header(p, s, pre):
   <div class="hdr-in">
     <a class="logo" href="%s" aria-label="American Barber Institute">
       <span class="logo-abi">ABI</span>
-      <span class="logo-words">American<br>Barber Institute<sup>®</sup></span>
+      <span class="logo-words">American Barber Institute<sup>®</sup></span>
     </a>
-    <div class="hdr-phones">%s
-      <a class="btn btn-blue btn-call" href="tel:%s">%s&nbsp;%s</a>
-    </div>
+    <div class="hdr-phones">%s</div>
+    <a class="btn btn-blue btn-call" href="tel:%s">%s&nbsp;%s</a>
     <button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
   <nav class="mainnav" aria-label="Main">%s
