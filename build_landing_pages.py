@@ -40,7 +40,7 @@ S = {
  "en": {
   "topbar": "Start your barber journey today for only $150 per week*",
   "limited": "🔥 LIMITED SEATS AVAILABLE! 🔥", "reserve": "Reserve Your Spot Today",
-  "next_start": "Next Start:", "call": "Call",
+  "next_start": "Next Start:", "call": "Request a Call",
   "form_sub": "Fill out the form and an Admissions Advisor will contact you.",
   "fn": "First Name", "ln": "Last Name", "ph": "Phone", "em": "Email",
   "q_loc": "Which School Location Would You Prefer To Attend?",
@@ -108,7 +108,7 @@ S = {
  "es": {
   "topbar": "Comienza tu carrera de barbero hoy por solo $150 por semana*",
   "limited": "🔥 ¡CUPOS LIMITADOS! 🔥", "reserve": "Reserva Tu Lugar Hoy",
-  "next_start": "Próximo Inicio:", "call": "Llamar",
+  "next_start": "Próximo Inicio:", "call": "Solicitar Llamada",
   "form_sub": "Completa el formulario y un asesor de admisiones te contactará.",
   "fn": "Nombre", "ln": "Apellido", "ph": "Teléfono", "em": "Correo Electrónico",
   "q_loc": "¿A cuál sede te gustaría asistir?",
