@@ -4,7 +4,7 @@
     {
       "name": "abi-site",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8642", "--directory", "/Users/kazimusharraf/Websites/abi-website"],
+      "runtimeArgs": ["-m", "http.server", "8642", "--directory", "/Users/mkazi/ABI/abi-website"],
       "port": 8642
     }
   ]

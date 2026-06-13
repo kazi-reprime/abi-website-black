@@ -393,36 +393,61 @@
 </section>
 
 <!-- ============ VISIT US / 360 WALKTHROUGH ============ -->
-<section class="visit360">
+<section class="visit360" id="virtual-tour">
   <div class="wrap">
     <p class="kicker" style="justify-content:flex-start">Step Inside</p>
-    <h2>Take a 360° Walkthrough</h2>
-    <p class="visit360-lead">A virtual tour is just the beginning — come see ABI for yourself. Step inside our real Midtown Manhattan and Bronx campuses.</p>
-    <div class="visit-grid">
-      <div class="visit-card">
-        <h3>Manhattan Campus</h3>
-        <div class="map-embed"><iframe title="Map of ABI Manhattan campus" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen src="https://maps.google.com/maps?q=48%20West%2039th%20Street%2C%20New%20York%2C%20NY%2010018&t=&z=16&ie=UTF8&iwloc=&output=embed"></iframe></div>
-        <p class="addr">48 West 39th Street, New York, NY 10018</p>
-        <a href="https://www.google.com/maps/place/48+W+39th+St,+New+York,+NY+10018" target="_blank" rel="noopener">Get Directions →</a>
-        <a class="vc-phone" href="tel:+12122902289">(212) 290-2289 (English)</a>
-        <a class="tour360" href="https://www.google.com/maps/place/48+W+39th+St,+New+York,+NY+10018" target="_blank" rel="noopener">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M2 12h20M12 2c2.5 2.7 4 6.3 4 10s-1.5 7.3-4 10c-2.5-2.7-4-6.3-4-10s1.5-7.3 4-10z"/></svg>
-          Take a 360° Walkthrough
-        </a>
+    <h2>Take a Virtual Tour</h2>
+    <p class="visit360-lead">Explore our campuses without leaving home. Drag inside the Manhattan Street View to look around, then see exactly where to find us in the Bronx — and when you're ready, come visit in person.</p>
+    <div class="tour-wrap" data-tour>
+      <div class="tour-tabs" role="tablist" aria-label="Choose a campus to tour">
+        <button class="tour-tab" role="tab" id="tab-manhattan" aria-controls="panel-manhattan" aria-selected="true">Manhattan</button>
+        <button class="tour-tab" role="tab" id="tab-bronx" aria-controls="panel-bronx" aria-selected="false">Bronx</button>
       </div>
-      <div class="visit-card">
-        <h3>Bronx Campus</h3>
-        <div class="map-embed"><iframe title="Map of ABI Bronx campus" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen src="https://maps.google.com/maps?q=121%20Westchester%20Square%2C%20Bronx%2C%20NY%2010461&t=&z=16&ie=UTF8&iwloc=&output=embed"></iframe></div>
-        <p class="addr">121 Westchester Square, Bronx, NY 10461</p>
-        <a href="https://www.google.com/maps/place/121+Westchester+Square,+Bronx,+NY+10461" target="_blank" rel="noopener">Get Directions →</a>
-        <a class="vc-phone" href="tel:+17186760640">(718) 676-0640 (Bronx)</a>
-        <a class="tour360" href="https://www.google.com/maps/place/121+Westchester+Square,+Bronx,+NY+10461" target="_blank" rel="noopener">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M2 12h20M12 2c2.5 2.7 4 6.3 4 10s-1.5 7.3-4 10c-2.5-2.7-4-6.3-4-10s1.5-7.3 4-10z"/></svg>
-          Take a 360° Walkthrough
-        </a>
+
+      <div class="tour-panel is-active" id="panel-manhattan" role="tabpanel" aria-labelledby="tab-manhattan">
+        <div class="tour-frame">
+          <iframe title="360° Street View of the American Barber Institute, 48 West 39th Street, Manhattan" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m0!3m2!1sen!2sus!4v1458840543737!6m8!1m7!1s4QuOJk2OYKYAAAQvOpz_bg!2m2!1d40.75240723376141!2d-73.98453581794098!3f215.04507302012684!4f-4.707608423426521!5f1.1924812503605782"></iframe>
+        </div>
+        <div class="tour-meta">
+          <span class="addr">48 West 39th Street, New York, NY 10018 · <a href="tel:+12122902289">(212) 290-2289</a></span>
+          <a class="btn btn-gold" href="https://www.google.com/maps/place/48+W+39th+St,+New+York,+NY+10018" target="_blank" rel="noopener">Get Directions</a>
+        </div>
+      </div>
+
+      <div class="tour-panel" id="panel-bronx" role="tabpanel" aria-labelledby="tab-bronx" hidden>
+        <div class="tour-frame">
+          <iframe title="Map of the American Barber Institute Bronx campus, 121 Westchester Square" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=121%20Westchester%20Square%2C%20Bronx%2C%20NY%2010461&t=&z=17&ie=UTF8&iwloc=&output=embed"></iframe>
+        </div>
+        <div class="tour-meta">
+          <span class="addr">121 Westchester Square, Bronx, NY 10461 · <a href="tel:+17186760640">(718) 676-0640</a></span>
+          <a class="btn btn-gold" href="https://www.google.com/maps/place/121+Westchester+Square,+Bronx,+NY+10461" target="_blank" rel="noopener">Open Street View &amp; Directions</a>
+        </div>
       </div>
     </div>
   </div>
+  <script>
+  (function(){
+    var root=document.querySelector('[data-tour]'); if(!root) return;
+    var tabs=root.querySelectorAll('.tour-tab');
+    function activate(tab){
+      tabs.forEach(function(t){
+        var sel=t===tab; t.setAttribute('aria-selected',sel?'true':'false');
+        var panel=document.getElementById(t.getAttribute('aria-controls'));
+        if(panel){ panel.classList.toggle('is-active',sel); if(sel){panel.removeAttribute('hidden');} else {panel.setAttribute('hidden','');} }
+      });
+    }
+    tabs.forEach(function(t,i){
+      t.addEventListener('click',function(){activate(t);});
+      t.addEventListener('keydown',function(e){
+        if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
+          e.preventDefault();
+          var next=tabs[(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length];
+          next.focus(); activate(next);
+        }
+      });
+    });
+  })();
+  </script>
 </section>
 
 <!-- ============ CONTACT FORM ============ -->
