@@ -447,6 +447,14 @@ html,body{overflow-x:clip}
 .tour360{display:inline-flex;align-items:center;gap:.6rem;background:var(--gold);color:#1a1205;font-weight:800;padding:.85rem 1.6rem;border-radius:50px;text-decoration:none;margin-top:1.2rem}
 .tour360:hover{filter:brightness(1.06)}
 @media (max-width:680px){.visit-grid{grid-template-columns:1fr}}
+/* Back-to-top button */
+.to-top{position:fixed;left:24px;bottom:28px;z-index:90;width:46px;height:46px;border-radius:50%;border:none;background:rgba(15,20,32,.82);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s ease,transform .25s ease,background .2s ease;box-shadow:0 8px 22px rgba(0,0,0,.3)}
+.to-top.show{opacity:1;visibility:visible;transform:translateY(0)}
+.to-top:hover{background:var(--blue)}
+@media (max-width:1080px){.to-top{bottom:70px;left:16px;width:42px;height:42px}}
+/* Micro-interaction polish */
+.trust-item strong{transition:transform .2s ease}
+.trust-strip .trust-item:hover strong{transform:scale(1.08)}
 .btn:hover{box-shadow:0 8px 22px rgba(27,47,217,.4)}
 /* Floating desktop sticky CTA */
 .desk-cta{position:fixed;right:24px;bottom:28px;z-index:90;display:inline-flex;align-items:center;gap:.55rem;background:var(--blue);color:#fff;font-weight:800;padding:.95rem 1.5rem;border-radius:50px;box-shadow:0 12px 32px rgba(27,47,217,.48);text-decoration:none;animation:deskPulse 2.6s ease-in-out infinite}
