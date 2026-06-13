@@ -460,7 +460,7 @@ html,body{overflow-x:clip}
 /* Per-page background image (different best photo per page) */
 body{background-image:linear-gradient(rgba(244,246,250,.90),rgba(244,246,250,.93)),var(--page-bg,url(../img/abi-nyc-001.jpg))!important;background-size:cover;background-position:center;background-attachment:fixed}
 /* Vivid, visible page-hero photo per page */
-.page-hero{position:relative;background:linear-gradient(120deg,rgba(15,20,32,.58),rgba(27,47,217,.34)),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center;color:#fff;padding:3.4rem 1rem 3rem;border:none}
+.page-hero{position:relative;background:linear-gradient(115deg,rgba(22,16,8,.60) 0%,rgba(120,80,30,.30) 52%,rgba(27,47,217,.20) 100%),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center;color:#fff;padding:3.4rem 1rem 3rem;border:none}
 /* P2: avoid fixed-attachment jank/cost on mobile; U2: more visible photos */
 @media (max-width:768px){
   body{background-attachment:scroll!important}
@@ -498,6 +498,30 @@ section:not(.dark):not(.alt):not(.trust-strip):not(.visit360):not(.inst-hero):no
 .lb-count{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);color:#fff;font-weight:700;letter-spacing:.05em;background:rgba(0,0,0,.4);padding:.35rem 1rem;border-radius:50px}
 .gallery-grid a{cursor:zoom-in}
 @media (max-width:560px){.lb-prev{left:6px}.lb-next{right:6px}.lightbox button{width:42px;height:42px}}
+/* ═══════════ v18 — embedded maps, animated logo, glow/3D ═══════════ */
+/* Google Maps virtual-tour embeds */
+.map-embed{margin:.2rem 0 1rem;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.18);box-shadow:0 12px 32px rgba(0,0,0,.4)}
+.map-embed iframe{width:100%;height:240px;border:0;display:block;filter:saturate(1.08) contrast(1.02)}
+/* Interactive, continuously rolling barber-pole logo */
+.logo-pole g{animation:barberRoll 1.7s linear infinite}
+@keyframes barberRoll{from{transform:translateY(-12px)}to{transform:translateY(0)}}
+.logo{transition:transform .25s ease}
+.logo:hover{transform:scale(1.03)}
+.logo:hover .logo-pole{filter:drop-shadow(0 0 7px rgba(27,47,217,.55))}
+.logo:hover .logo-pole g{animation-duration:.7s}
+/* Glow / 3D polish */
+.btn-gold{position:relative}
+.btn-gold:hover{transform:translateY(-2px) scale(1.02)}
+.trust-item:hover strong{text-shadow:0 0 16px rgba(229,160,25,.6)}
+.cta-band h2,.foot-cta h3{text-shadow:0 2px 18px rgba(0,0,0,.25)}
+.card,.quote,.inst-card,.plan,.visit-card{transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease}
+.desk-cta{box-shadow:0 12px 32px rgba(27,47,217,.5),0 0 0 0 rgba(27,47,217,.4)}
+.desk-cta:hover{box-shadow:0 14px 38px rgba(27,47,217,.65)}
+/* Respect reduced-motion */
+@media (prefers-reduced-motion:reduce){
+  .logo-pole g{animation:none}
+  .desk-cta{animation:none}
+}
 .btn:hover{box-shadow:0 8px 22px rgba(27,47,217,.4)}
 /* Floating desktop sticky CTA */
 .desk-cta{position:fixed;right:24px;bottom:28px;z-index:90;display:inline-flex;align-items:center;gap:.55rem;background:var(--blue);color:#fff;font-weight:800;padding:.95rem 1.5rem;border-radius:50px;box-shadow:0 12px 32px rgba(27,47,217,.48);text-decoration:none;animation:deskPulse 2.6s ease-in-out infinite}

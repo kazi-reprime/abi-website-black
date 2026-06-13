@@ -96,7 +96,7 @@ S = {
   "exit_cta": "Reserve My Spot",
   "f_about": "New York's only dedicated barber school — changing lives for over 30 years. Licensed by the New York State Department of Education. Est. 1996.",
   "f_visit": "Visit Us", "f_links": "Quick Links",
-  "f_linkitems": [("Programs","/programs/index.html"),("Financial Aid","/financial-aid.html"),
+  "f_linkitems": [("Programs","/programs/index.html"),("Admissions","/admissions.html"),
                   ("Veterans · GI Bill®","/veterans.html"),("Admissions","/admissions.html"),
                   ("$3 Haircuts","/haircuts.html"),("Contact","/contact.html")],
   "gibill": "GI BILL® is a registered trademark of the U.S. Department of Veterans Affairs (VA).",
@@ -164,7 +164,7 @@ S = {
   "exit_cta": "Reservar Mi Lugar",
   "f_about": "La única escuela de barbería dedicada de Nueva York — cambiando vidas por más de 30 años. Licenciada por el Departamento de Educación del Estado de NY. Est. 1996.",
   "f_visit": "Visítanos", "f_links": "Enlaces Rápidos",
-  "f_linkitems": [("Programas","/programs/index.html"),("Ayuda Financiera","/financial-aid.html"),
+  "f_linkitems": [("Programas","/programs/index.html"),("Admisiones","/admissions.html"),
                   ("Veteranos · GI Bill®","/veterans.html"),("Admisiones","/admissions.html"),
                   ("Cortes de $3","/haircuts.html"),("Contacto","/contact.html")],
   "gibill": "GI BILL® es una marca registrada del Departamento de Asuntos de Veteranos de EE. UU. (VA).",
@@ -495,7 +495,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=17">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=18">
 <script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
 </head>
@@ -935,7 +935,7 @@ def footer(p, s, pre):
     <button class="btn btn-blue" data-exit-cta style="padding:.85rem 2rem">%s</button>
   </div>
 </div>
-<script src="%sassets/js/landing.js?v=17" defer></script>
+<script src="%sassets/js/landing.js?v=18" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
               p["campus"]["tel"], icon("phone",17), s["mbar_call"], s["mbar_cta"],

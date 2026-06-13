@@ -38,11 +38,11 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{root}assets/css/style.css?v=17">
-<link rel="stylesheet" href="{root}assets/css/brand.css?v=17">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=17">
+<link rel="stylesheet" href="{root}assets/css/style.css?v=18">
+<link rel="stylesheet" href="{root}assets/css/brand.css?v=18">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=18">
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
-<link rel="stylesheet" href="{root}assets/css/effects.css?v=17">
+<link rel="stylesheet" href="{root}assets/css/effects.css?v=18">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 {schema}
 </head>
@@ -144,7 +144,6 @@ TEMPLATE = """<!DOCTYPE html>
         <h4>Quick Links</h4>
         <ul>
           <li><a href="{root}admissions.html">Admissions &amp; Schedule</a></li>
-          <li><a href="{root}financial-aid.html">Payment Plans</a></li>
           <li><a href="{root}veterans.html">Veterans · GI Bill®</a></li>
           <li><a href="{root}access-vr.html">ACCESS-VR</a></li>
           <li><a href="{root}haircuts.html">$3 Haircut Menu</a></li>
@@ -188,9 +187,9 @@ TEMPLATE = """<!DOCTYPE html>
 </div>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script src="{root}assets/js/main.js?v=17" defer></script>
-<script src="{root}assets/js/effects.js?v=17" defer></script>
-<script src="{root}assets/js/landing.js?v=17" defer></script>
+<script src="{root}assets/js/main.js?v=18" defer></script>
+<script src="{root}assets/js/effects.js?v=18" defer></script>
+<script src="{root}assets/js/landing.js?v=18" defer></script>
 </body>
 </html>
 """
@@ -290,10 +289,6 @@ PAGES = [
     ("admissions.html", "admissions.html",
      "Admissions, Requirements & Schedule | American Barber Institute",
      "How to get started at ABI: entrance requirements, class schedules (morning, afternoon, weekend), holiday calendar, and the 4 simple steps to enroll. Classes start monthly.",
-     "en", []),
-    ("financial-aid.html", "financial-aid.html",
-     "Financial Aid | NYSDOL Grant, ACCESS-VR & GI Bill® | American Barber Institute",
-     "Financial assistance for those who qualify: NYSDOL Grant, ACCESS-VR, Veterans GI Bill®, and weekly payment plans on every program. Pay while you attend school.",
      "en", []),
     ("veterans.html", "veterans.html",
      "Veterans Program — GI Bill® Approved Barber Training | American Barber Institute",
@@ -404,7 +399,7 @@ def faq_schema_from(body):
 PAGE_BG = {
     'classic-home.html': 'abi-nyc-003.jpg', 'about.html': 'abi-nyc-007.jpg',
     'instructors.html': 'abi-nyc-012.png', 'admissions.html': 'abi-nyc-014.jpg',
-    'financial-aid.html': 'abi-nyc-018.jpg', 'veterans.html': 'abi-nyc-021.jpeg',
+    'veterans.html': 'abi-nyc-021.jpeg',
     'access-vr.html': 'abi-nyc-022.jpg', 'haircuts.html': 'abi-nyc-031.jpg',
     'jobs.html': 'abi-nyc-033.jpg', 'gallery.html': 'abi-nyc-035.jpg',
     'faq.html': 'abi-nyc-036.jpg', 'contact.html': 'abi-nyc-037.jpg',
