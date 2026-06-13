@@ -38,11 +38,11 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{root}assets/css/style.css?v=19">
-<link rel="stylesheet" href="{root}assets/css/brand.css?v=19">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=19">
+<link rel="stylesheet" href="{root}assets/css/style.css?v=20">
+<link rel="stylesheet" href="{root}assets/css/brand.css?v=20">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=20">
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
-<link rel="stylesheet" href="{root}assets/css/effects.css?v=19">
+<link rel="stylesheet" href="{root}assets/css/effects.css?v=20">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 {schema}
 </head>
@@ -211,9 +211,9 @@ TEMPLATE = """<!DOCTYPE html>
 </div>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script src="{root}assets/js/main.js?v=19" defer></script>
-<script src="{root}assets/js/effects.js?v=19" defer></script>
-<script src="{root}assets/js/landing.js?v=19" defer></script>
+<script src="{root}assets/js/main.js?v=20" defer></script>
+<script src="{root}assets/js/effects.js?v=20" defer></script>
+<script src="{root}assets/js/landing.js?v=20" defer></script>
 </body>
 </html>
 """
@@ -422,10 +422,10 @@ def faq_schema_from(body):
 
 PAGE_BG = {
     'classic-home.html': 'abi-nyc-003.jpg', 'about.html': 'abi-nyc-007.jpg',
-    'instructors.html': 'abi-nyc-012.jpg', 'admissions.html': 'abi-nyc-014.jpg',
+    'instructors.html': 'abi-nyc-008.jpg', 'admissions.html': 'abi-nyc-014.jpg',
     'veterans.html': 'abi-nyc-021.jpeg',
     'access-vr.html': 'abi-nyc-022.jpg', 'haircuts.html': 'abi-nyc-031.jpg',
-    'jobs.html': 'abi-nyc-033.jpg', 'gallery.html': 'abi-nyc-035.jpg',
+    'jobs.html': 'abi-nyc-018.jpg', 'gallery.html': 'abi-nyc-035.jpg',
     'faq.html': 'abi-nyc-036.jpg', 'contact.html': 'abi-nyc-037.jpg',
     'resources.html': 'abi-nyc-038.jpg', 'privacy.html': 'abi-nyc-004.jpg',
     'programs/index.html': 'abi-nyc-005.jpg', 'programs/500-hour-master-barber.html': 'abi-nyc-006.jpg',
