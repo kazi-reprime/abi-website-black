@@ -683,3 +683,61 @@ section.alt{background:#eef2f8}
 @media (prefers-reduced-motion:reduce){
   .inst-avatar,.inst-card:hover .inst-avatar,.btn-gold,.btn-blue,.tour-panel.is-active{transition:none;animation:none;transform:none}
 }
+
+/* ============================================================
+   REV v31 — SPLASH/LANDING LEGIBILITY + LOGO UPGRADE
+   Goal: every line of text clearly visible & glowing over the
+   hero image and across all color themes; logo more prominent.
+   ============================================================ */
+
+/* --- Hero: stronger scrim so text never sits over a bright patch --- */
+.hero-bg{opacity:.42}
+.hero-grad{
+  background:
+    linear-gradient(90deg,rgba(6,8,14,.92) 0%,rgba(6,8,14,.66) 50%,rgba(6,8,14,.42) 100%),
+    linear-gradient(0deg,rgba(6,8,14,.55) 0%,rgba(6,8,14,.10) 40%);
+}
+@media (max-width:900px){
+  .hero-grad{background:linear-gradient(180deg,rgba(6,8,14,.90) 0%,rgba(6,8,14,.70) 100%)}
+}
+
+/* --- Hero headline + subhead: bright + glow --- */
+.hero-h1{color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.65),0 1px 3px rgba(0,0,0,.8)}
+.hero-h1 .accent{color:#7d8bff;filter:none;text-shadow:0 0 24px rgba(80,110,255,.85),0 2px 6px rgba(0,0,0,.6)}
+.hero-script{color:#fff;text-shadow:0 0 26px rgba(80,110,255,.55),0 2px 6px rgba(0,0,0,.6)}
+.hero-script::after{background:#7d8bff;filter:none;box-shadow:0 0 14px rgba(80,110,255,.9)}
+.hero-sub{color:#f4f6ff;text-shadow:0 1px 10px rgba(0,0,0,.7)}
+.hero-sub b{color:#fff}
+
+/* --- Hero feature bullets: explicit bright white + glow + crisp dividers --- */
+.hero .feature,.hero .feature span{color:#fff!important;font-weight:600;text-shadow:0 1px 8px rgba(0,0,0,.7)}
+.hero .feature{border-color:rgba(255,255,255,.4)!important}
+.hero .feature svg{color:#9aa6ff!important;filter:drop-shadow(0 0 6px rgba(120,140,255,.8))!important}
+
+/* --- Trust band: force opaque high-contrast surface (beat the translucent section rule) --- */
+section.trust{background:#0f1420!important;border-top:1px solid rgba(255,255,255,.08);backdrop-filter:none!important}
+.trust-item{color:#fff!important;font-weight:700;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.trust-item+.trust-item{border-left:1px solid rgba(255,255,255,.18)}
+.trust-item svg{color:#f4c44a!important;filter:drop-shadow(0 0 6px rgba(244,196,74,.7))}
+
+/* --- Skills ticker: solid dark band, bright legible text --- */
+.ticker{background:#0b0e16;color:#fff}
+.ticker span{font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.ticker .sc{color:#f4c44a;filter:drop-shadow(0 0 5px rgba(244,196,74,.7))}
+
+/* --- Stats band: keep accent bg but guarantee white reads on every theme --- */
+.stats{position:relative}
+.stats::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,8,14,.30),rgba(6,8,14,.42));pointer-events:none}
+.stats-in{position:relative;z-index:1}
+.stat b{color:#fff!important;text-shadow:0 2px 14px rgba(0,0,0,.55),0 0 18px rgba(255,255,255,.12)}
+.stat span{color:#fff!important;opacity:1;font-weight:600;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+
+/* --- Start pill + urgency: keep readable on any theme --- */
+.startpill{background:rgba(255,255,255,.92)!important;color:#10131a}
+.startpill b,.startpill .dot{color:#1b2fd9}
+
+/* --- LOGO upgrade: bigger + always-on glow so it pops on any header --- */
+.logo-img{height:60px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.28))}
+.logo:hover .logo-img{transform:scale(1.05);filter:drop-shadow(0 4px 16px rgba(27,63,217,.55))}
+@media (max-width:768px){.logo-img{height:48px}}
+@media (max-width:400px){.logo-img{height:40px}}

@@ -495,7 +495,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=30">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=31">
 <script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
 </head>
@@ -633,7 +633,7 @@ def sec_stats(p, s):
     es = p["lang"] == "es"
     data = [(30,"+","Años en el Negocio" if es else "Years in Business"),
             (10000,"+","Graduados" if es else "Graduates"),
-            (80,"%","Tasa de Graduación" if es else "Graduation Rate"),
+            (100,"+","Reseñas de Google" if es else "Google Reviews"),
             (4,"","Meses Para Tu Licencia" if es else "Months To Get Licensed")]
     cells = "".join('<div class="stat"><b data-count="%d" data-suffix="%s">0</b><span>%s</span></div>' % d for d in data)
     return '<section class="stats"><div class="container stats-in">%s</div></section>' % cells
