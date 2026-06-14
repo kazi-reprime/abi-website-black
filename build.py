@@ -38,11 +38,11 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{root}assets/css/style.css?v=22">
-<link rel="stylesheet" href="{root}assets/css/brand.css?v=22">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=22">
+<link rel="stylesheet" href="{root}assets/css/style.css?v=23">
+<link rel="stylesheet" href="{root}assets/css/brand.css?v=23">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=23">
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
-<link rel="stylesheet" href="{root}assets/css/effects.css?v=22">
+<link rel="stylesheet" href="{root}assets/css/effects.css?v=23">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 {schema}
 </head>
@@ -211,9 +211,9 @@ TEMPLATE = """<!DOCTYPE html>
 </div>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script src="{root}assets/js/main.js?v=22" defer></script>
-<script src="{root}assets/js/effects.js?v=22" defer></script>
-<script src="{root}assets/js/landing.js?v=22" defer></script>
+<script src="{root}assets/js/main.js?v=23" defer></script>
+<script src="{root}assets/js/effects.js?v=23" defer></script>
+<script src="{root}assets/js/landing.js?v=23" defer></script>
 </body>
 </html>
 """
@@ -478,8 +478,10 @@ def build():
             written.append(out)
     # sitemap
     written += ['index.html', 'es/index.html', '500-hours-master-barber-program-landing-page/index.html', 'es/500-hours-master-barber-program-landing-page/index.html', 'master-barber-program-bronx/index.html', 'es/master-barber-program-bronx/index.html', 'splash-page-1/index.html', 'splash-page-2/index.html', 'es/splash-page-1/index.html', 'es/splash-page-2/index.html']
+    import datetime
+    _today = datetime.date.today().isoformat()
     urls = '\n'.join(
-        f'  <url><loc>{SITE_URL}/{o}</loc></url>'.replace('/index.html', '/')
+        (f'  <url><loc>{SITE_URL}/{o}</loc><lastmod>{_today}</lastmod></url>').replace('/index.html', '/')
         for o in written)
     open(os.path.join(ROOT, 'sitemap.xml'), 'w').write(
         f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n')

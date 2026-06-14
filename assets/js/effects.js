@@ -12,7 +12,7 @@
   document.body.appendChild(bar);
 
   /* ---------- Header morph ---------- */
-  var head = document.querySelector('.site-head');
+  var head = document.querySelector('.hdr');
 
   /* ---------- Parallax targets ---------- */
   var heroBg = document.querySelector('.hero-bg');
