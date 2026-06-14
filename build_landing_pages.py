@@ -495,7 +495,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=24">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=25">
 <script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
 </head>
@@ -537,31 +537,7 @@ def header(p, s, pre):
 <header class="hdr">
   <div class="hdr-in">
     <a class="logo" href="%s" aria-label="American Barber Institute — home" title="American Barber Institute">
-      <svg class="logo-mark" width="44" height="50" viewBox="0 0 44 50" fill="none" aria-hidden="true" focusable="false">
-        <g class="logo-ruler">
-          <rect x="3" y="4" width="9" height="42" rx="2" fill="#0f1116"/>
-          <g stroke="#f4c44a" stroke-width="1.1" stroke-linecap="round">
-            <line x1="4.6" y1="10" x2="10.4" y2="10"/><line x1="6.4" y1="14" x2="10.4" y2="14"/>
-            <line x1="4.6" y1="18" x2="10.4" y2="18"/><line x1="6.4" y1="22" x2="10.4" y2="22"/>
-            <line x1="4.6" y1="26" x2="10.4" y2="26"/><line x1="6.4" y1="30" x2="10.4" y2="30"/>
-            <line x1="4.6" y1="34" x2="10.4" y2="34"/><line x1="6.4" y1="38" x2="10.4" y2="38"/>
-          </g>
-        </g>
-        <defs><clipPath id="abipole"><rect x="24" y="7" width="14" height="36" rx="7"/></clipPath></defs>
-        <rect x="24" y="7" width="14" height="36" rx="7" fill="#fff"/>
-        <g class="logo-stripes" clip-path="url(#abipole)" stroke-width="5">
-          <path d="M14 18 L38 -6" stroke="#e11d2a"/><path d="M14 30 L42 2" stroke="#1b3fd9"/>
-          <path d="M14 42 L46 10" stroke="#e11d2a"/><path d="M18 52 L50 20" stroke="#1b3fd9"/>
-          <path d="M26 56 L54 28" stroke="#e11d2a"/>
-        </g>
-        <rect x="24" y="7" width="14" height="36" rx="7" fill="none" stroke="#aab2c0" stroke-width="1.2"/>
-        <rect x="22" y="4" width="18" height="5" rx="2.5" fill="#c0c7d2"/>
-        <rect x="22" y="41" width="18" height="5" rx="2.5" fill="#c0c7d2"/>
-      </svg>
-      <span class="logo-text">
-        <span class="logo-abi">ABI</span>
-        <span class="logo-words">American Barber Institute<sup>®</sup></span>
-      </span>
+      <img class="logo-img" src="/assets/img/abi-logo.gif" alt="American Barber Institute" width="385" height="99" fetchpriority="high">
     </a>
     <div class="hdr-phones">%s</div>
     <button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -957,8 +933,8 @@ def footer(p, s, pre):
     <button class="btn btn-blue" data-exit-cta style="padding:.85rem 2rem">%s</button>
   </div>
 </div>
-<script src="/assets/js/effects.js?v=24" defer></script>
-<script src="%sassets/js/landing.js?v=24" defer></script>
+<script src="/assets/js/effects.js?v=25" defer></script>
+<script src="%sassets/js/landing.js?v=25" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
               p["campus"]["tel"], icon("phone",17), s["mbar_call"], s["mbar_cta"],
