@@ -61,13 +61,13 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=30">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=37">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=38">
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 {schema}
 </head>
-<body style="--page-bg:url('{root}assets/img/{pagebg}')">
+<body style="--page-bg:url('/assets/img/{pagebg}')">
 <a class="skip" href="#main">Skip to content</a>
 
 <div class="topbar">Start your barber journey today for only $150 per week*<span class="theme-dots" role="group" aria-label="Color theme"><button class="tdot tdot-blue" data-set-theme="blue" aria-label="Blue theme" title="Blue"></button><button class="tdot tdot-midnight" data-set-theme="midnight" aria-label="Midnight theme" title="Midnight"></button><button class="tdot tdot-classic" data-set-theme="classic" aria-label="Classic theme" title="Classic"></button><button class="tdot tdot-emerald" data-set-theme="emerald" aria-label="Emerald theme" title="Emerald"></button><button class="tdot tdot-noir" data-set-theme="noir" aria-label="Noir theme" title="Noir"></button></span></div>

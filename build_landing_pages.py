@@ -513,7 +513,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=37">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=38">
 <script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
 </head>
@@ -629,7 +629,7 @@ def hero(p, s, pre):
     h1b = '<span class="accent">%s</span><br>' % p["h1b"] if p["h1b"] else ""
     return """
 <section class="hero">
-  <div class="hero-bg" style="background-image:url('%sassets/img/%s'),url('%sassets/img/about.jpg'),url('https://abi-website-black.vercel.app/assets/img/about.jpg')"></div>
+  <div class="hero-bg" style="background-image:url('/assets/img/%s'),url('/assets/img/about.jpg')"></div>
   <div class="hero-grad"></div>
   <div class="container hero-in">
     <div class="hero-copy">
@@ -641,7 +641,7 @@ def hero(p, s, pre):
   </div>
 </section>
 <section class="trust"><div class="container trust-in">%s</div></section>""" % (
-        pre, p["hero_img"], pre,
+        p["hero_img"],
         p["h1a"], h1b, p["script"], p["sub"], feats, lead_form(p, s),
         "".join('<div class="trust-item">%s<span>%s</span></div>' % (icon(i,30), t) for i, t in s["trust"]))
 
