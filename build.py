@@ -61,7 +61,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=30">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=40">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=41">
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
@@ -86,7 +86,7 @@ TEMPLATE = """<!DOCTYPE html>
   <nav class="mainnav" aria-label="Main"><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}schedule.html">Schedule</a><a href="{root}admissions.html">Admissions</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}jobs.html">Jobs</a><a href="{root}gallery.html">Gallery</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a>
     <span class="mn-lang"><a href="{root}index.html" style="color:var(--blue)">EN</a> | <a href="{root}es/index.html">ES</a></span>
   </nav>
-  <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}schedule.html">Schedule</a><a href="{root}admissions.html">Admissions</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}jobs.html">Jobs</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
+  <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}schedule.html">Schedule</a><a href="{root}admissions.html">Admissions</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}jobs.html">Jobs</a><a href="{root}partners.html">Partners</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
 </header>
 
 <main id="main">
@@ -149,6 +149,7 @@ TEMPLATE = """<!DOCTYPE html>
           <li><a href="{root}haircuts.html">Haircuts</a></li>
           <li><a href="{root}resources.html">Resources</a></li>
           <li><a href="{root}jobs.html">Job Placement</a></li>
+          <li><a href="{root}partners.html">Partners</a></li>
           <li><a href="{root}gallery.html">Gallery</a></li>
           <li><a href="{root}blog/index.html">Blog</a></li>
           <li><a href="{root}contact.html">Contact</a></li>
@@ -343,6 +344,10 @@ PAGES = [
      "Barbering Resources & State Licensing Boards | American Barber Institute",
      "Regulatory agencies, state-by-state barber and cosmetology licensing boards, education resources and industry associations.",
      "en", []),
+    ("partners.html", "partners.html",
+     "Our Partners | American Barber Institute",
+     "Where ABI graduates work: Levels Barbershop, Diamond Fadez, Untouchable Cutz, Expo Gentlemen Salon, Otis & Finn and the NYC Barber Shop Museum. Real shops, real careers.",
+     "en", []),
     ("404.html", "404.html",
      "Page Not Found | American Barber Institute",
      "The page you're looking for doesn't exist. Return to American Barber Institute's homepage or browse our barber programs.",
@@ -427,7 +432,7 @@ PAGE_BG = {
     'veterans.html': 'abi-students-188.jpg',
     'access-vr.html': 'abi-students-025.jpg', 'haircuts.html': 'abi-students-020.jpg',
     'jobs.html': 'abi-students-236.jpg', 'gallery.html': 'abi-students-105.jpg',
-    'faq.html': 'abi-students-125.jpg', 'contact.html': 'abi-nyc-032.jpg',
+    'faq.html': 'abi-students-125.jpg', 'contact.html': 'abi-nyc-032.jpg', 'partners.html': 'abi-students-105.jpg',
     'resources.html': 'abi-students-190.jpg', 'privacy.html': 'abi-nyc-013.jpg',
     'programs/index.html': 'abi-students-107.jpg', 'programs/500-hour-master-barber.html': 'abi-students-139.jpg',
     'programs/200-hour-barber-fundamentals.html': 'abi-students-125.jpg', 'programs/50-hour-barber-refresher.html': 'abi-students-031.jpg',

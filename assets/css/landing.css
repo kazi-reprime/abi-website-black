@@ -934,3 +934,29 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .ftr-in{text-align:center}
   .ftr .socials,.ftr-in .socials{justify-content:center}
 }
+
+/* ============================================================
+   REV v41 — PARTNERS PAGE
+   ============================================================ */
+.partner-row{align-items:center;gap:2.6rem}
+.partner-row.reverse{direction:rtl}
+.partner-row.reverse > *{direction:ltr}
+.partner-media{display:flex;align-items:center;justify-content:center;border-radius:18px;overflow:hidden;min-height:240px;background:#0f1420;box-shadow:0 10px 30px rgba(15,20,32,.18)}
+.partner-media img{width:100%;height:100%;object-fit:cover;display:block}
+.partner-media.partner-logo{background:#fff;padding:2.2rem}
+.partner-media.partner-logo img{width:auto;max-width:80%;max-height:200px;object-fit:contain}
+.partner-tag{display:inline-block;font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);background:rgba(27,47,217,.10);border:1px solid rgba(27,47,217,.25);padding:.34rem .8rem;border-radius:999px;margin-bottom:.7rem}
+.partner-body h3{font-size:1.7rem;margin:.1rem 0 .6rem}
+.partner-body p{color:var(--ink-soft);line-height:1.6;margin-bottom:.7rem}
+.partner-tagline{font-style:italic;font-weight:600;color:var(--ink)!important}
+.partner-meta{font-size:.92rem;color:var(--ink-soft)}
+.partner-meta a{color:var(--blue);font-weight:600;text-decoration:none}
+.partner-meta a:hover{text-decoration:underline}
+@media (max-width:760px){
+  .partner-row{gap:1.3rem}
+  .partner-row.reverse{direction:ltr}
+  .partner-media{min-height:180px}
+  .partner-media.partner-logo{padding:1.5rem}
+  .partner-media.partner-logo img{max-height:140px}
+  .partner-body h3{font-size:1.4rem}
+}
