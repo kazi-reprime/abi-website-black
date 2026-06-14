@@ -61,7 +61,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=30">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=36">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=37">
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
@@ -417,18 +417,20 @@ def faq_schema_from(body):
                       "acceptedAnswer": {"@type": "Answer", "text": clean_a}})
     return {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": items}
 
+# Distinct, strong per-page background image (used by the page-hero banner and
+# the subtle full-page background). Each page gets its own image.
 PAGE_BG = {
-    'classic-home.html': 'abi-nyc-003.jpg', 'about.html': 'abi-nyc-007.jpg',
-    'instructors.html': 'abi-nyc-008.jpg', 'admissions.html': 'abi-nyc-014.jpg', 'schedule.html': 'abi-nyc-016.jpg',
-    'veterans.html': 'abi-nyc-021.jpeg',
-    'access-vr.html': 'abi-nyc-022.jpg', 'haircuts.html': 'abi-nyc-031.jpg',
-    'jobs.html': 'abi-nyc-018.jpg', 'gallery.html': 'abi-nyc-035.jpg',
-    'faq.html': 'abi-nyc-036.jpg', 'contact.html': 'abi-nyc-037.jpg',
-    'resources.html': 'abi-nyc-038.jpg', 'privacy.html': 'abi-nyc-004.jpg',
-    'programs/index.html': 'abi-nyc-005.jpg', 'programs/500-hour-master-barber.html': 'abi-nyc-006.jpg',
-    'programs/200-hour-barber-fundamentals.html': 'abi-nyc-008.jpg', 'programs/50-hour-barber-refresher.html': 'abi-nyc-009.jpg',
+    'classic-home.html': 'abi-students-001.jpg', 'about.html': 'abi-nyc-007.jpg',
+    'instructors.html': 'abi-students-024.jpg', 'admissions.html': 'abi-students-005.jpg', 'schedule.html': 'abi-students-017.jpg',
+    'veterans.html': 'abi-students-038.jpg',
+    'access-vr.html': 'abi-students-080.jpg', 'haircuts.html': 'abi-students-031.jpg',
+    'jobs.html': 'abi-students-056.jpg', 'gallery.html': 'abi-students-095.jpg',
+    'faq.html': 'abi-students-042.jpg', 'contact.html': 'abi-nyc-037.jpg',
+    'resources.html': 'abi-students-029.jpg', 'privacy.html': 'abi-nyc-004.jpg',
+    'programs/index.html': 'abi-students-009.jpg', 'programs/500-hour-master-barber.html': 'abi-nyc-006.jpg',
+    'programs/200-hour-barber-fundamentals.html': 'abi-students-015.jpg', 'programs/50-hour-barber-refresher.html': 'abi-students-018.jpg',
     'programs/scalp-micro-pigmentation.html': 'abi-nyc-010.jpg', 'programs/contagious-diseases.html': 'abi-nyc-013.jpg',
-    'programs/license-transfer.html': 'abi-nyc-015.jpg', 'blog/index.html': 'abi-nyc-016.jpg',
+    'programs/license-transfer.html': 'abi-nyc-015.jpg', 'blog/index.html': 'abi-students-045.jpg',
 }
 _DEFAULT_BG = 'abi-nyc-001.jpg'
 

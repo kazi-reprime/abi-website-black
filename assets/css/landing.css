@@ -523,7 +523,7 @@ html,body{overflow-x:clip}
 /* ═══════════ UI/UX upgrade — glassmorphism, vivid backgrounds, brighter CTAs (v15) ═══════════ */
 /* Per-page background image (different best photo per page) */
 body{background:#eef2f7}
-body::before{content:"";position:fixed;inset:0;z-index:-2;background:linear-gradient(rgba(238,242,247,.62),rgba(238,242,247,.74)),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center;background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:linear-gradient(rgba(236,240,246,.50),rgba(236,240,246,.64)),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center}
 /* Vivid, visible page-hero photo per page — warm/light, no cold blue cast */
 .page-hero{position:relative;overflow:hidden;background:linear-gradient(100deg,rgba(8,10,14,.82) 0%,rgba(8,10,14,.66) 50%,rgba(8,10,14,.5) 100%),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center 28%;background-repeat:no-repeat;color:#fff;padding:3.4rem 1rem 3rem;border:none}
 /* keep hero text crisp over the clearer photo */
