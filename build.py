@@ -38,11 +38,11 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{root}assets/css/style.css?v=28">
-<link rel="stylesheet" href="{root}assets/css/brand.css?v=28">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=28">
+<link rel="stylesheet" href="{root}assets/css/style.css?v=29">
+<link rel="stylesheet" href="{root}assets/css/brand.css?v=29">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=29">
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
-<link rel="stylesheet" href="{root}assets/css/effects.css?v=28">
+<link rel="stylesheet" href="{root}assets/css/effects.css?v=29">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 {schema}
 </head>
@@ -64,7 +64,7 @@ TEMPLATE = """<!DOCTYPE html>
   <nav class="mainnav" aria-label="Main"><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}schedule.html">Schedule</a><a href="{root}admissions.html">Admissions</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}jobs.html">Jobs</a><a href="{root}gallery.html">Gallery</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a>
     <span class="mn-lang"><a href="{root}index.html" style="color:var(--blue)">EN</a> | <a href="{root}es/index.html">ES</a></span>
   </nav>
-  <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}schedule.html">Schedule</a><a href="{root}admissions.html">Admissions</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}jobs.html">Jobs</a><a href="{root}gallery.html">Gallery</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
+  <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}schedule.html">Schedule</a><a href="{root}admissions.html">Admissions</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}jobs.html">Jobs</a><a href="{root}resources.html">Resources</a><a href="{root}gallery.html">Gallery</a><a href="{root}blog/index.html">Blog</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
 </header>
 
 <main id="main">
@@ -182,9 +182,9 @@ TEMPLATE = """<!DOCTYPE html>
 <script>(function(){{var b=document.querySelector('[data-call-toggle]'),s=document.querySelector('.call-sheet');if(!b||!s)return;function close(){{s.hidden=true;b.setAttribute('aria-expanded','false');}}b.addEventListener('click',function(e){{e.stopPropagation();var open=s.hidden;s.hidden=!open;b.setAttribute('aria-expanded',String(open));}});document.addEventListener('click',function(e){{if(!s.hidden&&!s.contains(e.target)&&e.target!==b)close();}});document.addEventListener('keydown',function(e){{if(e.key==='Escape')close();}});s.querySelectorAll('a').forEach(function(a){{a.addEventListener('click',close);}});}})();</script>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script src="{root}assets/js/main.js?v=28" defer></script>
-<script src="{root}assets/js/effects.js?v=28" defer></script>
-<script src="{root}assets/js/landing.js?v=28" defer></script>
+<script src="{root}assets/js/main.js?v=29" defer></script>
+<script src="{root}assets/js/effects.js?v=29" defer></script>
+<script src="{root}assets/js/landing.js?v=29" defer></script>
 </body>
 </html>
 """

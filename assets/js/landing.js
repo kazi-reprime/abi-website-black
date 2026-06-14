@@ -163,9 +163,20 @@
   var saved = null;
   try { saved = localStorage.getItem(KEY); } catch (e) {}
   apply(saved);
+  function themeSweep(d) {
+    try {
+      var r = d.getBoundingClientRect();
+      var sw = document.createElement('div');
+      sw.className = 'theme-sweep';
+      sw.style.setProperty('--sx', (r.left + r.width / 2) + 'px');
+      document.body.appendChild(sw);
+      setTimeout(function () { sw.remove(); }, 640);
+    } catch (e) {}
+  }
   document.querySelectorAll('.tdot').forEach(function (d) {
     d.addEventListener('click', function () {
       var t = d.getAttribute('data-set-theme');
+      themeSweep(d);
       apply(t);
       try { localStorage.setItem(KEY, t); localStorage.setItem('abi-theme-user', '1'); } catch (e) {}
     });
