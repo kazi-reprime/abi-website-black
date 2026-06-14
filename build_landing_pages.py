@@ -513,7 +513,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=33">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=34">
 <script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
 </head>
@@ -550,6 +550,10 @@ def header(p, s, pre):
             items += '<a href="%s%s">%s</a>' % (pre, target, label)
             drawer += '<a href="%s%s">%s</a>' % (pre, target, label)
     drawer += ('<a href="%s"><b>%s</b></a>' % (alt_href, "English" if lang == "es" else "Español"))
+    if lang == "es":
+        lt = '<div class="lang-toggle" role="group" aria-label="Idioma"><a href="%s">EN</a><a class="is-active" aria-current="true">ES</a></div>' % alt_href
+    else:
+        lt = '<div class="lang-toggle" role="group" aria-label="Language"><a class="is-active" aria-current="true">EN</a><a href="%s">ES</a></div>' % alt_href
     return """
 <div class="topbar">%s<span class="theme-dots" role="group" aria-label="Color theme"><button class="tdot tdot-blue" data-set-theme="blue" aria-label="ABI Blue" title="ABI Blue"></button><button class="tdot tdot-midnight" data-set-theme="midnight" aria-label="Midnight Gold" title="Midnight Gold"></button><button class="tdot tdot-classic" data-set-theme="classic" aria-label="Classic Americana" title="Classic Americana"></button><button class="tdot tdot-emerald" data-set-theme="emerald" aria-label="Emerald" title="Emerald"></button><button class="tdot tdot-noir" data-set-theme="noir" aria-label="Crimson Noir" title="Crimson Noir"></button></span></div>
 <header class="hdr">
@@ -557,6 +561,7 @@ def header(p, s, pre):
     <a class="logo" href="%s" aria-label="American Barber Institute — home" title="American Barber Institute">
       <img class="logo-img" src="/assets/img/abi-logo.gif" alt="American Barber Institute" width="385" height="99" fetchpriority="high">
     </a>
+    %s
     <div class="hdr-phones">%s</div>
     <button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
@@ -571,7 +576,7 @@ def header(p, s, pre):
 </div>
 <div class="startpill-wrap">
   <span class="startpill">%s <span>%s</span> <span class="dot">•</span> <span>%s <b data-next-start>%s</b></span></span>
-</div>""" % (s["topbar"], home, pills, items,
+</div>""" % (s["topbar"], home, lt, pills, items,
              en_href, 'style="color:var(--blue)"' if lang == "en" else "",
              es_href, 'style="color:var(--blue)"' if lang == "es" else "", drawer,
              s["limited"], s["reserve"],

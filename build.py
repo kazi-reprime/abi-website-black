@@ -61,7 +61,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=30">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=33">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=34">
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
@@ -76,6 +76,7 @@ TEMPLATE = """<!DOCTYPE html>
     <a class="logo" href="{root}index.html" aria-label="American Barber Institute — home" title="American Barber Institute">
       <img class="logo-img" src="{root}assets/img/abi-logo.gif" alt="American Barber Institute" width="385" height="99" fetchpriority="high">
     </a>
+    {langtoggle}
     <div class="hdr-phones">
       <a class="phone-pill" href="tel:+12122902289"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.22a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span><span class="lbl">English:&nbsp;</span>(212)&nbsp;290-2289</span></a>
       <a class="phone-pill" href="tel:+12122900278"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.22a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span><span class="lbl">Spanish:&nbsp;</span>(212)&nbsp;290-0278</span></a>
@@ -459,11 +460,21 @@ def build():
         schema_tags = '\n'.join(
             f'<script type="application/ld+json">{json.dumps(s, ensure_ascii=False)}</script>'
             for s in resolved)
+        # One-click EN/ES toggle beside the logo. Full Spanish exists for the
+        # home/splash; other EN pages send Spanish visitors to the Spanish home.
+        if out.startswith('es/'):
+            langtoggle = ('<div class="lang-toggle" role="group" aria-label="Language">'
+                          '<a href="%s%s">EN</a><a class="is-active" aria-current="true" href="%s%s">ES</a></div>'
+                          % (root, out[3:], root, out))
+        else:
+            langtoggle = ('<div class="lang-toggle" role="group" aria-label="Language">'
+                          '<a class="is-active" aria-current="true" href="%s%s">EN</a><a href="%ses/index.html">ES</a></div>'
+                          % (root, out, root))
         html = TEMPLATE.format(
             lang=lang, title=title, desc=desc, canonical=canonical, site=SITE_URL,
             oglocale='es_ES' if lang == 'es' else 'en_US',
             pagebg=PAGE_BG.get(out.replace('es/', ''), _DEFAULT_BG),
-            root=root, body=body, schema=schema_tags,
+            root=root, body=body, schema=schema_tags, langtoggle=langtoggle,
             lp=root + ('es/' if lang == 'es' else '') + '500-hours-master-barber-program-landing-page/',
             en_cur='aria-current="true"' if lang == 'en' else '',
             es_cur='aria-current="true"' if lang == 'es' else '')
