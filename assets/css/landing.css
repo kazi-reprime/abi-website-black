@@ -79,6 +79,11 @@ a{color:inherit;text-decoration:none}
 .visit-card-lite h3{margin:0 0 .3rem}
 .visit-card-lite a{color:var(--blue);font-weight:700}
 @media (max-width:560px){.date-card .d-day{font-size:2rem}}
+/* Feature grid (Why Choose ABI) */
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:1.4rem}
+.feature{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:14px;padding:1.4rem;box-shadow:0 4px 16px rgba(15,20,32,.06);border-top:3px solid var(--blue)}
+.feature h3{margin:0 0 .4rem;font-size:1.1rem}
+.feature p{margin:0;color:#4b5563}
 .hero-grad{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,10,16,.82) 0%,rgba(8,10,16,.45) 55%,rgba(8,10,16,.25) 100%)}
 .hero-in{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:2.5rem;padding:3.2rem 0 3.6rem;align-items:start}
 .hero-copy{padding-top:1.2rem}
