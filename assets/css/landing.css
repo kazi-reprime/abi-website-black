@@ -131,11 +131,11 @@ body,.hdr,.btn-gold,.btn-blue,.trust-strip,.cta-band,.foot-cta,.topbar{transitio
 .hero-sub{margin-top:1.3rem;font-size:1.08rem;max-width:34rem;color:#e8eaf2}
 .hero-sub b{color:#fff}
 .features{margin-top:1.8rem;display:grid;grid-template-columns:repeat(3,1fr);max-width:42rem}
-.feature{display:flex;gap:.7rem;align-items:flex-start;padding:.9rem .9rem .9rem 0;font-size:.85rem;line-height:1.35;border-top:1px solid rgba(255,255,255,.25)}
-.feature:nth-child(-n+3){border-top:none;border-bottom:1px solid rgba(255,255,255,.25)}
-.feature+.feature{border-left:1px solid rgba(255,255,255,.25);padding-left:.9rem}
-.feature:nth-child(4){border-left:none;padding-left:0}
-.feature svg{flex-shrink:0;color:var(--blue);filter:brightness(1.6);margin-top:.1rem}
+.features .feature{display:flex;gap:.7rem;align-items:flex-start;padding:.9rem .9rem .9rem 0;font-size:.85rem;line-height:1.35;border-top:1px solid rgba(255,255,255,.25)}
+.features .feature:nth-child(-n+3){border-top:none;border-bottom:1px solid rgba(255,255,255,.25)}
+.features .feature+.feature{border-left:1px solid rgba(255,255,255,.25);padding-left:.9rem}
+.features .feature:nth-child(4){border-left:none;padding-left:0}
+.features .feature svg{flex-shrink:0;color:var(--blue);filter:brightness(1.6);margin-top:.1rem}
 
 /* ── Form card ───────────────────────────── */
 .formcard{background:#fff;color:var(--ink);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.7rem 1.7rem}
@@ -314,8 +314,8 @@ html.js .rv.in{opacity:1;transform:none}
   .split,.plans,.testi,.why,.steps,.earn{grid-template-columns:1fr}
   .reqs{grid-template-columns:1fr}
   .features{grid-template-columns:repeat(2,1fr)}
-  .feature{border:none!important;padding-left:0!important}
-  .feature{border-bottom:1px solid rgba(255,255,255,.2)!important}
+  .features .feature{border:none!important;padding-left:0!important}
+  .features .feature{border-bottom:1px solid rgba(255,255,255,.2)!important}
   .mbar{display:grid}
   .ftr{padding-bottom:7.5rem}
   .bubble{bottom:5.2rem}
@@ -741,3 +741,57 @@ section.trust{background:#0f1420!important;border-top:1px solid rgba(255,255,255
 .logo:hover .logo-img{transform:scale(1.05);filter:drop-shadow(0 4px 16px rgba(27,63,217,.55))}
 @media (max-width:768px){.logo-img{height:48px}}
 @media (max-width:400px){.logo-img{height:40px}}
+
+/* ============================================================
+   REV v32 — RESOURCES COMPONENTS + MOBILE TYPE NORMALIZATION
+   ============================================================ */
+
+/* --- Resources: reference lists inside feature cards --- */
+.res-list{margin:.6rem 0 0;padding-left:1.15rem;list-style:disc}
+.res-list li{color:var(--ink-soft);margin:.35rem 0;font-size:.96rem;line-height:1.5}
+
+/* --- Resources: responsive state-board directory (no fixed columns) --- */
+.state-grid{list-style:none;margin:1.6rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.65rem}
+.state-grid li{background:rgba(255,255,255,.92);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;padding:.7rem .9rem;font-size:.93rem;line-height:1.4;color:var(--ink);box-shadow:0 2px 8px rgba(15,20,32,.05)}
+.state-grid li.state-hl{border-left-color:var(--gold,#e5a019);background:linear-gradient(90deg,rgba(244,196,74,.16),rgba(255,255,255,.92));font-weight:700}
+.state-grid li.state-hl b{color:var(--blue)}
+
+/* ------------------------------------------------------------
+   MOBILE TYPE NORMALIZATION — readable, consistent "medium"
+   sizing on phones (iPhone + Android). No line under ~13px.
+   ------------------------------------------------------------ */
+@media (max-width:640px){
+  body{font-size:16px}
+  p,li{font-size:1rem;line-height:1.62}
+  .lead{font-size:1.04rem;line-height:1.6}
+  .feature p,.card p,.res-list li,.prose p,.acc-body li,.step p,.testi-card p,.campus p,.inst-card p{font-size:.98rem;line-height:1.55}
+  .state-grid{grid-template-columns:1fr}
+  .state-grid li{font-size:.96rem}
+  /* raise micro-labels/legal/tags to a legible ~13px floor */
+  .crumbs,.form-note,.form-consent,.earn-note,.plans-note,.hero-note,.card-meta,
+  .trust-item span,.stat span,.plan-name,.plan-hours,.plan-terms,.testi-who span,
+  .ftr-legal,.count-cell span,.earn-yr,.inst-tag,.plan-tag,.date-card .d-tag,
+  .call-sheet-h,.kicker,.card-hours,.d-mo{font-size:.82rem!important;letter-spacing:.04em}
+  .ticker span{font-size:.92rem}
+  .topbar{font-size:.74rem;letter-spacing:.05em}
+  /* temper oversized headings so nothing is jarringly large */
+  .hero-h1{font-size:clamp(2rem,8vw,2.4rem)}
+  .page-hero h1{font-size:clamp(1.9rem,7.5vw,2.3rem)}
+  .section-head h2,h2{font-size:clamp(1.5rem,6.2vw,1.9rem)}
+  .stat b{font-size:2.05rem}
+  /* comfortable section padding on phones */
+  section{padding-top:2.4rem;padding-bottom:2.4rem}
+  .page-hero{padding:2.6rem 1rem 2.2rem}
+}
+@media (max-width:400px){
+  .hero-h1{font-size:1.9rem}
+  .page-hero h1{font-size:1.8rem}
+}
+
+/* v32 supplement — countdown labels + price notes (defined in style.css) */
+@media (max-width:640px){
+  .countdown span{font-size:.72rem!important;letter-spacing:.1em}
+  .countdown b{font-size:1.5rem!important}
+  .price small{font-size:.8rem!important;letter-spacing:.02em}
+  .menu-item b,.menu-item .p{font-size:1rem}
+}
