@@ -467,7 +467,7 @@ html,body{overflow-x:clip}
 .btn-gold{font-weight:800}
 .hero-value{display:inline-block;color:#fff;background:rgba(27,47,217,.35);border:1px solid rgba(255,255,255,.35);border-radius:50px;padding:.5rem 1.2rem;font-weight:700;font-size:.95rem;letter-spacing:.02em;margin:.2rem 0 1.1rem}
 /* ── Instructors page ── */
-.inst-hero{background:linear-gradient(120deg,rgba(16,22,42,.86),rgba(12,18,36,.80)),url(../img/abi-students-008.jpg);background-size:cover;background-position:center;color:#fff;text-align:center;padding:3.6rem 1rem 3rem}
+.inst-hero{background:linear-gradient(120deg,rgba(16,22,42,.86),rgba(12,18,36,.80)),url(../img/abi-students-105.jpg);background-size:cover;background-position:center;color:#fff;text-align:center;padding:3.6rem 1rem 3rem}
 .inst-hero h1{color:#fff;margin:.3rem 0 .6rem}
 .inst-hero .kicker{color:var(--gold-bright)}
 .inst-hero-sub{max-width:680px;margin:0 auto 1.4rem;opacity:.94;font-size:1.08rem}
@@ -523,9 +523,9 @@ html,body{overflow-x:clip}
 /* ═══════════ UI/UX upgrade — glassmorphism, vivid backgrounds, brighter CTAs (v15) ═══════════ */
 /* Per-page background image (different best photo per page) */
 body{background:#eef2f7}
-body::before{content:"";position:fixed;inset:0;z-index:-2;background:linear-gradient(rgba(236,240,246,.50),rgba(236,240,246,.64)),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:linear-gradient(rgba(236,240,246,.50),rgba(236,240,246,.64)),var(--page-bg,url(../img/abi-students-107.jpg));background-size:cover;background-position:center}
 /* Vivid, visible page-hero photo per page — warm/light, no cold blue cast */
-.page-hero{position:relative;overflow:hidden;background:linear-gradient(100deg,rgba(8,10,14,.82) 0%,rgba(8,10,14,.66) 50%,rgba(8,10,14,.5) 100%),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center 28%;background-repeat:no-repeat;color:#fff;padding:3.4rem 1rem 3rem;border:none}
+.page-hero{position:relative;overflow:hidden;background:linear-gradient(100deg,rgba(8,10,14,.82) 0%,rgba(8,10,14,.66) 50%,rgba(8,10,14,.5) 100%),var(--page-bg,url(../img/abi-students-107.jpg));background-size:cover;background-position:center 28%;background-repeat:no-repeat;color:#fff;padding:3.4rem 1rem 3rem;border:none}
 /* keep hero text crisp over the clearer photo */
 .page-hero h1{text-shadow:0 2px 16px rgba(0,0,0,.55)}
 .page-hero p,.page-hero .crumbs{text-shadow:0 1px 10px rgba(0,0,0,.5)}
@@ -533,7 +533,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-2;background:linear-grad
 @media (max-width:768px){
   body{background-attachment:scroll!important}
   /* near-uniform dark scrim on phones so full-width hero text is always readable */
-  .page-hero{background-attachment:scroll;background-image:linear-gradient(180deg,rgba(8,10,14,.84),rgba(8,10,14,.68)),var(--page-bg,url(../img/abi-nyc-001.jpg))}
+  .page-hero{background-attachment:scroll;background-image:linear-gradient(180deg,rgba(8,10,14,.84),rgba(8,10,14,.68)),var(--page-bg,url(../img/abi-students-107.jpg))}
 }
 .page-hero h1,.page-hero p,.page-hero a{color:#fff}
 .page-hero .crumbs a{color:#fff;opacity:.85}
@@ -924,3 +924,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* v36 — full-bleed content photo band for text-heavy pages */
 .photo-band{padding:0;line-height:0;border:none}
 .photo-band img{width:100%;height:clamp(190px,42vw,360px);object-fit:cover;display:block;filter:saturate(1.03)}
+
+/* ============================================================
+   REV v39 — footer social icons align with the column content
+   ============================================================ */
+.ftr .socials,.ftr-in .socials{justify-content:flex-start;margin-top:1.1rem;gap:.6rem}
+.ftr .socials a{background:rgba(255,255,255,.12)}
+@media (max-width:760px){
+  /* on stacked mobile footer, center them under the heading for balance */
+  .ftr-in{text-align:center}
+  .ftr .socials,.ftr-in .socials{justify-content:center}
+}

@@ -386,7 +386,7 @@ PAGES.append({"type":"program","lang":"en","path":"500-hours-master-barber-progr
  "campus":MANHATTAN,"h1a":"500 Hours.","h1b":"Barber Program.","script":"Start Today.",
  "sub":"Become a licensed Barber in as little as <b>4 months</b>. Comprehensive hands-on training and full NY State Board Exam prep at our Manhattan campus.",
  "about":ABOUT_MAN_EN,"about_h":"About the Program","tech":TECH_MAN_EN,"curr":CURR_MAN_EN,
- "hero_img":"lp-hero.jpg","dur":"~4 Months","tui":"$4,600"})
+ "hero_img":"abi-students-107.jpg","dur":"~4 Months","tui":"$4,600"})
 PAGES.append({"type":"program","lang":"es","path":"es/500-hours-master-barber-program-landing-page/index.html",
  "url":"/es/500-hours-master-barber-program-landing-page","alt":"/500-hours-master-barber-program-landing-page",
  "title":"Programa de Barbero Maestro de 500 Horas — Manhattan | American Barber Institute",
@@ -394,7 +394,7 @@ PAGES.append({"type":"program","lang":"es","path":"es/500-hours-master-barber-pr
  "campus":MANHATTAN,"h1a":"500 Horas.","h1b":"Programa de Barbero.","script":"Empieza Hoy.",
  "sub":"Conviértete en Barbero Maestro licenciado en tan solo <b>cuatro meses</b>. Entrenamiento práctico integral y preparación completa para el examen del Estado de NY en nuestra sede de Manhattan.",
  "about":ABOUT_MAN_ES,"about_h":"Sobre el Programa","tech":TECH_MAN_ES,"curr":CURR_MAN_ES,
- "hero_img":"lp-hero.jpg","dur":"~4 Meses","tui":"$4,600"})
+ "hero_img":"abi-students-107.jpg","dur":"~4 Meses","tui":"$4,600"})
 PAGES.append({"type":"program","lang":"en","path":"master-barber-program-bronx/index.html",
  "url":"/master-barber-program-bronx","alt":"/es/master-barber-program-bronx",
  "title":"Master Barber Program — Bronx | American Barber Institute",
@@ -402,7 +402,7 @@ PAGES.append({"type":"program","lang":"en","path":"master-barber-program-bronx/i
  "campus":BRONX,"h1a":"Barber Operator","h1b":"Program.","script":"Start Today.",
  "sub":"Become a licensed Master Barber with affordable payment plans, full-time and weekend schedules, and <b>bilingual instruction</b> at our Bronx campus. Se habla español.",
  "about":ABOUT_BX_EN,"about_h":"About the Program","tech":TECH_BX_EN,"curr":CURR_BX_EN,
- "hero_img":"lp-hero.jpg","dur":"~4 Months","tui":"$4,600"})
+ "hero_img":"abi-students-107.jpg","dur":"~4 Months","tui":"$4,600"})
 PAGES.append({"type":"program","lang":"es","path":"es/master-barber-program-bronx/index.html",
  "url":"/es/master-barber-program-bronx","alt":"/master-barber-program-bronx",
  "title":"Programa de Barbero Maestro — Bronx | American Barber Institute",
@@ -410,7 +410,7 @@ PAGES.append({"type":"program","lang":"es","path":"es/master-barber-program-bron
  "campus":BRONX,"h1a":"Programa de Barbero","h1b":"Operador.","script":"Empieza Hoy.",
  "sub":"Conviértete en Barbero Maestro licenciado con planes de pago asequibles, horarios de tiempo completo y fines de semana, e <b>instrucción bilingüe</b> en nuestra sede del Bronx. Se habla español.",
  "about":ABOUT_BX_ES,"about_h":"Sobre el Programa","tech":TECH_BX_ES,"curr":CURR_BX_ES,
- "hero_img":"lp-hero.jpg","dur":"~4 Meses","tui":"$4,600"})
+ "hero_img":"abi-students-107.jpg","dur":"~4 Meses","tui":"$4,600"})
 # splash pages
 for n, (h1a_en,h1b_en,h1a_es,h1b_es) in (
     (1,("Your Future.","Your Career.","Tu Futuro.","Tu Carrera.")),
@@ -421,40 +421,40 @@ for n, (h1a_en,h1b_en,h1a_es,h1b_es) in (
      "desc":"New York's only dedicated barber school — changing lives for over 30 years. Become a licensed barber in as little as 17 weeks. Hands-on training. Real skills. Real opportunities.",
      "campus":MANHATTAN,"h1a":h1a_en,"h1b":h1b_en,"script":"Start Today.",
      "sub":"Become a licensed barber in as little as <b>17 weeks</b>. Hands-on training. Real skills. Real opportunities.",
-     "hero_img":"lp-hero.jpg","dur":"~4 Months","tui":"$4,600","variant":n})
+     "hero_img":"abi-students-107.jpg","dur":"~4 Months","tui":"$4,600","variant":n})
     PAGES.append({"type":"splash","lang":"es","path":"es/splash-page-%d/index.html"%n,
      "url":"/es/splash-page-%d"%n,"alt":"/splash-page-%d"%n,
      "title":"Conviértete en Barbero Licenciado en NYC | American Barber Institute",
      "desc":"La única escuela de barbería dedicada en Nueva York. Licenciada por el Departamento de Educación del Estado de NY. Cambiando vidas por más de 30 años.",
      "campus":MANHATTAN,"h1a":h1a_es,"h1b":h1b_es,"script":"Empieza Hoy.",
      "sub":"Conviértete en barbero licenciado en tan solo <b>17 semanas</b>. Entrenamiento práctico. Habilidades reales. Oportunidades reales.",
-     "hero_img":"lp-hero.jpg","dur":"~4 Meses","tui":"$4,600","variant":n})
+     "hero_img":"abi-students-107.jpg","dur":"~4 Meses","tui":"$4,600","variant":n})
 PAGES.append({"type":"splash","lang":"en","path":"index.html",
  "url":"/","alt":"/es",
  "title":"Barber School NYC | American Barber Institute — Become a Licensed Barber in 4 Months",
  "desc":"NYC's only dedicated barber school, est. 1996. NYS-licensed 500-hour Master Barber program, financial aid, veterans GI Bill, ACCESS-VR and job placement. New classes start the first Monday of every month.",
  "campus":MANHATTAN,"h1a":"Your Future.","h1b":"Your Career.","script":"Start Today.",
  "sub":"Become a licensed barber in as little as <b>17 weeks</b>. Hands-on training. Real skills. Real opportunities.",
- "hero_img":"lp-hero.jpg","dur":"~4 Months","tui":"$4,600","variant":1})
+ "hero_img":"abi-students-107.jpg","dur":"~4 Months","tui":"$4,600","variant":1})
 PAGES.append({"type":"splash","lang":"es","path":"es/index.html",
  "url":"/es","alt":"/",
  "title":"Escuela de Barbería en NYC | American Barber Institute — Conviértete en Barbero Licenciado",
  "desc":"La única escuela de barbería dedicada en Nueva York. Licenciada por el Departamento de Educación del Estado de NY. Cambiando vidas por más de 30 años. Clases nuevas el primer lunes de cada mes.",
  "campus":MANHATTAN,"h1a":"Tu Futuro.","h1b":"Tu Carrera.","script":"Empieza Hoy.",
  "sub":"Conviértete en barbero licenciado en tan solo <b>17 semanas</b>. Entrenamiento práctico. Habilidades reales. Oportunidades reales.",
- "hero_img":"lp-hero.jpg","dur":"~4 Meses","tui":"$4,600","variant":1})
+ "hero_img":"abi-students-107.jpg","dur":"~4 Meses","tui":"$4,600","variant":1})
 # location pages (EN + ES)
 for L in LOCATIONS:
     PAGES.append({"type":"location","lang":"en","path":L["slug"]+"/index.html",
      "url":"/"+L["slug"],"alt":"/es/"+L["slug"],"title":L["title"],"desc":L["desc"],
      "campus":L["campus"],"h1a":L["h1"],"h1b":"","script":"Start Today.",
-     "sub":L["intro"][0],"loc":L,"hero_img":"lp-hero.jpg","dur":"~4 Months","tui":"$4,600"})
+     "sub":L["intro"][0],"loc":L,"hero_img":"abi-students-107.jpg","dur":"~4 Months","tui":"$4,600"})
     E = LOC_ES[L["slug"]]
     LE = dict(L); LE.update(E)
     PAGES.append({"type":"location","lang":"es","path":"es/"+L["slug"]+"/index.html",
      "url":"/es/"+L["slug"],"alt":"/"+L["slug"],"title":E["title"],"desc":E["desc"],
      "campus":L["campus"],"h1a":E["h1"],"h1b":"","script":"Empieza Hoy.",
-     "sub":E["intro"][0],"loc":LE,"hero_img":"lp-hero.jpg","dur":"~4 Meses","tui":"$4,600"})
+     "sub":E["intro"][0],"loc":LE,"hero_img":"abi-students-107.jpg","dur":"~4 Meses","tui":"$4,600"})
 
 # ── GLOBAL HERO OVERRIDE: exact mockup content on every landing page ──
 for _p in PAGES:
@@ -513,7 +513,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=38">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=39">
 <script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
 </head>

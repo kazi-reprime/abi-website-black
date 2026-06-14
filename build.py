@@ -61,7 +61,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=30">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=38">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=39">
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
@@ -419,20 +419,22 @@ def faq_schema_from(body):
 
 # Distinct, strong per-page background image (used by the page-hero banner and
 # the subtle full-page background). Each page gets its own image.
+# Per-page background — uses ONLY the client-approved image set. Each main
+# page gets a distinct photo; program subpages reuse from the same set.
 PAGE_BG = {
-    'classic-home.html': 'abi-students-001.jpg', 'about.html': 'abi-nyc-007.jpg',
-    'instructors.html': 'abi-students-024.jpg', 'admissions.html': 'abi-students-005.jpg', 'schedule.html': 'abi-students-017.jpg',
-    'veterans.html': 'abi-students-038.jpg',
-    'access-vr.html': 'abi-students-080.jpg', 'haircuts.html': 'abi-students-031.jpg',
-    'jobs.html': 'abi-students-056.jpg', 'gallery.html': 'abi-students-095.jpg',
-    'faq.html': 'abi-students-042.jpg', 'contact.html': 'abi-nyc-037.jpg',
-    'resources.html': 'abi-students-029.jpg', 'privacy.html': 'abi-nyc-004.jpg',
-    'programs/index.html': 'abi-students-009.jpg', 'programs/500-hour-master-barber.html': 'abi-nyc-006.jpg',
-    'programs/200-hour-barber-fundamentals.html': 'abi-students-015.jpg', 'programs/50-hour-barber-refresher.html': 'abi-students-018.jpg',
-    'programs/scalp-micro-pigmentation.html': 'abi-nyc-010.jpg', 'programs/contagious-diseases.html': 'abi-nyc-013.jpg',
-    'programs/license-transfer.html': 'abi-nyc-015.jpg', 'blog/index.html': 'abi-students-045.jpg',
+    'classic-home.html': 'abi-students-107.jpg', 'about.html': 'abi-nyc-008.jpg',
+    'instructors.html': 'abi-students-031.jpg', 'admissions.html': 'abi-students-130.jpg', 'schedule.html': 'abi-students-139.jpg',
+    'veterans.html': 'abi-students-188.jpg',
+    'access-vr.html': 'abi-students-025.jpg', 'haircuts.html': 'abi-students-020.jpg',
+    'jobs.html': 'abi-students-236.jpg', 'gallery.html': 'abi-students-105.jpg',
+    'faq.html': 'abi-students-125.jpg', 'contact.html': 'abi-nyc-032.jpg',
+    'resources.html': 'abi-students-190.jpg', 'privacy.html': 'abi-nyc-013.jpg',
+    'programs/index.html': 'abi-students-107.jpg', 'programs/500-hour-master-barber.html': 'abi-students-139.jpg',
+    'programs/200-hour-barber-fundamentals.html': 'abi-students-125.jpg', 'programs/50-hour-barber-refresher.html': 'abi-students-031.jpg',
+    'programs/scalp-micro-pigmentation.html': 'abi-students-190.jpg', 'programs/contagious-diseases.html': 'abi-nyc-013.jpg',
+    'programs/license-transfer.html': 'abi-nyc-032.jpg', 'blog/index.html': 'abi-students-095.jpg',
 }
-_DEFAULT_BG = 'abi-nyc-001.jpg'
+_DEFAULT_BG = 'abi-students-107.jpg'
 
 def build():
     written = []
