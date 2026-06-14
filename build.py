@@ -3,11 +3,32 @@
 Merges src/pages/*.html content partials into the base template.
 Usage: python3 build.py
 """
-import json, os, re
+import json, os, re, datetime
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(ROOT, 'src', 'pages')
 SITE_URL = 'https://www.abi.edu'
+
+# ── Next class date (first Monday of upcoming month), computed at build time ──
+def _next_first_monday():
+    today = datetime.date.today()
+    d = datetime.date(today.year, today.month, 1)
+    while d.weekday() != 0:
+        d += datetime.timedelta(days=1)
+    if d <= today:
+        y, m = (today.year, today.month + 1) if today.month < 12 else (today.year + 1, 1)
+        d = datetime.date(y, m, 1)
+        while d.weekday() != 0:
+            d += datetime.timedelta(days=1)
+    return d
+
+_NEXT_MON = _next_first_monday()
+_NEXT_DT = datetime.datetime.combine(_NEXT_MON, datetime.time(0, 0))
+_DELTA = _NEXT_DT - datetime.datetime.now()
+_REMAIN = max(int(_DELTA.total_seconds()), 0)
+NEXT_START_LONG = _NEXT_MON.strftime('%A, %B ') + str(_NEXT_MON.day)   # "Monday, July 6"
+CD_D, CD_H = str(_REMAIN // 86400), str((_REMAIN % 86400) // 3600)
+CD_M, CD_S = str((_REMAIN % 3600) // 60), str(_REMAIN % 60)
 
 # ---------------------------------------------------------------- template
 TEMPLATE = """<!DOCTYPE html>
@@ -40,7 +61,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=30">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=32">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=33">
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
@@ -446,6 +467,15 @@ def build():
             lp=root + ('es/' if lang == 'es' else '') + '500-hours-master-barber-program-landing-page/',
             en_cur='aria-current="true"' if lang == 'en' else '',
             es_cur='aria-current="true"' if lang == 'es' else '')
+        # Bake real next-class date + countdown defaults so they never render
+        # as "0"/empty without JS (JS still enhances them to a live countdown).
+        html = (html
+                .replace('<span class="date" data-start-date>First Monday of next month</span>',
+                         '<span class="date" data-start-date>%s</span>' % NEXT_START_LONG)
+                .replace('<b data-d>0</b>', '<b data-d>%s</b>' % CD_D)
+                .replace('<b data-h>0</b>', '<b data-h>%s</b>' % CD_H)
+                .replace('<b data-m>0</b>', '<b data-m>%s</b>' % CD_M)
+                .replace('<b data-s>0</b>', '<b data-s>%s</b>' % CD_S))
         dest = os.path.join(ROOT, out)
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         open(dest, 'w', encoding='utf-8').write(html)

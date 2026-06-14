@@ -795,3 +795,64 @@ section.trust{background:#0f1420!important;border-top:1px solid rgba(255,255,255
   .price small{font-size:.8rem!important;letter-spacing:.02em}
   .menu-item b,.menu-item .p{font-size:1rem}
 }
+
+/* ============================================================
+   REV v33 — DESIGN-UPGRADE BRANCH
+   Urgency badge · overlay z-index scale & safe-area ·
+   reduced-motion · focus states · tap targets · section rhythm
+   ============================================================ */
+
+/* --- Documented z-index scale ---------------------------------
+   base content        : 0–2
+   sticky header (.hdr) : 60
+   mobile bar (.mbar)   : 70
+   nav drawer           : 88   (above chat bubble)
+   chat bubble/tip      : 80
+   call-sheet popover   : 95
+   exit modal           : 120  (desktop only)
+   theme sweep fx       : 9999
+--------------------------------------------------------------- */
+.nav-drawer{z-index:88}
+.exit{z-index:120}
+body.nav-open .bubble,body.nav-open .bubble-tip{display:none!important}
+
+/* --- Urgency: styled pill instead of emoji text --- */
+.urgency-flame{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:linear-gradient(90deg,rgba(229,160,25,.16),rgba(229,160,25,.06));
+  border:1px solid rgba(229,160,25,.5);color:var(--gold-bright,#f4c44a);
+  font-weight:800;letter-spacing:.04em;text-transform:uppercase;font-size:.82rem;
+  padding:.4rem .9rem;border-radius:999px;line-height:1}
+.urgency-flame::before{content:"";width:8px;height:8px;border-radius:50%;
+  background:var(--red,#d9272e);box-shadow:0 0 0 0 rgba(217,39,46,.6);animation:pulseDot 1.8s ease-out infinite}
+@keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(217,39,46,.55)}70%{box-shadow:0 0 0 8px rgba(217,39,46,0)}100%{box-shadow:0 0 0 0 rgba(217,39,46,0)}}
+
+/* --- Sticky mobile bar: safe-area + never hide footer --- */
+@media (max-width:840px){
+  .mbar{padding-bottom:env(safe-area-inset-bottom,0)}
+  body{padding-bottom:calc(64px + env(safe-area-inset-bottom,0))}
+  .bubble{bottom:calc(5.4rem + env(safe-area-inset-bottom,0))}
+  .bubble-tip{bottom:calc(5.8rem + env(safe-area-inset-bottom,0))}
+}
+
+/* --- Touch targets: min 44px for primary interactive elements --- */
+.mbar a{min-height:56px}
+.nav-drawer a,.mn-lang a{min-height:48px;display:flex;align-items:center}
+.phone-pill{min-height:44px}
+.btn,.btn-gold,.btn-blue,.btn-ghost{min-height:44px}
+
+/* --- Visible keyboard focus everywhere (accessibility) --- */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.btn:focus-visible{
+  outline:3px solid var(--gold-bright,#f4c44a);outline-offset:2px;border-radius:6px}
+
+/* --- Section rhythm: consistent vertical spacing on the splash/landing --- */
+.sec{padding-block:clamp(2.6rem,6vw,5.5rem)}
+.sec-alt{background:rgba(255,255,255,.04)}
+
+/* --- Global reduced-motion: honor user preference site-wide --- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .urgency-flame::before,html.js .bubble,.ticker-track,.marquee-track{animation:none!important}
+}

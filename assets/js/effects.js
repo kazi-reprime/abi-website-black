@@ -195,6 +195,8 @@
   (function () {
     var els = [].slice.call(document.querySelectorAll('[data-count]'));
     if (!els.length) return;
+    // Respect reduced-motion: keep the real (baked-in) values, skip the count-up.
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     function run(el) {
       var target = parseFloat(el.getAttribute('data-count')) || 0;
       var suffix = el.getAttribute('data-suffix') || '';

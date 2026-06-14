@@ -3,10 +3,28 @@
 """ABI landing page generator — one template, 17 pages (EN/ES, multi-location).
 Run: python3 build.py   → writes pages next to this script.
 """
-import os, json
+import os, json, datetime
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = "https://www.abi.edu"
+
+# ── Next class date: first Monday of the upcoming month (computed at build) ──
+def _next_first_monday():
+    today = datetime.date.today()
+    d = datetime.date(today.year, today.month, 1)
+    while d.weekday() != 0:
+        d += datetime.timedelta(days=1)
+    if d <= today:
+        y, m = (today.year, today.month + 1) if today.month < 12 else (today.year + 1, 1)
+        d = datetime.date(y, m, 1)
+        while d.weekday() != 0:
+            d += datetime.timedelta(days=1)
+    return d
+
+NEXT_MON = _next_first_monday()
+NEXT_START_EN = NEXT_MON.strftime("%a, %b ") + str(NEXT_MON.day)          # e.g. "Mon, Jul 6"
+_ES_MO = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
+NEXT_START_ES = "lun, %s %d" % (_ES_MO[NEXT_MON.month - 1], NEXT_MON.day)  # e.g. "lun, jul 6"
 
 # ───────────────────────── icons ─────────────────────────
 def icon(name, size=22):
@@ -39,7 +57,7 @@ def icon(name, size=22):
 S = {
  "en": {
   "topbar": "Start your barber journey today for only $150 per week*",
-  "limited": "🔥 LIMITED SEATS AVAILABLE! 🔥", "reserve": "Reserve Your Spot Today",
+  "limited": "Limited Seats — Enrollment Open", "reserve": "Reserve Your Spot Today",
   "next_start": "Next Start:", "call": "Request a Call",
   "form_sub": "Fill out the form and an Admissions Advisor will contact you.",
   "fn": "First Name", "ln": "Last Name", "ph": "Phone", "em": "Email",
@@ -91,7 +109,7 @@ S = {
   "closing_cta": "Reserve Your Spot", "closing_call": "Call",
   "mbar_call": "Call Now", "mbar_cta": "Become a Barber",
   "bubble_tip": "Hey, I'm one of the assistants at ABI. How can I help?",
-  "exit_h": "Wait — your chair is waiting ✂",
+  "exit_h": "Wait — your chair is waiting",
   "exit_p": "Classes start the first Monday of every month and seats are limited. Leave your info and an admissions advisor will call you within 24 hours.",
   "exit_cta": "Reserve My Spot",
   "f_about": "New York's only dedicated barber school — changing lives for over 30 years. Licensed by the New York State Department of Education. Est. 1996.",
@@ -107,7 +125,7 @@ S = {
  },
  "es": {
   "topbar": "Comienza tu carrera de barbero hoy por solo $150 por semana*",
-  "limited": "🔥 ¡CUPOS LIMITADOS! 🔥", "reserve": "Reserva Tu Lugar Hoy",
+  "limited": "Cupos Limitados — Inscripción Abierta", "reserve": "Reserva Tu Lugar Hoy",
   "next_start": "Próximo Inicio:", "call": "Solicitar Llamada",
   "form_sub": "Completa el formulario y un asesor de admisiones te contactará.",
   "fn": "Nombre", "ln": "Apellido", "ph": "Teléfono", "em": "Correo Electrónico",
@@ -159,7 +177,7 @@ S = {
   "closing_cta": "Reserva Tu Lugar", "closing_call": "Llámanos",
   "mbar_call": "Llámanos", "mbar_cta": "Conviértete en Barbero",
   "bubble_tip": "Hola, soy uno de los asistentes de ABI. ¿Cómo puedo ayudarte?",
-  "exit_h": "Espera — tu silla te está esperando ✂",
+  "exit_h": "Espera — tu silla te está esperando",
   "exit_p": "Las clases comienzan el primer lunes de cada mes y los cupos son limitados. Déjanos tu información y un asesor de admisiones te llamará dentro de 24 horas.",
   "exit_cta": "Reservar Mi Lugar",
   "f_about": "La única escuela de barbería dedicada de Nueva York — cambiando vidas por más de 30 años. Licenciada por el Departamento de Educación del Estado de NY. Est. 1996.",
@@ -495,7 +513,7 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=32">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=33">
 <script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
 </head>
@@ -552,12 +570,13 @@ def header(p, s, pre):
   <div class="urgency-sub">%s</div>
 </div>
 <div class="startpill-wrap">
-  <span class="startpill">%s <span>%s</span> <span class="dot">•</span> <span>%s <b data-next-start></b></span></span>
+  <span class="startpill">%s <span>%s</span> <span class="dot">•</span> <span>%s <b data-next-start>%s</b></span></span>
 </div>""" % (s["topbar"], home, pills, items,
              en_href, 'style="color:var(--blue)"' if lang == "en" else "",
              es_href, 'style="color:var(--blue)"' if lang == "es" else "", drawer,
              s["limited"], s["reserve"],
-             icon("pin",16), p["campus"]["name_"+lang], s["next_start"])
+             icon("pin",16), p["campus"]["name_"+lang], s["next_start"],
+             NEXT_START_ES if lang == "es" else NEXT_START_EN)
 
 def lead_form(p, s):
     locs = "".join('<option>%s</option>' % o for o in s["locs"])
@@ -635,7 +654,7 @@ def sec_stats(p, s):
             (10000,"+","Graduados" if es else "Graduates"),
             (100,"+","Reseñas de Google" if es else "Google Reviews"),
             (4,"","Meses Para Tu Licencia" if es else "Months To Get Licensed")]
-    cells = "".join('<div class="stat"><b data-count="%d" data-suffix="%s">0</b><span>%s</span></div>' % d for d in data)
+    cells = "".join('<div class="stat"><b data-count="%d" data-suffix="%s">%s</b><span>%s</span></div>' % (n, suf, "{:,}{}".format(n, suf), lbl) for (n, suf, lbl) in data)
     return '<section class="stats"><div class="container stats-in">%s</div></section>' % cells
 
 def sec_about(p, s):
@@ -876,8 +895,25 @@ def sec_gallery(p, s, pre):
     eb = "Galería" if es else "Gallery"
     h = "La Vida en ABI" if es else "Life At ABI"
     more = "Ver Galería Completa →" if es else "View Full Gallery →"
-    imgs = "".join('<a href="%sgallery.html"><img loading="lazy" src="%sassets/img/%s" alt="American Barber Institute students training"></a>'
-                   % (pre, pre, g) for g in GALLERY)
+    _alts_en = ["ABI student giving a client a fresh haircut",
+                "Student barber practicing a skin fade",
+                "Hands-on training on the ABI clinic floor",
+                "Instructor guiding a student through a cut",
+                "Detailed lineup work by an ABI student",
+                "Students learning clipper technique at ABI",
+                "Client in the chair at the ABI barber clinic",
+                "Barbering students at work in the Manhattan campus"]
+    _alts_es = ["Estudiante de ABI dando un corte a un cliente",
+                "Estudiante practicando un fade",
+                "Entrenamiento práctico en la clínica de ABI",
+                "Instructor guiando a un estudiante en un corte",
+                "Trabajo de líneas por un estudiante de ABI",
+                "Estudiantes aprendiendo técnica de máquina en ABI",
+                "Cliente en la silla de la clínica de ABI",
+                "Estudiantes de barbería en el campus de Manhattan"]
+    _alts = _alts_es if es else _alts_en
+    imgs = "".join('<a href="%sgallery.html"><img loading="lazy" src="%sassets/img/%s" alt="%s"></a>'
+                   % (pre, pre, g, _alts[i % len(_alts)]) for i, g in enumerate(GALLERY))
     return ('<section class="sec sec-alt"><div class="container rv"><span class="eyebrow">%s</span><h2>%s</h2>'
             '<div class="gal">%s</div><p style="margin-top:1.4rem"><a class="greview" href="%sgallery.html">%s</a></p>'
             '</div></section>' % (eb, h, imgs, pre, more))

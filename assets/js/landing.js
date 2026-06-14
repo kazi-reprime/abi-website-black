@@ -62,6 +62,7 @@
     burger.addEventListener('click', function () {
       var open = drawer.classList.toggle('open');
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.classList.toggle('nav-open', open);
     });
   }
 
@@ -218,6 +219,8 @@ document.querySelectorAll('.yt').forEach(function (f) {
 (function () {
   var els = document.querySelectorAll('[data-count]');
   if (!els.length || !('IntersectionObserver' in window)) return;
+  // Respect reduced-motion: leave the real (baked-in) values, skip the count-up.
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (!e.isIntersecting) return;
