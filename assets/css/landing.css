@@ -525,14 +525,15 @@ html,body{overflow-x:clip}
 body{background:#eef2f7}
 body::before{content:"";position:fixed;inset:0;z-index:-2;background:linear-gradient(rgba(238,242,247,.62),rgba(238,242,247,.74)),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center;background-attachment:fixed}
 /* Vivid, visible page-hero photo per page — warm/light, no cold blue cast */
-.page-hero{position:relative;overflow:hidden;background:linear-gradient(100deg,rgba(8,10,14,.62) 0%,rgba(8,10,14,.40) 34%,rgba(8,10,14,.14) 66%,rgba(8,10,14,.02) 100%),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center 28%;background-repeat:no-repeat;color:#fff;padding:3.4rem 1rem 3rem;border:none}
+.page-hero{position:relative;overflow:hidden;background:linear-gradient(100deg,rgba(8,10,14,.82) 0%,rgba(8,10,14,.66) 50%,rgba(8,10,14,.5) 100%),var(--page-bg,url(../img/abi-nyc-001.jpg));background-size:cover;background-position:center 28%;background-repeat:no-repeat;color:#fff;padding:3.4rem 1rem 3rem;border:none}
 /* keep hero text crisp over the clearer photo */
 .page-hero h1{text-shadow:0 2px 16px rgba(0,0,0,.55)}
 .page-hero p,.page-hero .crumbs{text-shadow:0 1px 10px rgba(0,0,0,.5)}
 /* P2: avoid fixed-attachment jank/cost on mobile; U2: more visible photos */
 @media (max-width:768px){
   body{background-attachment:scroll!important}
-  .page-hero{background-attachment:scroll}
+  /* near-uniform dark scrim on phones so full-width hero text is always readable */
+  .page-hero{background-attachment:scroll;background-image:linear-gradient(180deg,rgba(8,10,14,.84),rgba(8,10,14,.68)),var(--page-bg,url(../img/abi-nyc-001.jpg))}
 }
 .page-hero h1,.page-hero p,.page-hero a{color:#fff}
 .page-hero .crumbs a{color:#fff;opacity:.85}
@@ -901,3 +902,25 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .lang-toggle a+a{border-left:1.6px solid var(--blue,#1b2fd9)}
 .lang-toggle a.is-active,.lang-toggle a:hover{background:var(--blue,#1b2fd9);color:#fff}
 @media (max-width:400px){.lang-toggle{margin-left:.4rem;font-size:.72rem}.lang-toggle a{padding:.36rem .5rem}}
+
+/* ============================================================
+   REV v36 — HERO FEATURE CHIPS (no overlap) + page-hero scrim
+   ============================================================ */
+/* The 6 hero benefit bullets → distinct rounded chips with real gaps */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;max-width:46rem;margin-top:1.8rem}
+.features .feature{
+  display:flex;align-items:flex-start;gap:.55rem;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18)!important;
+  border-radius:12px;padding:.8rem .85rem;font-size:.85rem;line-height:1.35;
+  text-shadow:0 1px 6px rgba(0,0,0,.5)}
+/* kill the old divider borders that made them look cramped/overlapping */
+.features .feature:nth-child(-n+3),.features .feature:nth-child(4),.features .feature+.feature{
+  border:1px solid rgba(255,255,255,.18)!important;border-left:1px solid rgba(255,255,255,.18)!important;
+  border-bottom:1px solid rgba(255,255,255,.18)!important;padding-left:.85rem!important}
+.features .feature svg{margin-top:.05rem}
+@media (max-width:900px){.features{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.features{grid-template-columns:1fr;max-width:none}}
+
+/* v36 — full-bleed content photo band for text-heavy pages */
+.photo-band{padding:0;line-height:0;border:none}
+.photo-band img{width:100%;height:clamp(190px,42vw,360px);object-fit:cover;display:block;filter:saturate(1.03)}
