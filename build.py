@@ -38,11 +38,11 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{root}assets/css/style.css?v=25">
-<link rel="stylesheet" href="{root}assets/css/brand.css?v=25">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=25">
+<link rel="stylesheet" href="{root}assets/css/style.css?v=26">
+<link rel="stylesheet" href="{root}assets/css/brand.css?v=26">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=26">
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
-<link rel="stylesheet" href="{root}assets/css/effects.css?v=25">
+<link rel="stylesheet" href="{root}assets/css/effects.css?v=26">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 {schema}
 </head>
@@ -61,10 +61,10 @@ TEMPLATE = """<!DOCTYPE html>
     </div>
     <button class="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
-  <nav class="mainnav" aria-label="Main"><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}admissions.html">Admissions</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}jobs.html">Jobs</a><a href="{root}gallery.html">Gallery</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a>
+  <nav class="mainnav" aria-label="Main"><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}schedule.html">Schedule</a><a href="{root}admissions.html">Admissions</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}jobs.html">Jobs</a><a href="{root}gallery.html">Gallery</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a>
     <span class="mn-lang"><a href="{root}index.html" style="color:var(--blue)">EN</a> | <a href="{root}es/index.html">ES</a></span>
   </nav>
-  <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}admissions.html">Admissions</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}jobs.html">Jobs</a><a href="{root}gallery.html">Gallery</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
+  <nav class="nav-drawer"><div class="container"><a href="{root}index.html">Home</a><a href="{root}about.html">About</a><a href="{root}instructors.html">Instructors</a><a href="{root}programs/index.html">Programs</a><a href="{root}schedule.html">Schedule</a><a href="{root}admissions.html">Admissions</a><a href="{root}haircuts.html">$3 Haircuts</a><a href="{root}jobs.html">Jobs</a><a href="{root}gallery.html">Gallery</a><a href="{root}faq.html">FAQs</a><a href="{root}contact.html">Contact</a><a href="{root}es/index.html"><b>Español</b></a></div></nav>
 </header>
 
 <main id="main">
@@ -176,9 +176,9 @@ TEMPLATE = """<!DOCTYPE html>
 </div>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script src="{root}assets/js/main.js?v=25" defer></script>
-<script src="{root}assets/js/effects.js?v=25" defer></script>
-<script src="{root}assets/js/landing.js?v=25" defer></script>
+<script src="{root}assets/js/main.js?v=26" defer></script>
+<script src="{root}assets/js/effects.js?v=26" defer></script>
+<script src="{root}assets/js/landing.js?v=26" defer></script>
 </body>
 </html>
 """
@@ -278,6 +278,10 @@ PAGES = [
     ("admissions.html", "admissions.html",
      "Admissions, Requirements & Schedule | American Barber Institute",
      "How to get started at ABI: entrance requirements, class schedules (morning, afternoon, weekend), holiday calendar, and the 4 simple steps to enroll. Classes start monthly.",
+     "en", []),
+    ("schedule.html", "schedule.html",
+     "Class Schedule & Start Dates | American Barber Institute",
+     "Upcoming class start dates at ABI's Manhattan and Bronx campuses — new classes begin the first Monday of every month. Morning, afternoon and weekend schedules with tuition plans.",
      "en", []),
     ("veterans.html", "veterans.html",
      "Veterans Program — GI Bill® Approved Barber Training | American Barber Institute",
@@ -387,7 +391,7 @@ def faq_schema_from(body):
 
 PAGE_BG = {
     'classic-home.html': 'abi-nyc-003.jpg', 'about.html': 'abi-nyc-007.jpg',
-    'instructors.html': 'abi-nyc-008.jpg', 'admissions.html': 'abi-nyc-014.jpg',
+    'instructors.html': 'abi-nyc-008.jpg', 'admissions.html': 'abi-nyc-014.jpg', 'schedule.html': 'abi-nyc-016.jpg',
     'veterans.html': 'abi-nyc-021.jpeg',
     'access-vr.html': 'abi-nyc-022.jpg', 'haircuts.html': 'abi-nyc-031.jpg',
     'jobs.html': 'abi-nyc-018.jpg', 'gallery.html': 'abi-nyc-035.jpg',
