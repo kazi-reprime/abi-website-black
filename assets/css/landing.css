@@ -523,7 +523,7 @@ html,body{overflow-x:clip}
 /* ═══════════ UI/UX upgrade — glassmorphism, vivid backgrounds, brighter CTAs (v15) ═══════════ */
 /* Per-page background image (different best photo per page) */
 body{background:#eef2f7}
-body::before{content:"";position:fixed;inset:0;z-index:-2;background:linear-gradient(rgba(236,240,246,.50),rgba(236,240,246,.64)),var(--page-bg,url(../img/abi-students-107.jpg));background-size:cover;background-position:center}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:linear-gradient(rgba(232,236,243,.34),rgba(232,236,243,.46)),var(--page-bg,url(../img/abi-students-107.jpg));background-size:cover;background-position:center}
 /* Vivid, visible page-hero photo per page — warm/light, no cold blue cast */
 .page-hero{position:relative;overflow:hidden;background:linear-gradient(100deg,rgba(8,10,14,.82) 0%,rgba(8,10,14,.66) 50%,rgba(8,10,14,.5) 100%),var(--page-bg,url(../img/abi-students-107.jpg));background-size:cover;background-position:center 28%;background-repeat:no-repeat;color:#fff;padding:3.4rem 1rem 3rem;border:none}
 /* keep hero text crisp over the clearer photo */
@@ -557,9 +557,8 @@ body::before{content:"";position:fixed;inset:0;z-index:-2;background:linear-grad
 .cta-band .kicker{color:var(--gold-bright,#f4c44a)}
 .cta-band h2,.cta-band p{color:#fff}
 /* Clean content surfaces (photos live in dedicated bands, not behind every section) */
-section:not(.dark):not(.alt):not(.trust-strip):not(.visit360):not(.inst-hero):not(.cta-band):not(.photo-band):not(.hero):not(.stats):not(.trust){background:rgba(255,255,255,.84);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
-section.alt{background:rgba(244,246,250,.80)!important}
-section.alt{background:#eef2f8}
+section:not(.dark):not(.alt):not(.trust-strip):not(.visit360):not(.inst-hero):not(.cta-band):not(.photo-band):not(.hero):not(.stats):not(.trust){background:rgba(255,255,255,.70);backdrop-filter:blur(7px) saturate(1.05);-webkit-backdrop-filter:blur(7px) saturate(1.05)}
+section.alt{background:rgba(246,248,252,.60)!important;backdrop-filter:blur(7px) saturate(1.05);-webkit-backdrop-filter:blur(7px) saturate(1.05)}
 /* Gallery lightbox */
 .lightbox{position:fixed;inset:0;z-index:200;background:rgba(8,11,18,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center}
 .lightbox.open{display:flex}
