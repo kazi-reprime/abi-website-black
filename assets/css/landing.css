@@ -960,3 +960,25 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .partner-media.partner-logo img{max-height:140px}
   .partner-body h3{font-size:1.4rem}
 }
+
+/* ============================================================
+   REV v42 — INSTRUCTOR PHOTOS + JOB OPPORTUNITIES BOARD
+   ============================================================ */
+/* real instructor photos in place of monogram avatars */
+.inst-photo{width:58px;height:58px;border-radius:50%;object-fit:cover;object-position:center top;display:block;border:2px solid rgba(27,47,217,.18);box-shadow:0 4px 14px rgba(15,20,32,.18)}
+.inst-avatar--lg.inst-photo{width:96px;height:96px;margin-bottom:.4rem}
+.inst-group-photo{width:100%;max-height:360px;object-fit:cover;border-radius:18px;margin:0 0 1.6rem;box-shadow:0 12px 34px rgba(15,20,32,.18);display:block}
+@media(max-width:560px){.inst-photo{width:52px;height:52px}.inst-avatar--lg.inst-photo{width:84px;height:84px}.inst-group-photo{max-height:220px}}
+
+/* job opportunities board */
+.job-tools{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin:1.2rem 0}
+.job-search{flex:1;min-width:240px;height:48px;border:1.5px solid var(--line);border-radius:12px;padding:0 16px;font:inherit;font-size:1rem;background:#fff;color:var(--ink)}
+.job-count{font-size:.92rem;color:var(--ink-soft);font-weight:600}
+.job-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1rem;margin-top:1rem}
+.job-card{background:rgba(255,255,255,.92);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:12px;padding:1rem 1.1rem;box-shadow:0 3px 10px rgba(15,20,32,.06)}
+.job-card h3{font-size:1.05rem;margin:0 0 .25rem;line-height:1.25}
+.job-loc{font-size:.82rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.5rem}
+.job-card p{font-size:.9rem;color:var(--ink-soft);margin:.15rem 0;line-height:1.4}
+.job-card a{color:var(--blue);font-weight:600;text-decoration:none}
+.job-card a:hover{text-decoration:underline}
+.job-none{display:none;color:var(--ink-soft);padding:1rem 0}

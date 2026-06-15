@@ -61,7 +61,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=30">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=41">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=42">
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
@@ -344,6 +344,14 @@ PAGES = [
      "Barbering Resources & State Licensing Boards | American Barber Institute",
      "Regulatory agencies, state-by-state barber and cosmetology licensing boards, education resources and industry associations.",
      "en", []),
+    ("jobs/job-opportunities.html", "job-opportunities.html",
+     "Barber Job Opportunities in NYC | American Barber Institute",
+     "Current openings and our network of New York-area barbershops hiring licensed barbers. ABI graduates get priority placement.",
+     "en", []),
+    ("jobs/shop-registration.html", "shop-registration.html",
+     "Register Your Shop — Hire ABI Barbers | American Barber Institute",
+     "Barbershop owners: join ABI's job placement network and get matched with skilled, licensed, board-prepared barbers ready to work.",
+     "en", []),
     ("partners.html", "partners.html",
      "Our Partners | American Barber Institute",
      "Where ABI graduates work: Levels Barbershop, Diamond Fadez, Untouchable Cutz, Expo Gentlemen Salon, Otis & Finn and the NYC Barber Shop Museum. Real shops, real careers.",
@@ -433,6 +441,7 @@ PAGE_BG = {
     'access-vr.html': 'abi-students-025.jpg', 'haircuts.html': 'abi-students-020.jpg',
     'jobs.html': 'abi-students-236.jpg', 'gallery.html': 'abi-students-105.jpg',
     'faq.html': 'abi-students-125.jpg', 'contact.html': 'abi-nyc-032.jpg', 'partners.html': 'abi-students-105.jpg',
+    'jobs/job-opportunities.html': 'abi-students-056.jpg', 'jobs/shop-registration.html': 'abi-students-236.jpg',
     'resources.html': 'abi-students-190.jpg', 'privacy.html': 'abi-nyc-013.jpg',
     'programs/index.html': 'abi-students-107.jpg', 'programs/500-hour-master-barber.html': 'abi-students-139.jpg',
     'programs/200-hour-barber-fundamentals.html': 'abi-students-125.jpg', 'programs/50-hour-barber-refresher.html': 'abi-students-031.jpg',
