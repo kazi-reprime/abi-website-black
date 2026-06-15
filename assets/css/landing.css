@@ -982,3 +982,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .job-card a{color:var(--blue);font-weight:600;text-decoration:none}
 .job-card a:hover{text-decoration:underline}
 .job-none{display:none;color:var(--ink-soft);padding:1rem 0}
+
+/* ============================================================
+   REV v43 — DEFINITIVELY hide theme switcher on mobile
+   (it was position:absolute over the promo text → overlap).
+   Desktop keeps the switcher; phones never show it.
+   ============================================================ */
+@media (max-width:840px){
+  .topbar .theme-dots, .theme-dots{display:none!important}
+  .topbar{display:block!important;text-align:center;padding:.5rem 1rem;position:relative}
+}
