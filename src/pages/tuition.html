@@ -1,0 +1,150 @@
+<div class="page-hero">
+  <div class="wrap">
+    <p class="crumbs"><a href="index.html">Home</a> / Tuition &amp; Payment Plans</p>
+    <h1>Tuition &amp; Payment Calculator</h1>
+    <p>No hidden costs. Choose your program and schedule to see your total tuition, down payment, and exact weekly payment — instantly. Pay weekly while you train.</p>
+  </div>
+</div>
+
+<!-- ============ CALCULATOR ============ -->
+<section>
+  <div class="wrap">
+    <div class="section-head center" style="margin-inline:auto"><p class="kicker" style="justify-content:center">Plan Your Investment</p><h2>Estimate Your Payments</h2><p class="lead" style="margin-inline:auto">Transparent pricing — see exactly what you'll pay and when.</p></div>
+    <div class="calc">
+      <div class="calc-controls">
+        <label class="calc-lbl" for="calc-prog">Choose your program</label>
+        <select id="calc-prog" class="calc-select">
+          <option value="500">500-Hour Master Barber</option>
+          <option value="200">200-Hour Barber Fundamentals</option>
+          <option value="50">50-Hour Barber Refresher</option>
+          <option value="smp">50-Hour Scalp Micro-Pigmentation</option>
+          <option value="cd">3-Hour Contagious Diseases</option>
+        </select>
+        <div id="calc-sched-wrap">
+          <label class="calc-lbl" for="calc-sched">Choose your schedule</label>
+          <select id="calc-sched" class="calc-select">
+            <option value="morning">Full-Time Morning · Mon–Fri 8:00 AM–2:00 PM</option>
+            <option value="afternoon" selected>Full-Time Afternoon · Mon–Fri 2:00 PM–8:00 PM</option>
+            <option value="weekend">Weekend · Sat &amp; Sun 9:00 AM–7:00 PM</option>
+          </select>
+        </div>
+        <p class="calc-foot-note">All plans include NY State Board Exam prep, hands-on training and job-placement support. Books, tools &amp; supplies are separate. ACCES-VR, Post-9/11 GI Bill® and VA benefits accepted.</p>
+      </div>
+      <div class="calc-result" id="calc-result" aria-live="polite">
+        <div class="calc-prog-name" id="r-name">500-Hour Master Barber</div>
+        <div class="calc-meta" id="r-meta">Mon–Fri · 2:00 PM–8:00 PM · 30 hrs/week</div>
+        <div class="calc-total-row">
+          <div class="calc-total"><span class="calc-total-amt" id="r-total">$4,600</span><span class="calc-total-lbl">Total tuition</span></div>
+          <div class="calc-dur" id="r-dur">~4 months · 17 weeks</div>
+        </div>
+        <div class="calc-break">
+          <div class="calc-break-item"><span class="cb-amt" id="r-down">$500</span><span class="cb-lbl">Due today</span></div>
+          <div class="calc-break-x">+</div>
+          <div class="calc-break-item"><span class="cb-amt" id="r-weekly">$250</span><span class="cb-lbl" id="r-weeks">/week × 16</span></div>
+        </div>
+        <p class="calc-plan-note" id="r-note">$500 down payment (includes $100 registration), then 16 weekly payments of $250 plus a final $100.</p>
+        <a class="btn btn-gold btn-lg" href="contact.html" style="width:100%">Reserve This Plan →</a>
+        <a class="calc-call" href="tel:+12122902289">or call (212) 290-2289</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPARISON TABLE ============ -->
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head"><p class="kicker">Compare</p><h2>All Programs at a Glance</h2><p class="lead">Find the program that fits your goals, schedule and budget.</p></div>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead>
+          <tr><th>Program</th><th>Hours</th><th>Duration</th><th>Schedules</th><th>Tuition</th><th>Best for</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-l="Program"><b>500-Hour Master Barber</b></td>
+            <td data-l="Hours">500</td>
+            <td data-l="Duration">~4 months</td>
+            <td data-l="Schedules">AM · PM · Weekend</td>
+            <td data-l="Tuition">From $4,600</td>
+            <td data-l="Best for">New barbers seeking a NY license</td>
+          </tr>
+          <tr>
+            <td data-l="Program"><b>200-Hour Barber Fundamentals</b></td>
+            <td data-l="Hours">200</td>
+            <td data-l="Duration">~2 months</td>
+            <td data-l="Schedules">Mon–Fri PM</td>
+            <td data-l="Tuition">$3,600</td>
+            <td data-l="Best for">Apprentices &amp; cosmetologists expanding skills</td>
+          </tr>
+          <tr>
+            <td data-l="Program"><b>50-Hour Barber Refresher</b></td>
+            <td data-l="Hours">50</td>
+            <td data-l="Duration">~2 weeks</td>
+            <td data-l="Schedules">AM or PM</td>
+            <td data-l="Tuition">$1,500</td>
+            <td data-l="Best for">Licensed pros prepping for the State Board</td>
+          </tr>
+          <tr>
+            <td data-l="Program"><b>Scalp Micro-Pigmentation</b></td>
+            <td data-l="Hours">50</td>
+            <td data-l="Duration">4 weekends</td>
+            <td data-l="Schedules">Sat &amp; Sun</td>
+            <td data-l="Tuition">$3,500</td>
+            <td data-l="Best for">Licensed pros adding SMP services</td>
+          </tr>
+          <tr>
+            <td data-l="Program"><b>3-Hour Contagious Diseases</b></td>
+            <td data-l="Hours">3</td>
+            <td data-l="Duration">1 session</td>
+            <td data-l="Schedules">Home study</td>
+            <td data-l="Tuition">$100</td>
+            <td data-l="Best for">Required NY Board exam certificate</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="center" style="margin-top:1.6rem">
+      <div class="hero-ctas" style="justify-content:center"><a class="btn btn-gold btn-lg" href="programs/index.html">Explore Programs</a><a class="btn btn-ghost btn-lg" href="admissions.html">Admissions &amp; Requirements</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINANCIAL HELP ============ -->
+<section class="dark">
+  <div class="wrap" style="text-align:center">
+    <div class="section-head center" style="margin-inline:auto"><p class="kicker" style="justify-content:center">Don't Let Cost Stop You</p><h2>Help Paying for School</h2></div>
+    <p class="lead" style="margin-inline:auto;color:var(--text-on-dark-mute)">ACCES-VR can cover tuition, tools and books for qualifying New Yorkers. Veterans: we accept the Post-9/11 GI Bill® and VA benefits. Every program offers a low-down-payment weekly plan.</p>
+    <div class="hero-ctas" style="justify-content:center;margin-top:1.4rem"><a class="btn btn-gold btn-lg" href="resources.html">Financial Assistance</a><a class="btn btn-ghost btn-lg" href="veterans.html">Veterans &amp; GI Bill®</a></div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var DATA={
+    "500":{name:"500-Hour Master Barber",sched:{
+      morning:{meta:"Mon–Fri · 8:00 AM–2:00 PM · 30 hrs/week",total:5600,down:500,weekly:300,weeks:17,dur:"~4 months · 17 weeks",note:"$500 down payment (includes $100 registration), then 17 weekly payments of $300."},
+      afternoon:{meta:"Mon–Fri · 2:00 PM–8:00 PM · 30 hrs/week",total:4600,down:500,weekly:250,weeks:16,dur:"~4 months · 17 weeks",note:"$500 down payment (includes $100 registration), then 16 weekly payments of $250 plus a final $100."},
+      weekend:{meta:"Sat & Sun · 9:00 AM–7:00 PM · 18 hrs/week",total:4600,down:550,weekly:150,weeks:27,dur:"~6–7 months · 27 weeks",note:"$550 down payment, then 27 weekly payments of $150."}
+    }},
+    "200":{name:"200-Hour Barber Fundamentals",single:{meta:"Mon–Fri · 2:00 PM–7:00 PM",total:3600,down:1200,weekly:300,weeks:8,dur:"~2 months",note:"$1,200 down payment, then weekly payments of $300 over ~8 weeks."}},
+    "50":{name:"50-Hour Barber Refresher",single:{meta:"Morning or afternoon · 2 weeks",total:1500,down:750,weekly:750,weeks:1,dur:"~2 weeks",note:"Split into 2 payments of $750."}},
+    "smp":{name:"50-Hour Scalp Micro-Pigmentation",single:{meta:"Sat & Sun · 4 weekends",total:3500,down:1000,weekly:625,weeks:4,dur:"4 weekends",note:"$1,000 down payment, then 4 weekly payments of $625. Tool kit included."}},
+    "cd":{name:"3-Hour Contagious Diseases",single:{meta:"Home study · by mail",total:100,down:100,weekly:0,weeks:0,dur:"1 session",note:"One payment of $100. Required for the NY State Board exam."}}
+  };
+  var money=function(n){return "$"+n.toLocaleString("en-US");};
+  var prog=document.getElementById('calc-prog'),sched=document.getElementById('calc-sched'),swrap=document.getElementById('calc-sched-wrap');
+  function render(){
+    var p=DATA[prog.value];var d=p.single?p.single:p.sched[sched.value];
+    swrap.style.display=p.single?'none':'';
+    document.getElementById('r-name').textContent=p.name;
+    document.getElementById('r-meta').textContent=d.meta;
+    document.getElementById('r-total').textContent=money(d.total);
+    document.getElementById('r-dur').textContent=d.dur;
+    document.getElementById('r-down').textContent=money(d.down);
+    if(d.weekly>0){document.getElementById('r-weekly').textContent=money(d.weekly);document.getElementById('r-weeks').textContent="/week × "+d.weeks;}
+    else{document.getElementById('r-weekly').textContent="—";document.getElementById('r-weeks').textContent="paid in full";}
+    document.getElementById('r-note').textContent=d.note;
+  }
+  prog.addEventListener('change',render);sched.addEventListener('change',render);render();
+})();
+</script>
