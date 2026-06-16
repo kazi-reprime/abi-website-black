@@ -488,7 +488,7 @@ html,body{overflow-x:clip}
 .inst-philosophy{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:1.4rem}
 .phil-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:1.6rem}
 .phil-num{font-family:'Oswald',sans-serif;font-size:1.6rem;font-weight:700;color:var(--gold-bright,#caa14a)}
-.phil-card h4{margin:.4rem 0 .4rem;font-size:1.1rem}
+.phil-card h3,.phil-card h4{margin:.4rem 0 .4rem;font-size:1.1rem}
 .inst-reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin-top:1.4rem}
 .inst-reviews blockquote{background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:12px;padding:1.4rem;margin:0}
 .inst-reviews cite{display:block;margin-top:.8rem;font-style:normal;font-weight:700;color:var(--blue);font-size:.88rem}

@@ -127,14 +127,14 @@
     lb.className = 'lightbox';
     lb.setAttribute('role', 'dialog');
     lb.setAttribute('aria-label', 'Image viewer');
-    lb.innerHTML = '<img alt=""><button class="lb-close" aria-label="Close">✕</button>' +
+    lb.innerHTML = '<img alt="Enlarged gallery image"><button class="lb-close" aria-label="Close">✕</button>' +
       '<button class="lb-prev" aria-label="Previous">‹</button><button class="lb-next" aria-label="Next">›</button>';
     document.body.appendChild(lb);
     var lbImg = lb.querySelector('img'), idx = 0;
     function show(i) {
       idx = (i + galLinks.length) % galLinks.length;
       lbImg.src = galLinks[idx].getAttribute('href');
-      lbImg.alt = galLinks[idx].querySelector('img') ? galLinks[idx].querySelector('img').alt : '';
+      lbImg.alt = (galLinks[idx].querySelector('img') && galLinks[idx].querySelector('img').alt) || 'Enlarged gallery image';
       lb.classList.add('open');
       document.body.style.overflow = 'hidden';
     }

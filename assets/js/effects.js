@@ -240,7 +240,7 @@
     box.className = 'lightbox';
     box.innerHTML = '<button class="lb-close" aria-label="Close">&times;</button>'
       + '<button class="lb-prev" aria-label="Previous">&#8249;</button>'
-      + '<img alt=""><button class="lb-next" aria-label="Next">&#8250;</button>'
+      + '<img alt="Enlarged gallery image"><button class="lb-next" aria-label="Next">&#8250;</button>'
       + '<div class="lb-count"></div>';
     document.body.appendChild(box);
     var img = box.querySelector('img'), count = box.querySelector('.lb-count'), i = 0;

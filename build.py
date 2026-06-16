@@ -61,7 +61,8 @@ TEMPLATE = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/style.css?v=30">
 <link rel="stylesheet" href="{root}assets/css/brand.css?v=30">
-<link rel="stylesheet" href="{root}assets/css/landing.css?v=45">
+<link rel="stylesheet" href="{root}assets/css/landing.css?v=46">
+<script src="{root}assets/js/analytics.js?v=1" defer></script>
 <script>(function(){{try{{if(!localStorage.getItem('abi-theme-user')){{localStorage.removeItem('abi-theme');}}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
 <link rel="stylesheet" href="{root}assets/css/effects.css?v=30">
 <script>try{{var t=localStorage.getItem('abi-theme');if(t&&t!=='midnight')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
@@ -206,8 +207,8 @@ TEMPLATE = """<!DOCTYPE html>
 <script>(function(){{var b=document.querySelector('[data-call-toggle]'),s=document.querySelector('.call-sheet');if(!b||!s)return;function close(){{s.hidden=true;b.setAttribute('aria-expanded','false');}}b.addEventListener('click',function(e){{e.stopPropagation();var open=s.hidden;s.hidden=!open;b.setAttribute('aria-expanded',String(open));}});document.addEventListener('click',function(e){{if(!s.hidden&&!s.contains(e.target)&&e.target!==b)close();}});document.addEventListener('keydown',function(e){{if(e.key==='Escape')close();}});s.querySelectorAll('a').forEach(function(a){{a.addEventListener('click',close);}});}})();</script>
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
-<script src="{root}assets/js/main.js?v=30" defer></script>
-<script src="{root}assets/js/effects.js?v=30" defer></script>
+<script src="{root}assets/js/main.js?v=31" defer></script>
+<script src="{root}assets/js/effects.js?v=31" defer></script>
 <script src="{root}assets/js/landing.js?v=30" defer></script>
 </body>
 </html>
@@ -294,35 +295,35 @@ INSTRUCTORS_SCHEMA = {"@context": "https://schema.org", "@type": "ItemList",
 PAGES = [
     # (output, partial, title, description, lang, extra_schema)
     ("classic-home.html", "home.html",
-     "Barber School NYC | American Barber Institute — 500-Hour Master Barber Program",
-     "NYC's only dedicated barber school, est. 1996. NYS-licensed 500-hour Master Barber program, financial aid, veterans GI Bill®, ACCESS-VR & job placement. New classes monthly.",
+     "Barber School NYC | American Barber Institute",
+     "NYC's only dedicated barber school since 1996. NYS-licensed 500-hour Master Barber program, GI Bill®, ACCESS-VR & job placement. New classes monthly.",
      "en", [ORG_SCHEMA]),
     ("about.html", "about.html",
-     "About Us | American Barber Institute — NYC Barber School Since 1996",
-     "Learn about ABI: 3,000 sq ft Midtown Manhattan campus, NYS-licensed curriculum, expert instructors who are all ABI graduates, and our mission to build lifetime barbering careers.",
+     "About Us | American Barber Institute NYC",
+     "Inside ABI: our Midtown Manhattan campus, NYS-licensed curriculum, instructors who are all ABI grads, and a mission to build lifetime barber careers.",
      "en", []),
     ("instructors.html", "instructors.html",
-     "Our Instructors | Master Barber Teachers in NYC | American Barber Institute",
-     "Meet ABI's master instructors — including King David Ayeoribe and Emmy-featured Harold \"Barkim\" Brown — with 50+ years of combined experience across our Manhattan and Bronx campuses.",
+     "Our Instructors | Master Barber Teachers in NYC",
+     "Meet ABI's master instructors — including King David Ayeoribe and Emmy-featured Harold “Barkim” Brown — with 50+ years of combined barbering experience.",
      "en", [INSTRUCTORS_SCHEMA]),
     ("admissions.html", "admissions.html",
-     "Admissions, Requirements & Schedule | American Barber Institute",
-     "How to get started at ABI: entrance requirements, class schedules (morning, afternoon, weekend), holiday calendar, and the 4 simple steps to enroll. Classes start monthly.",
+     "Admissions & Requirements | American Barber Institute",
+     "How to enroll at ABI: entrance requirements, class schedules, holiday calendar and the 4 simple steps to get started. New classes every month.",
      "en", []),
     ("schedule.html", "schedule.html",
      "Class Schedule & Start Dates | American Barber Institute",
-     "Upcoming class start dates at ABI's Manhattan and Bronx campuses — new classes begin the first Monday of every month. Morning, afternoon and weekend schedules with tuition plans.",
+     "Upcoming start dates at ABI's Manhattan & Bronx campuses — new classes begin the first Monday of every month. Morning, afternoon & weekend schedules.",
      "en", []),
     ("veterans.html", "veterans.html",
-     "Veterans Program — GI Bill® Approved Barber Training | American Barber Institute",
+     "Veterans — GI Bill® Approved Barber Training | ABI",
      "VA-approved barber training in NYC under Title 38 USC § 3676. Use your GI Bill® benefits to become a licensed Master Barber. We guide you through every step.",
      "en", []),
     ("access-vr.html", "access-vr.html",
-     "ACCESS-VR Program — Tuition Covered Barber Training | American Barber Institute",
+     "ACCESS-VR — Tuition-Covered Barber Training | ABI",
      "ACCESS-VR pays tuition, tools and books for qualified New Yorkers with disabilities. Train as a barber at ABI with full vocational rehabilitation support.",
      "en", []),
     ("haircuts.html", "haircuts.html",
-     "$3 Haircuts in Manhattan — Services Menu | American Barber Institute",
+     "$3 Haircuts in Manhattan — Services Menu | ABI",
      "Get a quality $3 haircut by supervised student barbers in Midtown Manhattan: fades, tapers, shape-ups, razor shaves and more. Free haircut coupon available.",
      "en", []),
     ("jobs.html", "jobs.html",
@@ -330,7 +331,7 @@ PAGES = [
      "ABI maintains a full-time job placement office. Graduates often finish with multiple offers. Barbershop owners: register your shop to hire our trained graduates.",
      "en", []),
     ("gallery.html", "gallery.html",
-     "Gallery — Student Work & Campus | American Barber Institute",
+     "Gallery — Student Work & Campus | ABI",
      "See our students' haircuts, our 3,000 sq ft Midtown Manhattan campus, and life at New York's only dedicated barber school.",
      "en", []),
     ("faq.html", "faq.html",
@@ -338,11 +339,11 @@ PAGES = [
      "Answers about tuition costs, program length, schedules, age requirements, ACCESS-VR, job placement, and why students choose ABI.",
      "en", ["FAQ_SCHEMA"]),
     ("contact.html", "contact.html",
-     "Contact & Directions | American Barber Institute — Midtown Manhattan",
+     "Contact & Directions | American Barber Institute",
      "Visit ABI at 48 West 39th Street, NYC — minutes from Penn Station, Grand Central & Times Square. Call (212) 290-2289 or book your free tour today.",
      "en", [ORG_SCHEMA]),
     ("resources.html", "resources.html",
-     "Barbering Resources & State Licensing Boards | American Barber Institute",
+     "Barbering Resources & State Licensing Boards | ABI",
      "Regulatory agencies, state-by-state barber and cosmetology licensing boards, education resources and industry associations.",
      "en", []),
     ("jobs/job-opportunities.html", "job-opportunities.html",
@@ -358,8 +359,8 @@ PAGES = [
      "Estimate your barber-school tuition, down payment and weekly payments instantly. Compare all ABI programs. ACCES-VR, GI Bill® and weekly payment plans accepted.",
      "en", []),
     ("partners.html", "partners.html",
-     "Our Partners | American Barber Institute",
-     "Where ABI graduates work: Levels Barbershop, Diamond Fadez, Untouchable Cutz, Expo Gentlemen Salon, Otis & Finn and the NYC Barber Shop Museum. Real shops, real careers.",
+     "Our Partners | Where ABI Barbers Work in NYC",
+     "Where ABI graduates work: Levels Barbershop, Diamond Fadez, Untouchable Cutz, Expo Gentlemen Salon, Otis & Finn and the NYC Barber Shop Museum.",
      "en", []),
     ("404.html", "404.html",
      "Page Not Found | American Barber Institute",
@@ -371,7 +372,7 @@ PAGES = [
      "en", []),
     ("programs/index.html", "programs-index.html",
      "Barber Programs in NYC | American Barber Institute",
-     "Compare ABI's NYS-licensed programs: 500-hour Master Barber, 200-hour Fundamentals, 50-hour Refresher, Scalp Micro-Pigmentation, Contagious Diseases course & License Transfer.",
+     "Compare ABI's NYS-licensed programs: 500-hour Master Barber, 200-hour Fundamentals, 50-hour Refresher, Scalp Micro-Pigmentation & License Transfer.",
      "en", []),
     ("programs/500-hour-master-barber.html", "program-500.html",
      "500-Hour Master Barber Program (4 Months) | American Barber Institute",

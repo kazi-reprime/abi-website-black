@@ -431,14 +431,14 @@ for n, (h1a_en,h1b_en,h1a_es,h1b_es) in (
      "hero_img":"abi-students-107.jpg","dur":"~4 Meses","tui":"$4,600","variant":n})
 PAGES.append({"type":"splash","lang":"en","path":"index.html",
  "url":"/","alt":"/es",
- "title":"Barber School NYC | American Barber Institute — Become a Licensed Barber in 4 Months",
- "desc":"NYC's only dedicated barber school, est. 1996. NYS-licensed 500-hour Master Barber program, financial aid, veterans GI Bill, ACCESS-VR and job placement. New classes start the first Monday of every month.",
+ "title":"Barber School NYC | American Barber Institute",
+ "desc":"NYC's only dedicated barber school since 1996. NYS-licensed 500-hour Master Barber program, GI Bill®, ACCESS-VR & job placement. New classes every month.",
  "campus":MANHATTAN,"h1a":"Your Future.","h1b":"Your Career.","script":"Start Today.",
  "sub":"Become a licensed barber in as little as <b>17 weeks</b>. Hands-on training. Real skills. Real opportunities.",
  "hero_img":"abi-students-107.jpg","dur":"~4 Months","tui":"$4,600","variant":1})
 PAGES.append({"type":"splash","lang":"es","path":"es/index.html",
  "url":"/es","alt":"/",
- "title":"Escuela de Barbería en NYC | American Barber Institute — Conviértete en Barbero Licenciado",
+ "title":"Escuela de Barbería en NYC | American Barber Institute",
  "desc":"La única escuela de barbería dedicada en Nueva York. Licenciada por el Departamento de Educación del Estado de NY. Cambiando vidas por más de 30 años. Clases nuevas el primer lunes de cada mes.",
  "campus":MANHATTAN,"h1a":"Tu Futuro.","h1b":"Tu Carrera.","script":"Empieza Hoy.",
  "sub":"Conviértete en barbero licenciado en tan solo <b>17 semanas</b>. Entrenamiento práctico. Habilidades reales. Oportunidades reales.",
@@ -513,7 +513,8 @@ def head(p, s, pre):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="%sassets/css/landing.css?v=45">
+<link rel="stylesheet" href="%sassets/css/landing.css?v=46">
+<script src="/assets/js/analytics.js?v=1" defer></script>
 <script>(function(){try{if(!localStorage.getItem('abi-theme-user')){localStorage.removeItem('abi-theme');}var t=localStorage.getItem('abi-theme');if(t&&t!=='blue')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 %s
 </head>
@@ -980,7 +981,7 @@ def footer(p, s, pre):
     <button class="btn btn-blue" data-exit-cta style="padding:.85rem 2rem">%s</button>
   </div>
 </div>
-<script src="/assets/js/effects.js?v=30" defer></script>
+<script src="/assets/js/effects.js?v=31" defer></script>
 <script src="%sassets/js/landing.js?v=30" defer></script>
 </body>
 </html>""" % (s["f_about"], s["f_links"], links, s["f_visit"], s["gibill"],
