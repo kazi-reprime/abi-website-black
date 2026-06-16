@@ -1006,7 +1006,7 @@ def build(p):
     elif p["type"] == "location":
         parts += [sec_location(p, s), sec_tuition(p, s), sec_dates(p, s), sec_videos(p, s, pre),
                   sec_testi(p, s), sec_faq(p, s), sec_countdown(p, s)]
-    parts += [closing(p, s), footer(p, s, pre)]
+    parts += [footer(p, s, pre)]
     out = os.path.join(ROOT, p["path"])
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w", encoding="utf-8") as f:
