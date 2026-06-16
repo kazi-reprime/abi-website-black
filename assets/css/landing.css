@@ -1110,3 +1110,59 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .socials a.soc,.socials a.soc svg,.socials a.soc::before{transition:none}
   .socials a.soc:hover{transform:none}
 }
+
+/* ===== v48 — Home content from client mobile reference (responsive) ===== */
+/* Hero urgency + schedule chips */
+.hero-urgency{display:inline-flex;align-items:center;gap:.4rem;margin:.9rem auto 0;padding:.4rem .9rem;border-radius:999px;
+  background:rgba(227,185,78,.16);border:1px solid rgba(227,185,78,.5);color:#ffe9b0;font-weight:700;font-size:.86rem;letter-spacing:.01em}
+.hero-urgency .hu-flame{filter:saturate(1.2)}
+.hero-sched{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin:.7rem auto 0}
+.hero-sched span{padding:.34rem .85rem;border-radius:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);
+  color:#fff;font-weight:800;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}
+
+/* What You Get — badge grid */
+.succeed-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem}
+.succeed-badge{display:flex;flex-direction:column;align-items:center;gap:.4rem;text-align:center;
+  background:var(--paper-2,#efe7d8);border:1px solid var(--line,rgba(0,0,0,.1));border-radius:13px;padding:1rem .6rem;
+  transition:transform .2s cubic-bezier(.2,.7,.2,1),box-shadow .2s ease,border-color .2s ease}
+.succeed-badge .sb-ico{font-size:1.5rem;line-height:1}
+.succeed-badge b{font-size:.8rem;font-weight:800;color:var(--text-dark,#1c2025);line-height:1.25}
+.succeed-badge:hover{transform:translateY(-4px);border-color:var(--gold,#c9a227);box-shadow:0 12px 26px -10px rgba(0,0,0,.28)}
+
+/* Career Earnings tiers (on .dark) */
+.earn-tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.earn-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:1.4rem 1.2rem}
+.earn-card.is-feat{border-color:var(--gold-bright,#e3b94e);border-width:2px;background:rgba(227,185,78,.08)}
+.earn-stage{display:block;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-bright,#e3b94e);margin-bottom:.5rem}
+.earn-amt{display:block;font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700;color:#fff;line-height:1;margin-bottom:.55rem}
+.earn-card p{font-size:.9rem;color:var(--text-on-dark-mute,#9aa0a8);line-height:1.5;margin:0}
+.earn-dis{font-size:.74rem;color:rgba(255,255,255,.4);line-height:1.5;margin:1.1rem auto 0;max-width:760px;text-align:center}
+
+/* Graduate stats + shop chips */
+.grad-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:1.6rem}
+.grad-stat{background:var(--paper-2,#efe7d8);border:1px solid var(--line,rgba(0,0,0,.1));border-radius:12px;padding:1.1rem .6rem;text-align:center}
+.grad-stat b{display:block;font-family:'Oswald',sans-serif;font-size:1.7rem;color:var(--gold,#c9a227);line-height:1}
+.grad-stat span{display:block;font-size:.78rem;color:var(--text-mute,#5a6068);margin-top:.3rem}
+.shop-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.55rem;margin-top:1.2rem}
+.shop-chips span{background:var(--ink,#101316);color:#fff;font-size:.78rem;font-weight:700;padding:.5rem .95rem;border-radius:999px}
+
+/* Final CTA band */
+.final-cta{background:var(--ink,#101316);padding:clamp(2.4rem,6vw,3.6rem) 0;text-align:center;
+  border-top:3px solid var(--gold,#c9a227)}
+.final-cta h2{color:#fff;margin:0 0 .6rem}
+.final-cta p{color:var(--text-on-dark-mute,#9aa0a8);max-width:620px;margin:0 auto 1.4rem;line-height:1.55}
+
+/* Responsive */
+@media(max-width:840px){
+  .succeed-grid{grid-template-columns:repeat(3,1fr)}
+  .earn-tiers{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .succeed-grid{grid-template-columns:repeat(2,1fr);gap:.55rem}
+  .succeed-badge{padding:.85rem .5rem}
+  .succeed-badge b{font-size:.74rem}
+  .grad-stats{grid-template-columns:1fr 1fr}
+  .grad-stat:last-child{grid-column:1/-1}
+  .earn-amt{font-size:1.7rem}
+}
+@media (prefers-reduced-motion:reduce){.succeed-badge{transition:none}.succeed-badge:hover{transform:none}}
