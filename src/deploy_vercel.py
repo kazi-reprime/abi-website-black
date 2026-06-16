@@ -36,7 +36,8 @@ def req(method, url, data=None, headers=None, raw=False):
 # 1. collect git-tracked files (exclude dev/build sources not needed to serve)
 tracked = subprocess.check_output(['git', 'ls-files'], cwd=ROOT, text=True).split()
 SKIP_PREFIX = ('src/', '.claude/', '.gitignore')
-files = [f for f in tracked if not f.startswith(SKIP_PREFIX) and f != 'build.py' and f != 'DEPLOY.md']
+# Don't serve source, docs, or markdown on the live site.
+files = [f for f in tracked if not f.startswith(SKIP_PREFIX) and not f.endswith('.md')]
 print(f'{len(files)} files to upload')
 
 # 2. upload each file blob (content-addressed by sha1)

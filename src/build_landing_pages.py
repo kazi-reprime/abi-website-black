@@ -5,7 +5,7 @@ Run: python3 build.py   → writes pages next to this script.
 """
 import os, json, datetime
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://www.abi.edu"
 
 # ── Next class date: first Monday of the upcoming month (computed at build) ──
