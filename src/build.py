@@ -295,10 +295,6 @@ INSTRUCTORS_SCHEMA = {"@context": "https://schema.org", "@type": "ItemList",
 
 PAGES = [
     # (output, partial, title, description, lang, extra_schema)
-    ("classic-home.html", "home.html",
-     "Barber School NYC | American Barber Institute",
-     "NYC's only dedicated barber school since 1996. NYS-licensed 500-hour Master Barber program, GI Bill®, ACCESS-VR & job placement. New classes monthly.",
-     "en", [ORG_SCHEMA]),
     ("about.html", "about.html",
      "About Us | American Barber Institute NYC",
      "Inside ABI: our Midtown Manhattan campus, NYS-licensed curriculum, instructors who are all ABI grads, and a mission to build lifetime barber careers.",
@@ -408,10 +404,6 @@ PAGES = [
      "Blog — Barbering Career Advice & News | American Barber Institute",
      "Advice from NYC's only dedicated barber school: licensing, careers, shop ownership, marketing your barbershop, and life after barber school.",
      "en", []),
-    ("es/classic-home.html", "es-home.html",
-     "Escuela de Barbería en NYC | American Barber Institute",
-     "La única escuela dedicada a la barbería en Nueva York, desde 1996. Programa de Master Barber de 500 horas con licencia del Estado de NY, ayuda financiera y colocación laboral. Llame al (212) 290-0278.",
-     "es", [ORG_SCHEMA]),
 ]
 
 # blog posts: content partials in src/pages/blog-*.html, listed in src/blog_manifest.json
@@ -442,7 +434,7 @@ def faq_schema_from(body):
 # Per-page background — uses ONLY the client-approved image set. Each main
 # page gets a distinct photo; program subpages reuse from the same set.
 PAGE_BG = {
-    'classic-home.html': 'abi-students-107.jpg', 'about.html': 'abi-nyc-008.jpg',
+    'about.html': 'abi-nyc-008.jpg',
     'instructors.html': 'abi-students-031.jpg', 'admissions.html': 'abi-students-130.jpg', 'schedule.html': 'abi-students-139.jpg',
     'veterans.html': 'abi-students-188.jpg',
     'access-vr.html': 'abi-students-025.jpg', 'haircuts.html': 'abi-students-020.jpg',
@@ -476,7 +468,7 @@ def build():
                 resolved.append(s)
         # BreadcrumbList for every page (entity clarity for AI/answer engines)
         crumb_items = [{"@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL + "/"}]
-        is_home = out in ('classic-home.html', 'index.html', 'es/classic-home.html')
+        is_home = out in ('index.html',)
         if not is_home:
             short = re.sub(r'\s*[|—].*$', '', title).strip()
             crumb_items.append({"@type": "ListItem", "position": 2, "name": short, "item": canonical})
