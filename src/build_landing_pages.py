@@ -500,7 +500,7 @@ def head(p, s, pre):
 <html lang="%s">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>%s</title>
 <meta name="description" content="%s">
 <link rel="canonical" href="%s%s">
